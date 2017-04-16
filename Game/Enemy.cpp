@@ -5,6 +5,10 @@
 
 void Enemy::Draw()
 {
+	modelMatrix = IDENTITY_M4;
+	//only need draw for now
+	modelMatrix *= glm::translate(position);
+	meshManager->SetModelMatrix(modelMatrix);
 }
 
 void Enemy::Move(float fPercent)
