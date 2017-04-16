@@ -6,11 +6,11 @@ class MovableObjects
 public:
 	matrix4 modelMatrix;
 	vector3 position;
-	vector3 rotation;
+	//true = left/false = right
+	boolean rotation;
 	vector3 size;
 
 	virtual void Move();
-	MovableObjects();
-	MovableObjects(vector3 ip, vector3 ir, vector3 is);
+	MovableObjects(vector3 ip, boolean ir, vector3 is);
 	~MovableObjects();
 };

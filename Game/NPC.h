@@ -7,7 +7,7 @@ class NPC :
 {
 public:
 	NPC();
-	NPC(vector3 initialPosition, vector3 initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd);
+	NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd);
 	~NPC();
 private:
 	vector3 v3_Start;

@@ -6,7 +6,7 @@ class Enemy :
 {
 public:
 	Enemy();
-	Enemy(vector3 initialPosition, vector3 initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd);
+	Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd);
 	~Enemy();
 
 	static int n_enemyCount; //can be moved to AppClass later

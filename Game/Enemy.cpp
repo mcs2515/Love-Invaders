@@ -7,7 +7,7 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(vector3 initialPosition, vector3 initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd) 
+Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd) 
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd)
 {
 }
