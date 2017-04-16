@@ -4,7 +4,7 @@
 
 GameManager::GameManager()
 {
-	m_pSystem = SystemSingleton:: GetInstance;
+	m_pSystem = SystemSingleton::GetInstance();
 }
 
 //called when player fails to reach round goal
@@ -191,7 +191,7 @@ void GameManager::SetLives(int value)
 
 int GameManager::GetLives(void)
 {
-	player->GetLives(lives);
+	return player->GetLives();
 }
 
 
