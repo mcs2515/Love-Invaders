@@ -1,6 +1,6 @@
 #include "RE\ReEngAppClass.h"
 #include <SFML\Graphics.hpp>
-#include "Player.cpp"
+
 
 class UILabels
 {

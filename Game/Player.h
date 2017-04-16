@@ -7,8 +7,8 @@ class Player : MovableObjects
 {
 private:
 	bool m_bGoLeft;				// Setter -> Used to determine which direction across the X AXIS the player travels
-	static int m_iBullets;		// Getter / Setter -> Used by UILayer / GameManager to get and change number of bullets player starts with
-	const static float m_fMove;	// Used to determine how much the player moves
+	int m_iBullets;		// Getter / Setter -> Used by UILayer / GameManager to get and change number of bullets player starts with
+	float m_fMove;	// Used to determine how much the player moves
 
 public:
 	Player();
