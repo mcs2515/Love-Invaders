@@ -9,9 +9,10 @@ public:
 	//true = left/false = right
 	boolean rotation;
 	vector3 size;
+	MeshManagerSingleton* meshManager
 
 	virtual void Move();
-	virtual void Draw(MeshManagerSingleton* meshManager);
-	MovableObjects(vector3 ip, boolean ir, vector3 is);
+	virtual void Draw();
+	MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager);
 	~MovableObjects();
 };

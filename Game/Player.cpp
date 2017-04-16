@@ -6,7 +6,7 @@ Player::Player()
 	m_fMove = 5.0f;
 }
 
-Player::Player(vector3 ip, vector3 ir, vector3 is) : MovableObjects(ip, ir, is)
+Player::Player(vector3 ip, vector3 ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager)
 {
 	m_iBullets = 5;
 	m_fMove = 5.0f;
@@ -17,7 +17,7 @@ Player::~Player()
 {
 }
 
-void Player::Draw(MeshManagerSingleton* meshManager)
+void Player::Draw()
 {
 }
 

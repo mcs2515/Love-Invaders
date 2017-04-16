@@ -3,7 +3,7 @@
 
 
 
-void Enemy::Draw(MeshManagerSingleton* meshManager)
+void Enemy::Draw()
 {
 }
 
@@ -25,8 +25,8 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd) 
-	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd)
+Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
+	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager)
 {
 	n_EnemyCount++;
 }

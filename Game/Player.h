@@ -12,11 +12,11 @@ private:
 
 public:
 	Player();
-	Player(vector3 ip, vector3 ir, vector3 is);
+	Player(vector3 ip, vector3 ir, vector3 is, MeshManagerSingleton* IMeshManager);
 	~Player();
 
 	//draw
-	void Draw(MeshManagerSingleton* meshManager);
+	void Draw();
 
 	// Getter / Setter for m_iBullets
 	int GetBullets();

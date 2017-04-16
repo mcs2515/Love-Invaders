@@ -10,12 +10,12 @@ NPC::NPC()
 	v3_End = vector3(1, 1, 1);
 }
 
-void NPC::Draw(MeshManagerSingleton* meshManager)
+void NPC::Draw()
 {
 }
 
-NPC::NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd)
-	: MovableObjects(initialPosition, initialRotation, initialSize)
+NPC::NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
+	: MovableObjects(initialPosition, initialRotation, initialSize, IMeshManager)
 {
 	v3_Start = initialStart;
 	v3_End = initialEnd;
