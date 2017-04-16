@@ -1,4 +1,3 @@
-#pragma once
 #include "RE\ReEngAppClass.h"
 #include <SFML\Graphics.hpp>
 #include "Player.cpp"
@@ -6,34 +5,27 @@
 class UILabels
 {
 public:
-	UILabels(Player p);
+	UILabels();
 	~UILabels();
 
-	//method to get player obj score
-	void DisplayScore(void);
+	//method to display total score
+	String DisplayTotalScore(int ts);
 
-	void IncrementScore(void);
+	//method to display current score
+	String DisplayCurrentScore(int cs);
 
-	//method to get play obj bullet count
-	void DisplayAmmoCount();
 
-	//method to check if player obj reached goal
-	void DisplayGoal();
+	//method to display current bullet count
+	String DisplayAmmoCount(int a);
 
-	void CheckGoal(bool);
+
+	//method to display current goal
+	String DisplayGoal(int g);
+
 
 private:
-	//timer
-	float endTimer;
-	float currentTimer;
-	//win/lose
-	bool roundCleared;
-	//score
-	int score;
-	//bullets
-	int bullets;
-	//goal
-	int goalNum;
+
+
 
 };
 
