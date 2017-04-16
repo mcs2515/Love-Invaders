@@ -1,4 +1,5 @@
 #include "AppClass.h"
+
 void AppClass::InitWindow(String a_sWindowName)
 {
 	super::InitWindow("Love Invaders"); // Window Name
@@ -24,6 +25,7 @@ void AppClass::InitVariables(void)
 	//Load a model onto the Mesh manager
 	m_pMeshMngr->LoadModel("Lego\\Unikitty.bto", "Unikitty");
 
+	gm = new GameManager();
 	gm->ResetGame();
 }
 
@@ -56,6 +58,7 @@ void AppClass::Update(void)
 	//Print info on the screen
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
 
+	//call the GM's displayData method
 	gm->DisplayData(m_pMeshMngr);
 
 	m_pMeshMngr->Print("Selection: ");
@@ -78,5 +81,6 @@ void AppClass::Display(void)
 
 void AppClass::Release(void)
 {
+	delete gm;
 	super::Release(); //release the memory of the inherited fields
 }
