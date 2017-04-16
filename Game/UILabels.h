@@ -8,19 +8,16 @@ public:
 	UILabels();
 	~UILabels();
 
-	//method to display total score
-	String DisplayTotalScore(int ts);
+	
+	String DisplayTotalScore(int ts); //method to display total score
+	
+	String DisplayCurrentScore(int cs); //method to display current score
+	
+	String DisplayAmmoCount(int a); //method to display current bullet count
 
-	//method to display current score
-	String DisplayCurrentScore(int cs);
+	String DisplayGoal(int g); //method to display current goal
 
-
-	//method to display current bullet count
-	String DisplayAmmoCount(int a);
-
-
-	//method to display current goal
-	String DisplayGoal(int g);
+	String DisplayLives(int l); //method to display current goal
 
 
 private:

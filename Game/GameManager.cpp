@@ -1,132 +1,143 @@
 #include "GameManager.h"
 
-
-
 GameManager::GameManager()
 {
+<<<<<<< HEAD
 	m_pSystem = SystemSingleton::GetInstance();
+=======
+	m_pSystem = SystemSingleton:: GetInstance();
+	player = Player::GetInstance();
 }
 
-//called when player fails to reach round goal
-void GameManager::ResetRound()
-{
-	if (player->GetLives() > 0) {
-		player->SetLives(GetLives() - 1);
 
+void GameManager::Update(MeshManagerSingleton* meshManager) {
+	//Lets us know how much time has passed since the last call
+	fTimeSpan = m_pSystem->LapClock(); //Delta time (between frame calls)
 
-		//return to original score
-		SetTotalScore(GetTotalScore() - GetCurrentScore());
+	//cumulative time
+	fRunTime += fTimeSpan; //How much time has passed since the program started
 
-		//reset current score
-		SetCurrentScore(0);
-
-		//reset current timer
-		SetCurrentTimer(30); //seconds
-
-		//Ammo and Goal are the same for the current round
+	if (currentTimer > 0) {
+		//draw E,P,B and background
+		//move E,B
+		//detect collision
+		
+		DisplayData(meshManager); //display UI
+		
+		UpdateTimer(); //update timer
 	}
 	else {
-		GameOver();
+		CheckGoal();
+	}
+>>>>>>> 480f99e1a220b8f988eee210d5410e0e7c744f34
+}
+
+// called when player fails to reach round goal
+void GameManager::ResetRound()
+{
+	//as long as player's hp is >0
+	if (player->GetLives() > 0) {
+
+		player->SetLives(GetLives() - 1); //player lose 1 health
+
+		SetTotalScore(GetTotalScore() - GetCurrentScore()); //return to original score
+
+		SetCurrentScore(0); //reset current score
+
+		SetCurrentTimer(roundTimer); //seconds //reset current timer
+
+		player->SetBullets(roundAmmo); //Ammo and Goal are the same for the current round
+	}
+	else {
+		GameOver(); //if player health = 0, call GameOver
 	}
 }
 
-void GameManager::ResetGame(void)
+void GameManager::NewGame(void)
 {
-	//reset lives
-	SetLives(3);
+	fRunTime = 0.0f; //reset run time
+	roundTimer = 60; //seconds
 
-	//reset total score
-	SetTotalScore(0);
-	//reset current score
-	SetCurrentScore(0);
-	//reset current timer
-	SetCurrentTimer(30); //seconds
+	SetLives(3); //reset lives
+
+	SetTotalScore(0); //reset total score
+	
+	SetCurrentScore(0); //reset current score
+	
+	SetCurrentTimer(roundTimer); //reset current timer-seconds
+
 	//reset ammo count
 	SetAmmo(20);
-	//reset goal
-	SetGoal(5);
+	roundAmmo = 20;
+
+	SetGoal(5); //reset goal
 }
 
 void GameManager::NextRound(void)
 {
-	//increment total score
-	SetTotalScore(GetTotalScore() + GetCurrentScore());
-
-	//reset current score
-	SetCurrentScore(0);
-
-	//reset current timer
-	SetCurrentTimer(30); //seconds
-
-	//increment goal player has to reach
-	ChangeGoalAmount();
-
-	//decrement the ammount of bullets the player has
-	ChangeAmmoAmount();
+	SetTotalScore(GetTotalScore() + GetCurrentScore()); //increment total score
+	
+	SetCurrentScore(0); //reset current score
+	
+	SetCurrentTimer(roundTimer); //reset current timer-seconds
+	
+	IncreaseChallenge(); //increase game challenge
 }
 
 void GameManager::GameOver(){
-	
+	//destroy enemies
+
+	//call new game if player wishes to continue
 }
 
 void GameManager::DisplayData(MeshManagerSingleton* meshManager)
 {
-	//these return a string
-	meshManager-> PrintLine(ui->DisplayCurrentScore(GetCurrentScore()));
+	meshManager->PrintLine(ui->DisplayTotalScore(GetTotalScore())); //display total score
 
-	//method to display total score
-	meshManager->PrintLine(ui->DisplayTotalScore(GetTotalScore()));
+	meshManager->PrintLine(ui->DisplayGoal(GetGoal())); //display current round goal
 
-	//method to display current bullet count
-	meshManager->PrintLine(ui->DisplayAmmoCount(GetAmmo()));
+	meshManager-> PrintLine(ui->DisplayCurrentScore(GetCurrentScore())); //display current score
 
+	meshManager->PrintLine(ui->DisplayAmmoCount(GetAmmo())); //display current bullet count
 
-	//method to display current goal
-	meshManager->PrintLine(ui->DisplayGoal(GetGoal()));
+	//display player lives
+	meshManager->PrintLine(ui->DisplayLives(GetLives()));
+}
+
+void GameManager::UpdateTimer(void)
+{
+	currentTimer -= fRunTime;
 }
 
 
-//at the end of the timer, checks to see if player reached their goal
-bool GameManager::CheckGoal(void)
+// at the end of the timer, checks to see if player reached their goal
+void GameManager::CheckGoal(void)
 {
-	if (currentTimer <= 0) {
+	if (currentScore >= goal) {
 		
-		if (currentScore >= goal) {
-			//make a new round
-			NextRound();
-		}
-		else {
-			if (player -> GetLives() > 0) {
-				player->SetLives(GetLives() - 1);
-				//player has to play the round again but with 1 less health
-				ResetRound();
-			}
-		}
+		NextRound(); //player goes to a next round
 	}
-
-
-	return false;
+	else {
+		
+		ResetRound(); //player has to replay round
+	}
 }
 
 // decrements how many ammo the player starts with in current round
-void GameManager::ChangeAmmoAmount()
+// increments the goal the player needs to reach in current round
+void GameManager::IncreaseChallenge()
 {
 	if (player->GetBullets() > 3) {
-		//randomly decrement by a certain amount
-		int ranNum = rand() % 3; //0-3
 
-		SetAmmo(GetAmmo() + ranNum);
+		int ranNum = rand() % 3; //get a new rando value
+
+		roundAmmo = GetAmmo() + ranNum; //used for reseting round. 
+		SetAmmo(GetAmmo() - ranNum); //decrement ammo
+
+		ranNum = rand() % 3; //get a new rando value
+
+		SetGoal(GetGoal() + ranNum); //increment goal
 	}
-}
-
-// increments the goal the player needs to reach in current round
-void GameManager::ChangeGoalAmount()
-{
-	//randomly decrement by a certain amount
-	int ranNum = rand() % 3; //0-3
-
-	//randomly increment by a certain amount
-	SetGoal(GetGoal() + ranNum);
 }
 
 // increments the current score when player hits something
@@ -135,21 +146,15 @@ void GameManager::IncrementCurrentScore(int value)
 	currentScore += value;
 }
 
-float GameManager::Percentage(float valueToMap, float scaleOrginalMin, float scaleOriginalMax, float mappedMin, float mappedMax )
+//returns a percentage based on time that is used for LERPING
+float GameManager::Percentage(float scaleOrginalMin, float scaleOriginalMax, float mappedMin, float mappedMax )
 {
-	//Lets us know how much time has passed since the last call
-	double fTimeSpan = m_pSystem->LapClock(); //Delta time (between frame calls)
-
-	//cumulative time
-	static double fRunTime = 0.0f; //How much time has passed since the program started
-	fRunTime += fTimeSpan;
-
-
-	float percentage = MapValue(static_cast<float>(valueToMap), scaleOrginalMin, scaleOriginalMax, mappedMin, mappedMax);
+	float percentage = MapValue(static_cast<float>(fRunTime), scaleOrginalMin, scaleOriginalMax, mappedMin, mappedMax);
 
 	return percentage;
 }
 
+//PROPERTIES---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //GOAL properties
 int GameManager::GetGoal() {
@@ -160,6 +165,7 @@ void GameManager::SetGoal(int value) {
 
 	goal = value;
 }
+
 
 // CURRENT SCORE properties
 int GameManager::GetCurrentScore() {
@@ -182,6 +188,7 @@ void GameManager::SetTotalScore(int value)
 {
 	totalScore = value;
 }
+
 
 //LIVES properties
 void GameManager::SetLives(int value)
@@ -212,8 +219,6 @@ void GameManager::SetCurrentTimer(int value)
 {
 	currentTimer = value;
 }
-
-
 
 
 // destructor
