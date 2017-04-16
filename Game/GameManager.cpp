@@ -62,7 +62,7 @@ void GameManager::ChangeAmmoAmount()
 	//randomly decrement by a certain amount
 	int ranNum = rand() % 3; //0-3
 
-	player->SetAmmo(GetAmmo() + ranNum);
+	player->SetBullets(GetAmmo() + ranNum);
 
 	SetAmmo(GetAmmo() + ranNum);
 }

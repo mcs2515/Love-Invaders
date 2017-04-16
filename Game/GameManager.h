@@ -47,7 +47,7 @@ private:
 	//goal
 	int goal;
 	//timer
-	float currentTimer;
+	int currentTimer;
 	//win/lose
 	bool roundCleared;
 	//score
