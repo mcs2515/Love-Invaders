@@ -16,7 +16,7 @@ public:
 	~Player();
 
 	//draw
-	void Draw();
+	void Draw(MeshManagerSingleton* meshManager);
 
 	// Getter / Setter for m_iBullets
 	int GetBullets();

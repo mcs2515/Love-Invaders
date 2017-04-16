@@ -3,7 +3,7 @@
 
 
 
-void Enemy::Draw()
+void Enemy::Draw(MeshManagerSingleton* meshManager)
 {
 }
 

@@ -4,7 +4,7 @@ void MovableObjects::Move()
 {
 }
 
-void MovableObjects::Draw()
+void MovableObjects::Draw(MeshManagerSingleton* meshManager)
 {
 }
 

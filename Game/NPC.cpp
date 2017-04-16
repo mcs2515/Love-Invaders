@@ -10,7 +10,7 @@ NPC::NPC()
 	v3_End = vector3(1, 1, 1);
 }
 
-void NPC::Draw()
+void NPC::Draw(MeshManagerSingleton* meshManager)
 {
 }
 

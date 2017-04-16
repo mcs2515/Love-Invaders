@@ -17,7 +17,7 @@ Player::~Player()
 {
 }
 
-void Player::Draw()
+void Player::Draw(MeshManagerSingleton* meshManager)
 {
 }
 

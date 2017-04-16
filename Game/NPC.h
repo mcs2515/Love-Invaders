@@ -7,7 +7,7 @@ class NPC :
 {
 public:
 	NPC();
-	virtual void Draw();
+	virtual void Draw(MeshManagerSingleton* meshManager);
 	NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd);
 	~NPC();
 private:

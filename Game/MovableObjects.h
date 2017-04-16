@@ -11,7 +11,7 @@ public:
 	vector3 size;
 
 	virtual void Move();
-	virtual void Draw();
+	virtual void Draw(MeshManagerSingleton* meshManager);
 	MovableObjects(vector3 ip, boolean ir, vector3 is);
 	~MovableObjects();
 };
