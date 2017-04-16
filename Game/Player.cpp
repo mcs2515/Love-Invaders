@@ -1,38 +1,36 @@
 #include "Player.h"
-
-Player::Player(vector3 ip, vector3 ir, vector3 is) : MovableObjects(ip, ir, is)
+// PRIVATE - CONSTRUCTOR
+Player::Player(vector3 ip, vector3 is) : MovableObjects(ip, true, is)
 {
 	m_iBullets = 5;
+
+	// Creates the body for drawing
+	m_pBody = new PrimitiveClass();
+	m_pBody->GenerateSphere(1.0f, 5, RERED);
 }
-
-
+// PRIVATE - DESTRUCTOR
 Player::~Player()
 {
+	SafeDelete(m_pBody);
+	ReleaseInstance();
 }
 
+// Draws the 
 void Player::Draw()
 {
 }
 
-int Player::GetBullets()
-{
-	return m_iBullets;
-}
-
-void Player::SetBullets(int b)
-{
-	m_iBullets = b;
-}
-
-void Player::SetLeft(bool l)
-{
-	m_bGoLeft = l;
-}
-
 void Player::Move() {
-	if (m_bGoLeft)
-		position.x -= m_fMove;
+	// X AXIS movement
+	if (m_bGoUp)
+		position.x -= static_cast<float>(m_iMove);
 	else
-		position.x += m_fMove;
+		position.x += static_cast<float>(m_iMove);
+
+	// Z AXIS movement
+	if (m_bGoLeft)
+		position.z -= static_cast<float>(m_iMove);
+	else
+		position.z += static_cast<float>(m_iMove);
 
 }
