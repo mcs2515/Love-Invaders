@@ -8,8 +8,9 @@ void MovableObjects::Draw()
 {
 }
 
-MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is)
+MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager)
 {
+	meshManager = iMeshManager;
 	position = ip;
 	rotation = ir;
 	size = is;

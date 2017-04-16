@@ -6,10 +6,13 @@ class Enemy :
 {
 public:
 	void Draw();
+	void Move(float fTImer);
 	Enemy();
-	Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd);
+	Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager);
 	~Enemy();
 
-	static int n_enemyCount; //can be moved to AppClass later
+	static int n_EnemyCount; //can be moved to AppClass later
+
+private:
 };
 

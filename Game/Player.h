@@ -12,6 +12,7 @@ private:
 	static int m_iBullets;				// Getter / Setter -> Used by UILayer / GameManager to get and change number of bullets player starts with
 	const static int m_iMove = 5;		// Used to determine how much the player moves
 
+<<<<<<< HEAD
 	PrimitiveClass* m_pBody;
 	// Constructor
 	Player(vector3 ip, vector3 is);
@@ -22,6 +23,11 @@ private:
 		instance = other.GetInstance();
 	};
 	// Destructor
+=======
+public:
+	Player();
+	Player(vector3 ip, vector3 ir, vector3 is, MeshManagerSingleton* IMeshManager);
+>>>>>>> dc2a3e68b1e1c4b55e6cb92de74ecdd52c4f59e5
 	~Player();
 
 public:
