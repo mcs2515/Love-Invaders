@@ -4,6 +4,10 @@ void MovableObjects::Move()
 {
 }
 
+void MovableObjects::Draw()
+{
+}
+
 MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is)
 {
 	position = ip;
