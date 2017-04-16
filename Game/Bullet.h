@@ -1,5 +1,7 @@
 #pragma once
-class Bullet
+#include "RE\ReEngAppClass.h"
+
+class Bullet : public NPC
 {
 public:
 	Bullet();
