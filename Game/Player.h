@@ -14,6 +14,9 @@ public:
 	Player(vector3 ip, vector3 ir, vector3 is);
 	~Player();
 
+	//draw
+	void Draw();
+
 	// Getter / Setter for m_iBullets
 	int GetBullets();
 	void SetBullets(int b);

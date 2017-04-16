@@ -11,6 +11,7 @@ public:
 	vector3 size;
 
 	virtual void Move();
+	virtual void Draw();
 	MovableObjects(vector3 ip, boolean ir, vector3 is);
 	~MovableObjects();
 };

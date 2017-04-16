@@ -10,6 +10,10 @@ NPC::NPC()
 	v3_End = vector3(1, 1, 1);
 }
 
+void NPC::Draw()
+{
+}
+
 NPC::NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd)
 	: MovableObjects(initialPosition, initialRotation, initialSize)
 {

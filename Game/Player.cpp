@@ -10,6 +10,10 @@ Player::~Player()
 {
 }
 
+void Player::Draw()
+{
+}
+
 int Player::GetBullets()
 {
 	return m_iBullets;
