@@ -1,19 +1,12 @@
 #include "Player.h"
 // PRIVATE - CONSTRUCTOR
-Player::Player(vector3 ip, vector3 is) : MovableObjects(ip, true, is)
+Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager)
 {
 	m_iBullets = 5;
 
-<<<<<<< HEAD
-	// Creates the body for drawing
+	// Creates the body for drawing - Not used yet
 	m_pBody = new PrimitiveClass();
 	m_pBody->GenerateSphere(1.0f, 5, RERED);
-=======
-Player::Player(vector3 ip, vector3 ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager)
-{
-	m_iBullets = 5;
-	m_fMove = 5.0f;
->>>>>>> dc2a3e68b1e1c4b55e6cb92de74ecdd52c4f59e5
 }
 // PRIVATE - DESTRUCTOR
 Player::~Player()
@@ -22,9 +15,10 @@ Player::~Player()
 	ReleaseInstance();
 }
 
-// Draws the 
+// Draws the body - Not used yet, just adds a sphere to the render list
 void Player::Draw()
 {
+	meshManager->AddSphereToRenderList(modelMatrix, RERED, SOLID);
 }
 
 void Player::Move() {
@@ -39,5 +33,13 @@ void Player::Move() {
 		position.z -= static_cast<float>(m_iMove);
 	else
 		position.z += static_cast<float>(m_iMove);
+
+	// Updates the model matrix after moving
+	modelMatrix = glm::translate(position);
+	if (!rotation)
+	{
+		modelMatrix *= glm::rotate(180.0f, REAXISY);
+	}
+	modelMatrix *= glm::scale(size);
 
 }

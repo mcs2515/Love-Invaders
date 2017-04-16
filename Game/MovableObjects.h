@@ -9,7 +9,7 @@ public:
 	//true = left/false = right
 	boolean rotation;
 	vector3 size;
-	MeshManagerSingleton* meshManager
+	MeshManagerSingleton* meshManager;
 
 	virtual void Move();
 	virtual void Draw();
