@@ -11,24 +11,29 @@ class GameManager
 public:
 	GameManager();
 
+	void Update(MeshManagerSingleton* meshManager);
+
 	void NextRound(void);
 	void ResetRound(void);
-	void ResetGame(void);
-	
-	
-	bool CheckGoal(void);
+	void NewGame(void);
+	void GameOver(void);
 
-	void ChangeAmmoAmount(void);
+	void CheckGoal(void);
 
-	void ChangeGoalAmount(void);
+	void IncreaseChallenge(void);
 
 	void IncrementCurrentScore(int value);
 
-	float Percentage(float valueToMap, float scaleOrginalMin, float scaleOriginalMax, float mappedMin, float mappedMax);
+	float Percentage(float scaleOrginalMin, float scaleOriginalMax, float mappedMin, float mappedMax);
 
 	void DisplayData(MeshManagerSingleton* meshManager);
 
-	void GameOver(void);
+	void UpdateTimer(void);
+
+	void DetectCollision(void);
+
+	void DestroyEnemy(void);
+	void DestroyBullets(void);
 
 	int GetGoal(void);
 	void SetGoal(int value);
@@ -40,7 +45,6 @@ public:
 
 	int GetCurrentScore(void);
 	void SetCurrentScore(int value);
-
 
 	int GetTotalScore(void);
 	void SetTotalScore(int value);
@@ -62,10 +66,17 @@ private:
 	int goal;
 
 	//timer
+	int roundTimer;
 	int currentTimer;
 
 	//score
 	int totalScore;
 	int currentScore;
+
+	//keeps track of the ammo player starts off with at beginning of current round
+	int roundAmmo;
+
+	double fTimeSpan;
+	static double fRunTime;
 };
 
