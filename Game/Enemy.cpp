@@ -5,6 +5,7 @@
 
 void Enemy::Draw()
 {
+	meshManager->AddSphereToRenderList(modelMatrix, REGREEN, SOLID);
 }
 
 void Enemy::Move(float fPercent)

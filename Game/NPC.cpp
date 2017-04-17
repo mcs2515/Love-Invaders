@@ -2,15 +2,11 @@
 
 
 
-NPC::NPC()
-	: MovableObjects(vector3(0, 0, 0), true, vector3(1, 1, 1))
+void NPC::Draw()
 {
-	//set dummy starter values
-	v3_Start = vector3(0, 0, 0);
-	v3_End = vector3(1, 1, 1);
 }
 
-void NPC::Draw()
+void Move(float fTImer)
 {
 }
 
