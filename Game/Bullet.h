@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BULLET_H
+#define BULLET_H
+
 #include "RE\ReEngAppClass.h"
 #include "NPC.h"
 
@@ -11,4 +13,4 @@ public:
 	Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager);
 	~Bullet();
 };
-
+#endif

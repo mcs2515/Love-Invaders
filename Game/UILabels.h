@@ -1,5 +1,6 @@
+#ifndef UILABELS_H
+#define UILABELS_H
 #include "RE\ReEngAppClass.h"
-#include <SFML\Graphics.hpp>
 
 
 class UILabels
@@ -17,7 +18,7 @@ public:
 
 	String DisplayGoal(int g); //method to display current goal
 
-	String DisplayLives(int l); //method to display current goal
+	String DisplayLives(int l); //method to display current lives
 
 
 private:
@@ -25,4 +26,4 @@ private:
 
 
 };
-
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MOVABLEOBJECTS_H
+#define MOVABLEOBJECTS_H
+
 #include "RE\ReEngAppClass.h"
 
 class MovableObjects
@@ -16,3 +18,4 @@ public:
 	MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager);
 	~MovableObjects();
 };
+#endif

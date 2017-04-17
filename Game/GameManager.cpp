@@ -2,20 +2,11 @@
 
 GameManager::GameManager(MeshManagerSingleton* msh)
 {
-<<<<<<< HEAD
-	m_pSystem = SystemSingleton:: GetInstance();
-	player = Player::GetInstance();
-=======
-<<<<<<< HEAD
+
 	meshManager = MeshManagerSingleton::GetInstance();
 	m_pSystem = SystemSingleton::GetInstance();
-	player = Player::GetInstance(meshManager);
-=======
+	player = new Player(vector3(0.0f), false, vector3(1.0f), meshManager);//Player::GetInstance(meshManager);
 
-	m_pSystem = SystemSingleton::GetInstance();
-	//player = Player::GetInstance();
->>>>>>> a060fb23e2e928958b9a5acf10d4442fef779ceb
->>>>>>> d88efdb201fdf11afa1241fadad446632cc26072
 }
 
 
@@ -33,6 +24,8 @@ void GameManager::Update() {
 		
 		DisplayData(); //display UI
 		
+		player->Draw();	// display Player; temporary
+
 		UpdateTimer(); //update timer
 	}
 	else {
@@ -108,13 +101,15 @@ void GameManager::DisplayData()
 
 	meshManager->PrintLine(ui->DisplayAmmoCount(GetAmmo())); //display current bullet count
 
+	meshManager->PrintLine("Current Time: " + std::to_string(currentTimer));
+
 	//display player lives
 	meshManager->PrintLine(ui->DisplayLives(GetLives()));
 }
 
 void GameManager::UpdateTimer(void)
 {
-	currentTimer -= fRunTime;
+	currentTimer -= fTimeSpan;
 }
 
 
@@ -162,6 +157,17 @@ float GameManager::Percentage(float scaleOrginalMin, float scaleOriginalMax, flo
 	return percentage;
 }
 
+void GameManager::MovePlayer(bool left, bool dir)
+{
+	if (left) {
+		player->SetLeft(dir);
+	}
+	else {
+		player->SetUp(dir);
+	}
+	player->Move();
+}
+
 //PROPERTIES---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //GOAL properties
@@ -201,7 +207,7 @@ void GameManager::SetTotalScore(int value)
 //LIVES properties
 void GameManager::SetLives(int value)
 {
-	player -> SetLives(value);
+	player->SetLives(value);
 }
 
 int GameManager::GetLives(void)
@@ -232,4 +238,8 @@ void GameManager::SetCurrentTimer(float value)
 // destructor
 GameManager::~GameManager()
 {
+	SafeDelete(ui);
+	SafeDelete(player);
+	SafeDelete(bullet);
+	SafeDelete(enemy);
 }

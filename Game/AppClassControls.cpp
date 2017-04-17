@@ -43,6 +43,17 @@ void AppClass::ProcessKeyboard(void)
 		m_pCameraMngr->MoveVertical(fSpeed);
 #pragma endregion
 
+#pragma region Player Movement
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		gm->MovePlayer(true, true);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		gm->MovePlayer(true, false);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		gm->MovePlayer(false, true);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		gm->MovePlayer(false, false);
+#pragma endregion
+
 #pragma region Other Actions
 	ON_KEY_PRESS_RELEASE(Escape, NULL, PostMessage(m_pWindow->GetHandler(), WM_QUIT, NULL, NULL));
 	ON_KEY_PRESS_RELEASE(F1, NULL, m_pCameraMngr->SetCameraMode(CAMPERSP));
