@@ -1,16 +1,14 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
+GameManager::GameManager(MeshManagerSingleton* msh)
 {
-<<<<<<< HEAD
+	meshManager = MeshManagerSingleton::GetInstance();
 	m_pSystem = SystemSingleton::GetInstance();
-=======
-	m_pSystem = SystemSingleton:: GetInstance();
-	player = Player::GetInstance();
+	player = Player::GetInstance(meshManager);
 }
 
 
-void GameManager::Update(MeshManagerSingleton* meshManager) {
+void GameManager::Update() {
 	//Lets us know how much time has passed since the last call
 	fTimeSpan = m_pSystem->LapClock(); //Delta time (between frame calls)
 
@@ -22,14 +20,13 @@ void GameManager::Update(MeshManagerSingleton* meshManager) {
 		//move E,B
 		//detect collision
 		
-		DisplayData(meshManager); //display UI
+		DisplayData(); //display UI
 		
 		UpdateTimer(); //update timer
 	}
 	else {
 		CheckGoal();
 	}
->>>>>>> 480f99e1a220b8f988eee210d5410e0e7c744f34
 }
 
 // called when player fails to reach round goal
@@ -90,7 +87,7 @@ void GameManager::GameOver(){
 	//call new game if player wishes to continue
 }
 
-void GameManager::DisplayData(MeshManagerSingleton* meshManager)
+void GameManager::DisplayData()
 {
 	meshManager->PrintLine(ui->DisplayTotalScore(GetTotalScore())); //display total score
 

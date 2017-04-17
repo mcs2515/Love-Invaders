@@ -7,9 +7,9 @@
 class GameManager
 {
 public:
-	GameManager();
+	GameManager(MeshManagerSingleton* meshManager);
 
-	void Update(MeshManagerSingleton* meshManager);
+	void Update();
 
 	void NextRound(void);
 	void ResetRound(void);
@@ -24,7 +24,7 @@ public:
 
 	float Percentage(float scaleOrginalMin, float scaleOriginalMax, float mappedMin, float mappedMax);
 
-	void DisplayData(MeshManagerSingleton* meshManager);
+	void DisplayData();
 
 	void UpdateTimer(void);
 
@@ -56,6 +56,8 @@ public:
 	Enemy* enemy;
 	
 	SystemSingleton* m_pSystem;
+
+	MeshManagerSingleton* meshManager;
 
 	~GameManager();
 	
