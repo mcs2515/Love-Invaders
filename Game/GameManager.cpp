@@ -2,6 +2,9 @@
 
 GameManager::GameManager()
 {
+<<<<<<< HEAD
+	m_pSystem = SystemSingleton::GetInstance();
+=======
 	m_pSystem = SystemSingleton:: GetInstance();
 	player = Player::GetInstance();
 }
@@ -26,6 +29,7 @@ void GameManager::Update(MeshManagerSingleton* meshManager) {
 	else {
 		CheckGoal();
 	}
+>>>>>>> 480f99e1a220b8f988eee210d5410e0e7c744f34
 }
 
 // called when player fails to reach round goal
@@ -194,7 +198,7 @@ void GameManager::SetLives(int value)
 
 int GameManager::GetLives(void)
 {
-	player->GetLives(lives);
+	return player->GetLives();
 }
 
 

@@ -1,6 +1,4 @@
 #pragma once
-#include "RE\ReEngAppClass.h"
-#include <SFML\Graphics.hpp>
 #include "Player.h"
 #include "UILabels.h"
 #include "Bullet.h"

@@ -1,0 +1,17 @@
+﻿  AppClass.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Main.cpp
+  GameManager.cpp
+  Enemy.cpp
+  AppClassControls.cpp
+AppClassControls.obj : error LNK2005: "public: static class Player * Player::instance" (?instance@Player@@2PAV1@A) already defined in AppClass.obj
+GameManager.obj : error LNK2005: "public: static class Player * Player::instance" (?instance@Player@@2PAV1@A) already defined in AppClass.obj
+Main.obj : error LNK2005: "public: static class Player * Player::instance" (?instance@Player@@2PAV1@A) already defined in AppClass.obj
+Player.obj : error LNK2005: "public: static class Player * Player::instance" (?instance@Player@@2PAV1@A) already defined in AppClass.obj
+Bullet.obj : error LNK2019: unresolved external symbol "public: __thiscall NPC::NPC(void)" (??0NPC@@QAE@XZ) referenced in function "public: __thiscall Bullet::Bullet(void)" (??0Bullet@@QAE@XZ)
+Enemy.obj : error LNK2001: unresolved external symbol "public: __thiscall NPC::NPC(void)" (??0NPC@@QAE@XZ)
+Enemy.obj : error LNK2001: unresolved external symbol "public: static int Enemy::n_EnemyCount" (?n_EnemyCount@Enemy@@2HA)
+GameManager.obj : error LNK2001: unresolved external symbol "private: static int Player::m_iBullets" (?m_iBullets@Player@@0HA)
+Player.obj : error LNK2001: unresolved external symbol "private: static int Player::m_iBullets" (?m_iBullets@Player@@0HA)
+Z:\IGMProfile\Documents\_Third Year_\Second Semester\_Love-Invaders\Z_DELETE\Game_VS15D.exe : fatal error LNK1120: 3 unresolved externals

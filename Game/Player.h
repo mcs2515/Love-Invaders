@@ -16,11 +16,11 @@ private:
 	
 	// Constructor
 	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager);
-	// Equals / assignment operator
+	// Equals / assignment operator - DON'T EVER USE THIS (becaues of the GetInstance)
 	Player& operator=(Player other) {
 		m_bGoLeft = other.GetLeft();
 		m_bGoUp = other.GetUp();
-		instance = other.GetInstance();
+		instance = other.GetInstance(meshManager);
 	};
 	// Destructor
 	~Player();

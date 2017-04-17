@@ -5,7 +5,14 @@
 
 void Enemy::Draw()
 {
+<<<<<<< HEAD
 	meshManager->AddSphereToRenderList(modelMatrix, REGREEN, SOLID);
+=======
+	modelMatrix = IDENTITY_M4;
+	//only need draw for now
+	modelMatrix *= glm::translate(position);
+	meshManager->SetModelMatrix(modelMatrix);
+>>>>>>> b2796f5a91a0aeea8976c76f2e6c1360e46d858f
 }
 
 void Enemy::Move(float fPercent)
