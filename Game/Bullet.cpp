@@ -1,7 +1,10 @@
 #include "Bullet.h"
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d88efdb201fdf11afa1241fadad446632cc26072
 void Bullet::Move(float fPercent)
 {
 	//lerp from start to end

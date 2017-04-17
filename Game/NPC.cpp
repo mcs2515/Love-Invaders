@@ -1,7 +1,10 @@
 #include "NPC.h"
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d88efdb201fdf11afa1241fadad446632cc26072
 void NPC::Draw()
 {
 }

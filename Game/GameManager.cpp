@@ -1,13 +1,25 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
+GameManager::GameManager(MeshManagerSingleton* msh)
 {
+<<<<<<< HEAD
 	m_pSystem = SystemSingleton:: GetInstance();
 	player = Player::GetInstance();
+=======
+<<<<<<< HEAD
+	meshManager = MeshManagerSingleton::GetInstance();
+	m_pSystem = SystemSingleton::GetInstance();
+	player = Player::GetInstance(meshManager);
+=======
+
+	m_pSystem = SystemSingleton::GetInstance();
+	//player = Player::GetInstance();
+>>>>>>> a060fb23e2e928958b9a5acf10d4442fef779ceb
+>>>>>>> d88efdb201fdf11afa1241fadad446632cc26072
 }
 
 
-void GameManager::Update(MeshManagerSingleton* meshManager) {
+void GameManager::Update() {
 	//Lets us know how much time has passed since the last call
 	fTimeSpan = m_pSystem->LapClock(); //Delta time (between frame calls)
 
@@ -19,7 +31,7 @@ void GameManager::Update(MeshManagerSingleton* meshManager) {
 		//move E,B
 		//detect collision
 		
-		DisplayData(meshManager); //display UI
+		DisplayData(); //display UI
 		
 		UpdateTimer(); //update timer
 	}
@@ -86,7 +98,7 @@ void GameManager::GameOver(){
 	//call new game if player wishes to continue
 }
 
-void GameManager::DisplayData(MeshManagerSingleton* meshManager)
+void GameManager::DisplayData()
 {
 	meshManager->PrintLine(ui->DisplayTotalScore(GetTotalScore())); //display total score
 
@@ -211,7 +223,7 @@ void GameManager::SetAmmo(int value)
 
 
 // CURRENT TIMER properties
-void GameManager::SetCurrentTimer(int value)
+void GameManager::SetCurrentTimer(float value)
 {
 	currentTimer = value;
 }

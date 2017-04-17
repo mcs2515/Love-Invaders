@@ -7,9 +7,9 @@
 class GameManager
 {
 public:
-	GameManager();
+	GameManager(MeshManagerSingleton* meshManager);
 
-	void Update(MeshManagerSingleton* meshManager);
+	void Update();
 
 	void NextRound(void);
 	void ResetRound(void);
@@ -24,7 +24,7 @@ public:
 
 	float Percentage(float scaleOrginalMin, float scaleOriginalMax, float mappedMin, float mappedMax);
 
-	void DisplayData(MeshManagerSingleton* meshManager);
+	void DisplayData();
 
 	void UpdateTimer(void);
 
@@ -36,7 +36,7 @@ public:
 	int GetGoal(void);
 	void SetGoal(int value);
 
-	void SetCurrentTimer(int value);
+	void SetCurrentTimer(float value);
 
 	int GetAmmo(void);
 	void SetAmmo(int value);
@@ -57,6 +57,8 @@ public:
 	
 	SystemSingleton* m_pSystem;
 
+	MeshManagerSingleton* meshManager;
+
 	~GameManager();
 	
 private: 
@@ -64,8 +66,8 @@ private:
 	int goal;
 
 	//timer
-	int roundTimer;
-	int currentTimer;
+	float roundTimer;
+	float currentTimer;
 
 	//score
 	int totalScore;
