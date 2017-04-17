@@ -26,7 +26,7 @@ void AppClass::InitVariables(void)
 	m_pMeshMngr->LoadModel("Lego\\Unikitty.bto", "Unikitty");
 
 	gm = new GameManager();
-	gm->ResetGame();
+	gm->NewGame();
 }
 
 void AppClass::Update(void)

@@ -1,16 +1,11 @@
 #include "NPC.h"
 
 
-<<<<<<< HEAD
-
 void NPC::Draw()
 {
 }
 
 void Move(float fTImer)
-=======
-void NPC::Draw()
->>>>>>> b2796f5a91a0aeea8976c76f2e6c1360e46d858f
 {
 }
 

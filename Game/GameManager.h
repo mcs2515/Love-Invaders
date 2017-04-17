@@ -36,7 +36,7 @@ public:
 	int GetGoal(void);
 	void SetGoal(int value);
 
-	void SetCurrentTimer(int value);
+	void SetCurrentTimer(float value);
 
 	int GetAmmo(void);
 	void SetAmmo(int value);
@@ -64,8 +64,8 @@ private:
 	int goal;
 
 	//timer
-	int roundTimer;
-	int currentTimer;
+	float roundTimer;
+	float currentTimer;
 
 	//score
 	int totalScore;
