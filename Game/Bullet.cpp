@@ -1,11 +1,5 @@
 #include "Bullet.h"
 
-
-
-Bullet::Bullet()
-{
-}
-
 void Bullet::Move(float fPercent)
 {
 	//lerp from start to end

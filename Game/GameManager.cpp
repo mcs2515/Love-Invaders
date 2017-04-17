@@ -2,9 +2,15 @@
 
 GameManager::GameManager(MeshManagerSingleton* msh)
 {
+<<<<<<< HEAD
 	meshManager = MeshManagerSingleton::GetInstance();
 	m_pSystem = SystemSingleton::GetInstance();
 	player = Player::GetInstance(meshManager);
+=======
+
+	m_pSystem = SystemSingleton::GetInstance();
+	//player = Player::GetInstance();
+>>>>>>> a060fb23e2e928958b9a5acf10d4442fef779ceb
 }
 
 
@@ -212,7 +218,7 @@ void GameManager::SetAmmo(int value)
 
 
 // CURRENT TIMER properties
-void GameManager::SetCurrentTimer(int value)
+void GameManager::SetCurrentTimer(float value)
 {
 	currentTimer = value;
 }
