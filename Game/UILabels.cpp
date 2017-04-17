@@ -28,7 +28,7 @@ String UILabels::DisplayAmmoCount(int a) {
 }
 
 //displays how many lives player has left
-String UILabels::DisplayAmmoCount(int l) {
+String UILabels::DisplayLives(int l) {
 	return "Lives: " + std::to_string(l);
 }
 

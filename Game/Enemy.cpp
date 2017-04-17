@@ -5,14 +5,9 @@
 
 void Enemy::Draw()
 {
-<<<<<<< HEAD
-	meshManager->AddSphereToRenderList(modelMatrix, REGREEN, SOLID);
-=======
-	modelMatrix = IDENTITY_M4;
 	//only need draw for now
-	modelMatrix *= glm::translate(position);
 	meshManager->SetModelMatrix(modelMatrix);
->>>>>>> b2796f5a91a0aeea8976c76f2e6c1360e46d858f
+	meshManager->AddSphereToRenderList(modelMatrix, REGREEN, SOLID);
 }
 
 void Enemy::Move(float fPercent)
@@ -27,11 +22,15 @@ void Enemy::Move(float fPercent)
 		v3_Start = v3_End;
 		v3_End = temp;
 	}
+	modelMatrix = IDENTITY_M4;
+	modelMatrix *= glm::translate(position);
+	if (!rotation)
+	{
+		modelMatrix *= glm::rotate(180.0f, REAXISY);
+	}
+	modelMatrix *= glm::scale(size);
 }
 
-Enemy::Enemy()
-{
-}
 
 Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager)

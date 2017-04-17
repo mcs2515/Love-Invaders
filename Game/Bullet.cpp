@@ -2,10 +2,6 @@
 
 
 
-Bullet::Bullet()
-{
-}
-
 void Bullet::Move(float fPercent)
 {
 	//lerp from start to end
@@ -18,10 +14,19 @@ void Bullet::Move(float fPercent)
 		v3_Start = v3_End;
 		v3_End = temp;
 	}
+	modelMatrix = IDENTITY_M4;
+	modelMatrix *= glm::translate(position);
+	if (!rotation)
+	{
+		modelMatrix *= glm::rotate(180.0f, REAXISY);
+	}
+	modelMatrix *= glm::scale(size);
 }
 
 void Bullet::Draw()
 {
+	//only need draw for now
+	meshManager->SetModelMatrix(modelMatrix);
 	meshManager->AddSphereToRenderList(modelMatrix, REBLUE, SOLID);
 }
 Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
