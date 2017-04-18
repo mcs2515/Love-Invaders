@@ -32,6 +32,11 @@ String UILabels::DisplayLives(int l) {
 	return "Lives: " + std::to_string(l);
 }
 
+//displays how many lives player has left
+String UILabels::DisplayCurrentTime(int t) {
+	return "CurrentTime: " + std::to_string(t);
+}
+
 
 UILabels::~UILabels()
 {

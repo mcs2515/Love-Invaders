@@ -25,7 +25,7 @@ void AppClass::InitVariables(void)
 	//Load a model onto the Mesh manager
 	//m_pMeshMngr->LoadModel("Lego\\Unikitty.bto", "Unikitty");
 
-	gm = new GameManager(m_pMeshMngr);
+	gm = GameManager::GetInstance();
 	gm->NewGame();
 }
 
@@ -81,6 +81,5 @@ void AppClass::Display(void)
 
 void AppClass::Release(void)
 {
-	delete gm;
 	super::Release(); //release the memory of the inherited fields
 }

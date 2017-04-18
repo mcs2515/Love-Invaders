@@ -20,6 +20,8 @@ public:
 
 	String DisplayLives(int l); //method to display current lives
 
+	String DisplayCurrentTime(int t); //method siplays current time
+
 
 private:
 
