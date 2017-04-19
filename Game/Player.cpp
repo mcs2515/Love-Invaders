@@ -9,10 +9,7 @@ Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManag
 	m_pBody->GenerateSphere(1.0f, 5, RERED);
 }
 // PRIVATE - DESTRUCTOR
-Player::~Player()
-{
-	SafeDelete(m_pBody);
-}
+
 
 // Draws the body - Not used yet, just adds a sphere to the render list
 void Player::Draw()
