@@ -7,6 +7,8 @@
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
 
+Player* Player::instance = nullptr;
+
 //Singleton class
 class GameManager
 {
@@ -19,6 +21,7 @@ class GameManager
 
 	//instance of other singleton classes
 	Player* player;
+
 	SystemSingleton* m_pSystem;
 	MeshManagerSingleton* meshManager;
 
@@ -26,6 +29,7 @@ public:
 	static GameManager* GetInstance() {
 		if (instance == nullptr) {
 			instance = new GameManager();
+			
 		}
 		return instance;
 	};
@@ -200,7 +204,7 @@ public:
 
 		meshManager->PrintLine(ui->DisplayAmmoCount(GetAmmo())); //display current bullet count
 
-		meshManager->PrintLine(ui->DisplayCurrentTime);
+		meshManager->PrintLine(ui->DisplayCurrentTime(fRunTime));	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
 
 		//display player lives
 		meshManager->PrintLine(ui->DisplayLives(GetLives()));
@@ -272,7 +276,8 @@ private:
 
 		//meshManager = MeshManagerSingleton::GetInstance();
 		m_pSystem = SystemSingleton::GetInstance();
-		player = new Player(vector3(0.0f), false, vector3(1.0f), meshManager);//Player::GetInstance(meshManager);
+		player = Player::GetInstance(meshManager);
+		//player = new Player(vector3(0.0f), false, vector3(1.0f), meshManager);//Player::GetInstance(meshManager);
 	};
 
 	// Copy constructor
@@ -288,7 +293,8 @@ private:
 	// Basic destructor
 	~GameManager() {
 		SafeDelete(ui);
-		//SafeDelete()
+		player->ReleaseInstance();
+		ReleaseInstance();
 	};
 
 #pragma region variables

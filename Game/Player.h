@@ -5,8 +5,14 @@
 
 class Player : MovableObjects
 {
+private:
 
-public:
+	// Constructor
+	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager);
+
+	// Destructor
+	~Player();
+
 	bool m_bGoLeft;						// Getter / Setter -> Set in AppClassControls, used to determine which direction across the Z AXIS the player travels
 	bool m_bGoUp;						// Getter / Setter -> Set in AppClassControls, used to determine which direction across the X AXIS the player travels
 	int m_iLives;						// Getter / Setter -> Used by UILayer / GameManager to get and change how many lives the player has left
@@ -15,34 +21,32 @@ public:
 
 	PrimitiveClass* m_pBody;
 
-	// Constructor
-	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager);
-	/*
-	// Equals / assignment operator - DON'T EVER USE THIS (becaues of the GetInstance)
-	Player& operator=(Player other) {
+	static Player* instance;
+
+public:
+
+	// Equals / assignment operator - DON'T EVER USE THIS (because of the GetInstance)
+	inline Player& operator=(Player other) {
 		m_bGoLeft = other.GetLeft();
 		m_bGoUp = other.GetUp();
 		instance = other.GetInstance(meshManager);
-	};*/
-	// Destructor
-	~Player();
-	/*Player* instance;
+	};
 
 	// Since there will only ever be one player, make it a singleton / instance
-	Player* GetInstance(MeshManagerSingleton* IMeshManager) {
+	inline static Player* GetInstance(MeshManagerSingleton* IMeshManager) {
 		if (instance == nullptr) {
 			instance = new Player(vector3(0.0f, 0.0f, 0.0f), true, vector3(1.0f, 1.0f, 1.0f), IMeshManager);
 		}
 		return instance;
 	};
 
-	void ReleaseInstance() {
+	inline void ReleaseInstance() {
 		if (instance != nullptr) {
 			delete instance;
 			instance = nullptr;
 		}
 	}
-	*/
+	
 	// Draws the Object based on m_pBody and inherited class's variables
 	void Draw();
 
@@ -50,19 +54,18 @@ public:
 	void Move();
 
 	// Getter / Setter for m_bGoLeft
-	bool GetLeft() { return m_bGoLeft; };
-	void SetLeft(bool l) { m_bGoLeft = l; };
+	inline bool GetLeft() { return m_bGoLeft; };
+	inline void SetLeft(bool l) { m_bGoLeft = l; };
 	// Getter / Setter for m_bGoUp
-	bool GetUp() { return m_bGoUp; };
-	void SetUp(bool u) { m_bGoUp = u; };
+	inline bool GetUp() { return m_bGoUp; };
+	inline void SetUp(bool u) { m_bGoUp = u; };
 	// Getter / Setter for m_iLives
-	int GetLives() { return m_iLives; };
-	void SetLives(int l) { m_iLives = l; };
+	inline int GetLives() { return m_iLives; };
+	inline void SetLives(int l) { m_iLives = l; };
 	// Getter / Setter for m_iBullets
-	int GetBullets() { return m_iBullets; };
-	void SetBullets(int b) { m_iBullets = b; };
+	inline int GetBullets() { return m_iBullets; };
+	inline void SetBullets(int b) { m_iBullets = b; };
 
 };
 
-//Player* Player::instance = nullptr;
 #endif // __PLAYER_H_

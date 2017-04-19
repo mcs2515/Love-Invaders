@@ -12,7 +12,6 @@ Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManag
 Player::~Player()
 {
 	SafeDelete(m_pBody);
-	//ReleaseInstance();
 }
 
 // Draws the body - Not used yet, just adds a sphere to the render list
