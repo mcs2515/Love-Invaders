@@ -8,19 +8,10 @@ class Player : MovableObjects
 private:
 
 	// Constructor
-	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager) {
-		m_iBullets = 5;
-
-		// Creates the body for drawing - Not used yet
-		m_pBody = new PrimitiveClass();
-		m_pBody->GenerateSphere(1.0f, 5, RERED);
-	};
+	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager);
 
 	// Destructor
-	~Player() {
-		delete m_pBody;
-		ReleaseInstance();
-	};
+	~Player();
 
 	bool m_bGoLeft;						// Getter / Setter -> Set in AppClassControls, used to determine which direction across the Z AXIS the player travels
 	bool m_bGoUp;						// Getter / Setter -> Set in AppClassControls, used to determine which direction across the X AXIS the player travels
@@ -42,48 +33,14 @@ public:
 	};*/
 
 	// Since there will only ever be one player, make it a singleton / instance
-	  static Player* GetInstance(MeshManagerSingleton* IMeshManager) {
-		if (instance == nullptr) {
-			instance = new Player(vector3(0.0f, 0.0f, 0.0f), true, vector3(1.0f, 1.0f, 1.0f), IMeshManager);
-		}
-		return instance;
-	};
-
-	  void ReleaseInstance() {
-		if (instance != nullptr) {
-			delete instance;
-			instance = nullptr;
-		}
-	}
+	  static Player* GetInstance(MeshManagerSingleton* IMeshManager);
+	  void ReleaseInstance();
 	
 	// Draws the Object based on m_pBody and inherited class's variables
-	  void Draw() {
-		  meshManager->AddSphereToRenderList(modelMatrix, RERED, SOLID);
-	  };
+	  void Draw();
 
 	// Moves the player based on m_fMove
-	  void Move() {
-
-		  // X AXIS movement
-		  if (m_bGoLeft)
-			  position.x -= static_cast<float>(m_iMove);
-		  else
-			  position.x += static_cast<float>(m_iMove);
-
-		  // Z AXIS movement
-		  if (m_bGoUp)
-			  position.z -= static_cast<float>(m_iMove);
-		  else
-			  position.z += static_cast<float>(m_iMove);
-
-		  // Updates the model matrix after moving
-		  modelMatrix = glm::translate(position);
-		  /*if (!rotation)
-		  {
-		  modelMatrix *= glm::rotate(180.0f, REAXISY);
-		  }*/
-		  modelMatrix *= glm::scale(size);
-	  };
+	  void Move();
 
 	  // Getter / Setter for m_bGoLeft
 	  bool GetLeft() { return m_bGoLeft; };

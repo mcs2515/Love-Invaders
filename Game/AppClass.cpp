@@ -1,5 +1,8 @@
 #include "AppClass.h"
 
+GameManager* GameManager::instance = nullptr;
+Player* Player::instance = nullptr;
+
 void AppClass::InitWindow(String a_sWindowName)
 {
 	super::InitWindow("Love Invaders"); // Window Name
