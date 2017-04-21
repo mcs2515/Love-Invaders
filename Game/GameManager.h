@@ -52,7 +52,7 @@ public:
 	void IncrementCurrentScore(int value);
 #pragma endregion
 
-	void MovePlayer(bool left, bool dir);
+	void MovePlayer(int left, int up);
 
 	// Used to detect a collision between enemies & bullets
 	void DetectCollision();

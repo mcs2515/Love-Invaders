@@ -2,7 +2,6 @@
 #define MOVABLEOBJECTS_H
 
 #include "RE\ReEngAppClass.h"
-#include "Player.h"
 
 class MovableObjects
 {

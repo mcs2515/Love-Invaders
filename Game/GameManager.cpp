@@ -1,5 +1,4 @@
 #include "GameManager.h"
-
 Player* Player::instance = nullptr;
 
 GameManager* GameManager::GetInstance(MeshManagerSingleton* mesh) {
@@ -126,13 +125,19 @@ void GameManager::IncrementCurrentScore(int value) {
 }
 #pragma endregion
 
-void GameManager::MovePlayer(bool left, bool dir) {
-	if (left) {
-		player->SetLeft(dir);
-	}
-	else {
-		player->SetUp(dir);
-	}
+void GameManager::MovePlayer(int left, int up) {
+	// X AXIS movement
+	if (left == 1)
+		player->position.x -= static_cast<float>(player->GetMoveSpeed());
+	else if (left == -1)
+		player->position.x += static_cast<float>(player->GetMoveSpeed());
+
+	// Z AXIS movement
+	if (up == 1)
+		player->position.z -= static_cast<float>(player->GetMoveSpeed());
+	else if (up == -1)
+		player->position.z += static_cast<float>(player->GetMoveSpeed());
+
 	player->Move();
 }
 

@@ -39,20 +39,6 @@ void Player::Draw()
 }
 
 void Player::Move() {
-
-
-	// X AXIS movement
-	if (m_bGoLeft)
-		position.x -= static_cast<float>(m_iMove);
-	else
-		position.x += static_cast<float>(m_iMove);
-
-	// Z AXIS movement
-	if (m_bGoUp)
-		position.z -= static_cast<float>(m_iMove);
-	else
-		position.z += static_cast<float>(m_iMove);
-
 	// Updates the model matrix after moving
 	modelMatrix = glm::translate(position);
 	/*if (!rotation)

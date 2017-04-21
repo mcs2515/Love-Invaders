@@ -3,7 +3,7 @@
 
 #include "MovableObjects.h"
 
-class Player : MovableObjects
+class Player : public MovableObjects
 {
 protected:
 
@@ -58,6 +58,7 @@ public:
 	  // Getter / Setter for m_iBullets
 	  int GetBullets() { return m_iBullets; };
 	  void SetBullets(int b) { m_iBullets = b; };
+	  int GetMoveSpeed() { return m_iMove; };
 
 };
 

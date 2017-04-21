@@ -45,13 +45,13 @@ void AppClass::ProcessKeyboard(void)
 
 #pragma region Player Movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		gm->MovePlayer(true, true);
+		gm->MovePlayer(1, 0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		gm->MovePlayer(true, false);
+		gm->MovePlayer(-1, 0);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		gm->MovePlayer(false, true);
+		gm->MovePlayer(0, 1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		gm->MovePlayer(false, false);
+		gm->MovePlayer(0, -1);
 #pragma endregion
 
 #pragma region Other Actions
