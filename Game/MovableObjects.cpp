@@ -24,7 +24,6 @@ MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSi
 	modelMatrix *= glm::scale(size);
 
 	m_bColliding = false;
-	m_fRadius = 0.0f;
 	m_v3CenterGlobal = vector3(0.0f);
 
 	if (vertexList.size() < 1)
@@ -75,6 +74,19 @@ MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSi
 	m_v3MinSurrounding = m_v3Min;
 
 	m_v3SurroundingSize = m_v3MaxSurrounding - m_v3MinSurrounding;
+
+	if (m_fRadius < m_v3SurroundingSize.x)
+	{
+		m_fRadius = m_v3SurroundingSize.x;
+	}
+	if (m_fRadius < m_v3SurroundingSize.y)
+	{
+		m_fRadius = m_v3SurroundingSize.y;
+	}
+	if (m_fRadius < m_v3SurroundingSize.z)
+	{
+		m_fRadius = m_v3SurroundingSize.z;
+	}
 }
 
 
@@ -179,6 +191,7 @@ bool MovableObjects::IsColliding(MovableObjects * a_other)
 	return false;
 }
 
+
 bool MovableObjects::CheckBoxCollision(MovableObjects* a_other)
 {
 	if (this->m_v3MaxG.x < a_other->m_v3MinG.x)
@@ -199,6 +212,7 @@ bool MovableObjects::CheckBoxCollision(MovableObjects* a_other)
 	//else return true
 	return true;
 }
+
 
 bool MovableObjects::CheckSphereCollision(MovableObjects* a_other)
 {

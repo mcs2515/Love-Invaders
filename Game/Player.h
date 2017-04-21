@@ -5,7 +5,7 @@
 
 class Player : MovableObjects
 {
-private:
+protected:
 
 	// Constructor
 	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager);
@@ -22,6 +22,9 @@ private:
 	PrimitiveClass* m_pBody;
 
 	static Player* instance;
+
+
+	std::vector<vector3> MakePlayerCollisionBox(vector3 size);
 
 public:
 
@@ -41,6 +44,7 @@ public:
 
 	// Moves the player based on m_fMove
 	  void Move();
+
 
 	  // Getter / Setter for m_bGoLeft
 	  bool GetLeft() { return m_bGoLeft; };

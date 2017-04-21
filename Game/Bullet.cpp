@@ -21,6 +21,22 @@ void Bullet::Move(float fPercent)
 	modelMatrix *= glm::scale(size);
 }
 
+std::vector<vector3> Bullet::MakeBulletCollisionBox(vector3 size)
+{
+	std::vector<vector3> data;
+
+	data.push_back(vector3(size.x, size.y, size.z));
+	data.push_back(vector3(-size.x, size.y, size.z));
+	data.push_back(vector3(size.x, -size.y, size.z));
+	data.push_back(vector3(size.x, size.y, -size.z));
+	data.push_back(vector3(-size.x, -size.y, size.z));
+	data.push_back(vector3(size.x, -size.y, -size.z));
+	data.push_back(vector3(-size.x, size.y, -size.z));
+	data.push_back(vector3(-size.x, -size.y, -size.z));
+
+	return data;
+}
+
 void Bullet::Draw()
 {
 	//only need draw for now
@@ -28,7 +44,7 @@ void Bullet::Draw()
 	meshManager->AddSphereToRenderList(modelMatrix, REBLUE, SOLID);
 }
 Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
-	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, std::vector<vector3>())
+	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeBulletCollisionBox(initialSize))
 {
 
 }

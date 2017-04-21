@@ -55,7 +55,7 @@ public:
 	void MovePlayer(bool left, bool dir);
 
 	// Used to detect a collision between enemies & bullets
-	void DetectCollision(void);
+	void DetectCollision();
 
 #pragma region Other_Helper_Functions
 	void UpdateTimer(void);

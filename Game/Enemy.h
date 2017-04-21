@@ -13,5 +13,6 @@ public:
 
 
 private:
+	std::vector<vector3> MakeEnemyCollisionBox(vector3 size);
 };
 #endif

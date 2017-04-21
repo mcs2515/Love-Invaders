@@ -136,8 +136,25 @@ void GameManager::MovePlayer(bool left, bool dir) {
 	player->Move();
 }
 
-void GameManager::DetectCollision(void)
+void GameManager::DetectCollision()
 {
+	for (int i = 0; i < bulletList.size(); i++)
+	{
+		for (int j = 0; j < enemyList.size(); j++)
+		{
+			if (bulletList[i].IsColliding(&enemyList[i]))
+			{
+				enemyList.erase(enemyList.begin()+i);
+			}
+
+			if (bulletList[i].IsColliding(player))
+			{
+				bulletList.erase(bulletList.begin() + i);
+			}
+
+		}
+
+	}
 }
 
 

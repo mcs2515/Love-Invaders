@@ -1,7 +1,7 @@
 #include "Player.h"
 //Player* Player::instance = nullptr;
 // PRIVATE - CONSTRUCTOR
-Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager, std::vector<vector3>())
+Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager, MakePlayerCollisionBox(is))
 {
 	m_iBullets = 5;
 
@@ -61,3 +61,22 @@ void Player::Move() {
 	}*/
 	modelMatrix *= glm::scale(size);
 }
+
+
+
+std::vector<vector3> Player::MakePlayerCollisionBox(vector3 size)
+{
+	std::vector<vector3> data;
+
+	data.push_back(vector3(size.x, size.y, size.z));
+	data.push_back(vector3(-size.x, size.y, size.z));
+	data.push_back(vector3(size.x, -size.y, size.z));
+	data.push_back(vector3(size.x, size.y, -size.z));
+	data.push_back(vector3(-size.x, -size.y, size.z));
+	data.push_back(vector3(size.x, -size.y, -size.z));
+	data.push_back(vector3(-size.x, size.y, -size.z));
+	data.push_back(vector3(-size.x, -size.y, -size.z));
+
+	return data;
+}
+

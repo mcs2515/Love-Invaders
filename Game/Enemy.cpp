@@ -3,7 +3,7 @@
 
 
 Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
-	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, std::vector<vector3>())
+	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize))
 {
 }
 
@@ -36,6 +36,24 @@ void Enemy::Move(float fTimer)
 	}
 	modelMatrix *= glm::scale(size);
 }
+
+
+std::vector<vector3> Enemy::MakeEnemyCollisionBox(vector3 size)
+{
+	std::vector<vector3> data;
+
+	data.push_back(vector3(size.x, size.y, size.z));
+	data.push_back(vector3(-size.x, size.y, size.z));
+	data.push_back(vector3(size.x, -size.y, size.z));
+	data.push_back(vector3(size.x, size.y, -size.z));
+	data.push_back(vector3(-size.x, -size.y, size.z));
+	data.push_back(vector3(size.x, -size.y, -size.z));
+	data.push_back(vector3(-size.x, size.y, -size.z));
+	data.push_back(vector3(-size.x, -size.y, -size.z));
+
+	return data;
+}
+
 
 Enemy::~Enemy()
 {
