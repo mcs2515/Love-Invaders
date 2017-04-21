@@ -18,7 +18,7 @@ void GameManager::Update() {
 	//Lets us know how much time has passed since the last call
 	fTimeSpan = m_pSystem->LapClock(); //Delta time (between frame calls)
 
-									   //cumulative time
+	//cumulative time
 	fRunTime += fTimeSpan; //How much time has passed since the program started
 
 	if (currentTimer > 0) {
@@ -198,49 +198,27 @@ void GameManager::RenderBullet(int bullet) {
 
 #pragma region Properties
 // GOAL properties
-int GameManager::GetGoal() {
-	return goal;
-}
-void GameManager::SetGoal(int value) {
-	goal = value;
-}
+int GameManager::GetGoal() {return goal;}
+void GameManager::SetGoal(int value) {goal = value;}
 
 // CURRENT SCORE properties
-int GameManager::GetCurrentScore() {
-	return currentScore;
-}
-void GameManager::SetCurrentScore(int value) {
-	currentScore = value;
-}
+int GameManager::GetCurrentScore() {return currentScore;}
+void GameManager::SetCurrentScore(int value) {currentScore = value;}
 
 // TOTAL SCORE properties
-int GameManager::GetTotalScore() {
-	return totalScore;
-}
-void GameManager::SetTotalScore(int value) {
-	totalScore = value;
-}
+int GameManager::GetTotalScore() {return totalScore;}
+void GameManager::SetTotalScore(int value) {totalScore = value;}
 
 // LIVES properties
-int GameManager::GetLives() {
-	return player->GetLives();
-}
-void GameManager::SetLives(int value) {
-	player->SetLives(value);
-}
+int GameManager::GetLives() {return player->GetLives();}
+void GameManager::SetLives(int value) {player->SetLives(value);}
 
 // AMMO COUNT properties
-int GameManager::GetAmmo(void) {
-	return player->GetBullets();
-}
-void GameManager::SetAmmo(int value) {
-	player->SetBullets(value);
-}
+int GameManager::GetAmmo(void) {return player->GetBullets();}
+void GameManager::SetAmmo(int value) {player->SetBullets(value);}
 
 // CURRENT TIMER properties
-void GameManager::SetCurrentTimer(float value) {
-	currentTimer = value;
-}
+void GameManager::SetCurrentTimer(float value) {currentTimer = value;}
 #pragma endregion
 /*
 GameManager::GameManager(void) {

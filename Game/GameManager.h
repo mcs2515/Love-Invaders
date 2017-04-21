@@ -14,14 +14,8 @@ class GameManager
 {
 	static GameManager* instance;
 
-	//objects
-	UILabels* ui;
-	std::vector<Bullet> bulletList; // List of bullet objects the singleton creates and has control over
-	std::vector<Enemy> enemyList; // List of enemy objects the singleton creates and has control over
-
 	//instance of other singleton classes
 	Player* player;
-
 	SystemSingleton* m_pSystem;
 	MeshManagerSingleton* meshManager;
 
@@ -33,6 +27,11 @@ public:
 	static void ReleaseInstance(void);
 
 	void Update();
+
+	//objects
+	UILabels* ui;
+	std::vector<Bullet> bulletList; // List of bullet objects the singleton creates and has control over
+	std::vector<Enemy> enemyList; // List of enemy objects the singleton creates and has control over
 
 #pragma region Game_Loop_Functions
 	// called when player fails to reach round goal
@@ -114,14 +113,13 @@ public:
 private: 
 
 	// Basic constructor
-	GameManager(void) {
+	GameManager(MeshManagerSingleton mesh) {
 		bulletList = std::vector<Bullet>();
 		enemyList = std::vector<Enemy>();
-
+		meshManager = mesh;
 		//meshManager = MeshManagerSingleton::GetInstance();
 		m_pSystem = SystemSingleton::GetInstance();
 		player = Player::GetInstance(meshManager);
-		//player = new Player(vector3(0.0f), false, vector3(1.0f), meshManager);//Player::GetInstance(meshManager);
 	};
 
 	// Copy constructor
