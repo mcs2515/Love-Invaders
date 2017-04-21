@@ -1,7 +1,7 @@
 #include "Player.h"
 //Player* Player::instance = nullptr;
 // PRIVATE - CONSTRUCTOR
-Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager)
+Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager, std::vector<vector3>())
 {
 	m_iBullets = 5;
 

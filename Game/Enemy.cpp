@@ -3,7 +3,7 @@
 
 
 Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
-	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager)
+	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, std::vector<vector3>())
 {
 }
 
