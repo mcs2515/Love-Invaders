@@ -7,7 +7,6 @@
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
 
-//Player* Player::instance = nullptr;
 
 //Singleton class
 class GameManager
@@ -21,7 +20,7 @@ class GameManager
 
 public:
 	// Returns the instance of GameManager singleton and 
-	static GameManager* GetInstance();
+	static GameManager* GetInstance(MeshManagerSingleton* meshManager);
 
 	// Deletes the instance of GameManager singleton if not already destroyed
 	static void ReleaseInstance(void);
@@ -113,7 +112,7 @@ public:
 private: 
 
 	// Basic constructor
-	GameManager(MeshManagerSingleton mesh) {
+	GameManager(MeshManagerSingleton* mesh) {
 		bulletList = std::vector<Bullet>();
 		enemyList = std::vector<Enemy>();
 		meshManager = mesh;
@@ -122,15 +121,15 @@ private:
 		player = Player::GetInstance(meshManager);
 	};
 
-	// Copy constructor
-	GameManager(GameManager const& other) {
-		instance = other.GetInstance();
-	};
+	//// Copy constructor
+	//GameManager(GameManager const& other) {
+	//	instance = other.GetInstance();
+	//};
 
-	// Copy assignment
-	GameManager& operator=(GameManager const& other) {
-		instance = other.GetInstance();
-	};
+	//// Copy assignment
+	//GameManager& operator=(GameManager const& other) {
+	//	instance = other.GetInstance();
+	//};
 
 	// Basic destructor
 	~GameManager() {

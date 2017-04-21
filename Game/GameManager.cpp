@@ -1,7 +1,10 @@
 #include "GameManager.h"
-GameManager* GameManager::GetInstance() {
+
+Player* Player::instance = nullptr;
+
+GameManager* GameManager::GetInstance(MeshManagerSingleton* mesh) {
 	if (instance == nullptr) {
-		instance = new GameManager();
+		instance = new GameManager(mesh);
 
 	}
 	return instance;

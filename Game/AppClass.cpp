@@ -1,7 +1,6 @@
 #include "AppClass.h"
 
 GameManager* GameManager::instance = nullptr;
-Player* Player::instance = nullptr;
 
 void AppClass::InitWindow(String a_sWindowName)
 {
@@ -28,7 +27,7 @@ void AppClass::InitVariables(void)
 	//Load a model onto the Mesh manager
 	//m_pMeshMngr->LoadModel("Lego\\Unikitty.bto", "Unikitty");
 
-	gm = GameManager::GetInstance();
+	gm = GameManager::GetInstance(m_pMeshMngr);
 	gm->NewGame();
 }
 
