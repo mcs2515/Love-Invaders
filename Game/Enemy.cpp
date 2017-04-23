@@ -5,12 +5,12 @@
 Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize))
 {
+	v3_Start = vector3(-11.0f, 0.0f, 0.0f);
+	v3_End = vector3(9.0f, 0.0f, 0.0f);
 }
 
 void Enemy::Draw()
 {
-
-	modelMatrix = IDENTITY_M4;
 	//only need draw for now
 	meshManager->SetModelMatrix(modelMatrix);
 	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
