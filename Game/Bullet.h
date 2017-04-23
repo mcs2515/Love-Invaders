@@ -17,6 +17,6 @@ public:
 
 private:
 	std::vector<vector3> MakeBulletCollisionBox(vector3 size);
-	bool visible;
+	bool visible = false;
 };
 #endif

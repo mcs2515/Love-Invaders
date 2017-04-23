@@ -60,6 +60,8 @@ public:
 	  void SetBullets(int b) { m_iBullets = b; };
 	  int GetMoveSpeed() { return m_iMove; };
 
+	  vector3 SetPosition(vector3 p) { position = p; }
+	  vector3 GetPosition() { return position; }
 };
 
 #endif // __PLAYER_H_

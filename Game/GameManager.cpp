@@ -224,9 +224,11 @@ void GameManager::RenderEnemy(int enemy) {
 
 void GameManager::RenderBullet(int bullet) {
 
-	if (bulletList[bullet].GetRenderVisibily()) {
-		// render the bullet that we want
-		bulletList[bullet].Draw();
+	if (player->GetBullets() > 0) {
+		if (bulletList[bullet].GetRenderVisibily()) {
+			// render the bullet that we want
+			bulletList[bullet].Draw();
+		}
 	}
 }
 
