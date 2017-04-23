@@ -111,9 +111,8 @@ void AppClass::ProcessMouse(void)
 		vector3 tempPosition = gm->player->position;
 		gm->bulletList[0].SetRenderVisibility(true);
 		gm->bulletList[0].position = tempPosition;
-		
-		//std::cout << tempPosition.x << ", " << tempPosition.y << ", " << tempPosition.z << std::endl;
 		gm->bulletList[0].SetStart(tempPosition);
 		gm->bulletList[0].SetEnd(vector3(tempPosition.x, 0.0f, tempPosition.z));
+		gm->bulletList[0].Reset();
 	}
 }

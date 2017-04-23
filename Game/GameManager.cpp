@@ -36,10 +36,10 @@ void GameManager::Update() {
 		{
 			if (bulletList[i].GetRenderVisibily())
 			{
-				bulletList[i].TimeTick((float)fTimeSpan);
+				bulletList[i].TimeTick(fTimeSpan);
 				float bulletLerp = MapValue(bulletList[i].GetTime(), 0.0f, 2.0f, 0.0f, 1.0f);
 				bulletList[i].Move(bulletLerp);
-				std::cout << bulletLerp << std::endl;
+				//std::cout << bulletLerp << std::endl;
 				bulletList[i].Draw();
 			}
 		}
@@ -99,9 +99,9 @@ void GameManager::NewGame(void) {
 		bulletList.push_back(Bullet(vector3(0, 0, 0), false, bulletSize, vector3(0, 0, 0), vector3(0, 0, 0), meshManager));
 	}
 
-	//create bullet objects
+	//create enemy objects
 	for (int i = 0; i < enemyLSize; i++) {
-		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, vector3(0, 0, 0), vector3(0, 0, 0), meshManager));
+		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, vector3(-5.0f, 0.0f, 5.0f), vector3(5.0f, 0.0f, -5.0f), meshManager));
 	}
 
 	SetGoal(5); //reset goal
@@ -239,8 +239,10 @@ void GameManager::DestroyBullet(int bullet) {
 void GameManager::RenderEnemy() {
 	// render the enemy
 	for (int i = 0; i < enemyLSize; i++) {
+		enemyList[i].TimeTick(fTimeSpan);
+		float enemyLerp = MapValue(enemyList[i].GetTime(), 0.0f, 5.0f, 0.0f, 1.0f);
+		enemyList[i].Move(enemyLerp);
 		enemyList[i].Draw();
-		enemyList[i].Move(Percentage(0, 25, 0, 5));
 	}
 }
 

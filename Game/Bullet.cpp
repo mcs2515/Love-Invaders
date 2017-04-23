@@ -48,7 +48,6 @@ void Bullet::Draw()
 Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeBulletCollisionBox(initialSize))
 {
-	timer = 0;
 	returning = false;
 }
 
@@ -60,3 +59,9 @@ Bullet::~Bullet()
 bool Bullet::GetRenderVisibily(void){ return visible; }
 
 void Bullet::SetRenderVisibility(bool value) { visible = value; }
+
+void Bullet::Reset()
+{
+	timer = 0;
+	returning = false;
+}

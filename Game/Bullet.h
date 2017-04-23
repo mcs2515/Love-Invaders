@@ -14,6 +14,7 @@ public:
 
 	bool GetRenderVisibily(void);
 	void SetRenderVisibility(bool value);
+	void Reset();
 private:
 	std::vector<vector3> MakeBulletCollisionBox(vector3 size);
 	bool visible = false;

@@ -5,8 +5,7 @@
 Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize))
 {
-	v3_Start = vector3(-11.0f, 0.0f, 0.0f);
-	v3_End = vector3(9.0f, 0.0f, 0.0f);
+	
 }
 
 void Enemy::Draw()
@@ -23,17 +22,15 @@ void Enemy::Move(float percentage)
 
 	if (percentage >= 1.0f) //reached destination
 	{
-		std::swap(v3Start, v3End);
-		//swap start and end
-		/*vector3 temp = v3_Start;
-		v3_Start = v3_End;
-		v3_End = temp;*/
+		std::swap(v3_Start, v3_End);
+		timer = 0;
 	}
+
 	modelMatrix = IDENTITY_M4;
 	modelMatrix *= glm::translate(position);
 	if (!rotation)
 	{
-		modelMatrix *= glm::rotate(180.0f, REAXISY);
+		//modelMatrix *= glm::rotate(180.0f, REAXISY);
 	}
 	modelMatrix *= glm::scale(size);
 }

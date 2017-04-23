@@ -14,6 +14,7 @@ NPC::NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, 
 {
 	v3_Start = initialStart;
 	v3_End = initialEnd;
+	timer = 0;
 }
 
 
