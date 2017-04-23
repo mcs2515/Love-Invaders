@@ -227,7 +227,7 @@ void GameManager::RenderEnemy() {
 	// render the enemy
 	for (int i = 0; i < enemyLSize; i++) {
 		enemyList[i].Draw();
-		enemyList[i].Move(fRunTime);
+		enemyList[i].Move(Percentage(0, 25, 0, 5));
 	}
 }
 

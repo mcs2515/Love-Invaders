@@ -1,0 +1,42 @@
+﻿  GameManager.cpp
+c:\users\megan smith\desktop\love-invaders\game\gamemanager.cpp(21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\megan smith\desktop\love-invaders\game\gamemanager.cpp(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\megan smith\desktop\love-invaders\game\gamemanager.cpp(114): warning C4018: '<': signed/unsigned mismatch
+c:\users\megan smith\desktop\love-invaders\game\gamemanager.cpp(160): warning C4018: '<': signed/unsigned mismatch
+c:\users\megan smith\desktop\love-invaders\game\gamemanager.cpp(162): warning C4018: '<': signed/unsigned mismatch
+c:\users\megan smith\desktop\love-invaders\game\gamemanager.cpp(203): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Game_VS15.vcxproj -> C:\Users\Megan Smith\Desktop\Love-Invaders\Z_DELETE\Game_VS15D.exe
+  Game_VS15.vcxproj -> C:\Users\Megan Smith\Desktop\Love-Invaders\Z_DELETE\Game_VS15D.pdb (Full PDB)
+  A subdirectory or file C:\Users\Megan Smith\Desktop\Love-Invaders\_Binary\ already exists.
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\GL\bin\glew32.dll
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\GL\bin\glut32.dll
+  2 File(s) copied
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\bin\2015\ReEng_VS15.dll
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\bin\2015\ReEng_VS15_d.dll
+  2 File(s) copied
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\SFML\bin\sfml-system-2.dll
+  1 File(s) copied
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\SFML\bin\sfml-window-2.dll
+  1 File(s) copied
+  A subdirectory or file C:\Users\Megan Smith\Desktop\Love-Invaders\_Binary\Shaders\ already exists.
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Basic.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Basic.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\BasicColor.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\BasicColor.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Color.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Color.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\PassThrough.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\PassThrough.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Phong.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Phong.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\REShader.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\REShader.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\REShaderInv.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\REShaderMC.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Skybox.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Skybox.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Test.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\Test.vs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\TextShader.fs
+  C:\Users\Megan Smith\Desktop\Love-Invaders\include\RE\Shaders\TextShader.vs
+  20 File(s) copied

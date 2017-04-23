@@ -16,12 +16,12 @@ void Enemy::Draw()
 	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
 }
 
-void Enemy::Move(float fTimer)
+void Enemy::Move(float percentage)
 {
 	//lerp from start to end
-	position = glm::lerp(v3_Start, v3_End, fTimer);
+	position = glm::lerp(v3_Start, v3_End, percentage);
 
-	if (fTimer>= 1.0f) //reached destination
+	if (percentage >= 1.0f) //reached destination
 	{
 		//swap start and end
 		vector3 temp = v3_Start;

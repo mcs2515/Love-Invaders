@@ -158,8 +158,8 @@ private:
 	//keeps track of the ammo player starts off with at beginning of current round
 	int roundAmmo;
 
-	double fTimeSpan;
-	double fRunTime;
+	float fTimeSpan;
+	float fRunTime;
 #pragma endregion
 
 };
