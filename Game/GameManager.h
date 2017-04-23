@@ -78,7 +78,7 @@ public:
 #pragma endregion
 
 #pragma region Rendering_Objects
-	void RenderEnemy(int enemy);
+	void RenderEnemy();
 
 	void RenderBullet(int bullet);
 #pragma endregion
@@ -145,8 +145,9 @@ private:
 	//goal
 	int goal;
 
+	vector3 humanSize;
 	vector3 bulletSize;
-	int enemeyLSize = 6;
+	int enemyLSize = 6;
 
 	//timer
 	float roundTimer;
@@ -159,8 +160,8 @@ private:
 	//keeps track of the ammo player starts off with at beginning of current round
 	int roundAmmo;
 
-	double fTimeSpan;
-	double fRunTime;
+	float fTimeSpan;
+	float fRunTime;
 #pragma endregion
 
 };

@@ -27,7 +27,7 @@ void GameManager::Update() {
 		//draw E,P,B and background
 		//move E,B
 		//detect collision
-		DetectCollision();
+		//DetectCollision();
 
 		DisplayData(); //display UI
 
@@ -45,6 +45,7 @@ void GameManager::Update() {
 		}
 
 		player->Draw();	// display Player; temporary
+		RenderEnemy();
 
 		UpdateTimer(); //update timer
 	}
@@ -78,6 +79,7 @@ void GameManager::NewGame(void) {
 	fRunTime = 0.0f; //reset run time
 	roundTimer = 60; //seconds
 	bulletSize = vector3(0.2f, 0.2f, 0.2f);
+	humanSize = vector3(1.0f,1.0f,1.0f);
 	//bulletInitialPos = vector3();
 
 	SetLives(3); //reset lives
@@ -95,6 +97,11 @@ void GameManager::NewGame(void) {
 	//create bullet objects
 	for (int i = 0; i < player->GetBullets(); i++) {
 		bulletList.push_back(Bullet(vector3(0, 0, 0), false, bulletSize, vector3(0, 0, 0), vector3(0, 0, 0), meshManager));
+	}
+
+	//create bullet objects
+	for (int i = 0; i < enemyLSize; i++) {
+		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, vector3(0, 0, 0), vector3(0, 0, 0), meshManager));
 	}
 
 	SetGoal(5); //reset goal
@@ -176,9 +183,7 @@ void GameManager::DetectCollision()
 			{
 				bulletList.erase(bulletList.begin() + i);
 			}
-
 		}
-
 	}
 }
 
@@ -231,8 +236,12 @@ void GameManager::DestroyBullet(int bullet) {
 #pragma endregion
 
 #pragma region Rendering_Objects
-void GameManager::RenderEnemy(int enemy) {
-	// render the enemy that we want
+void GameManager::RenderEnemy() {
+	// render the enemy
+	for (int i = 0; i < enemyLSize; i++) {
+		enemyList[i].Draw();
+		enemyList[i].Move(Percentage(0, 25, 0, 5));
+	}
 }
 
 void GameManager::RenderBullet(int bullet) {

@@ -5,28 +5,29 @@
 Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize))
 {
+	v3_Start = vector3(-11.0f, 0.0f, 0.0f);
+	v3_End = vector3(9.0f, 0.0f, 0.0f);
 }
 
 void Enemy::Draw()
 {
-
-	modelMatrix = IDENTITY_M4;
 	//only need draw for now
 	meshManager->SetModelMatrix(modelMatrix);
-	meshManager->AddSphereToRenderList(modelMatrix, REGREEN, SOLID);
+	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
 }
 
-void Enemy::Move(float fTimer)
+void Enemy::Move(float percentage)
 {
 	//lerp from start to end
-	position = glm::lerp(v3_Start, v3_End, fTimer);
+	position = glm::lerp(v3_Start, v3_End, percentage);
 
-	if (fTimer>= 1.0f) //reached destination
+	if (percentage >= 1.0f) //reached destination
 	{
+		std::swap(v3Start, v3End);
 		//swap start and end
-		vector3 temp = v3_Start;
+		/*vector3 temp = v3_Start;
 		v3_Start = v3_End;
-		v3_End = temp;
+		v3_End = temp;*/
 	}
 	modelMatrix = IDENTITY_M4;
 	modelMatrix *= glm::translate(position);
