@@ -13,7 +13,7 @@ void Enemy::Draw()
 	modelMatrix = IDENTITY_M4;
 	//only need draw for now
 	meshManager->SetModelMatrix(modelMatrix);
-	meshManager->AddSphereToRenderList(modelMatrix, REGREEN, SOLID);
+	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
 }
 
 void Enemy::Move(float fTimer)
