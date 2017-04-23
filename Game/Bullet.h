@@ -14,9 +14,10 @@ public:
 
 	bool GetRenderVisibily(void);
 	void SetRenderVisibility(bool value);
-
 private:
 	std::vector<vector3> MakeBulletCollisionBox(vector3 size);
 	bool visible = false;
+
+	bool returning; //used to check if it has bounced off the ground
 };
 #endif

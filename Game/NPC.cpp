@@ -20,3 +20,33 @@ NPC::NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, 
 NPC::~NPC()
 {
 }
+
+vector3 NPC::GetStart()
+{
+	return v3_Start;
+}
+
+void NPC::SetStart(vector3 start)
+{
+	v3_Start = start;
+}
+
+vector3 NPC::GetEnd()
+{
+	return v3_End;
+}
+
+void NPC::SetEnd(vector3 end)
+{
+	v3_End = end;
+}
+
+float NPC::GetTime()
+{
+	return timer;
+}
+
+void NPC::TimeTick(float deltaTime)
+{
+	timer += deltaTime;
+}

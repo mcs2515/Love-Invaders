@@ -5,12 +5,14 @@ void Bullet::Move(float fPercent)
 	//lerp from start to end
 	position = glm::lerp(v3_Start, v3_End, fPercent);
 
-	if (fPercent >= 1.0f) //reached destination
+	if (fPercent >= 1.0f && !returning) //reached destination
 	{
 		//swap start and end
 		vector3 temp = v3_Start;
 		v3_Start = v3_End;
 		v3_End = temp;
+		timer = 0.0f;
+		returning = true;
 	}
 	modelMatrix = IDENTITY_M4;
 	modelMatrix *= glm::translate(position);
@@ -46,6 +48,8 @@ void Bullet::Draw()
 Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeBulletCollisionBox(initialSize))
 {
+	timer = 0;
+	returning = false;
 }
 
 

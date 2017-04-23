@@ -31,6 +31,19 @@ void GameManager::Update() {
 
 		DisplayData(); //display UI
 
+		//for loop for bullet rendering
+		for (int i = 0; i < bulletList.size(); i++)
+		{
+			if (bulletList[i].GetRenderVisibily())
+			{
+				bulletList[i].TimeTick((float)fTimeSpan);
+				float bulletLerp = MapValue(bulletList[i].GetTime(), 0.0f, 2.0f, 0.0f, 1.0f);
+				bulletList[i].Move(bulletLerp);
+				std::cout << bulletLerp << std::endl;
+				bulletList[i].Draw();
+			}
+		}
+
 		player->Draw();	// display Player; temporary
 
 		UpdateTimer(); //update timer
@@ -134,15 +147,15 @@ void GameManager::IncrementCurrentScore(int value) {
 
 void GameManager::MovePlayer(int left, int up) {
 	// X AXIS movement
-	if (left == 1)
+	if (left == -1)
 		player->position.x -= static_cast<float>(player->GetMoveSpeed());
-	else if (left == -1)
+	else if (left == 1)
 		player->position.x += static_cast<float>(player->GetMoveSpeed());
 
 	// Z AXIS movement
-	if (up == 1)
+	if (up == -1)
 		player->position.z -= static_cast<float>(player->GetMoveSpeed());
-	else if (up == -1)
+	else if (up == 1)
 		player->position.z += static_cast<float>(player->GetMoveSpeed());
 
 	player->Move();

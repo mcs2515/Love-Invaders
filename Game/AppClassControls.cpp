@@ -44,14 +44,15 @@ void AppClass::ProcessKeyboard(void)
 #pragma endregion
 
 #pragma region Player Movement
+	//Use first set of params for standard movement, second set for psuedo-iso movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		gm->MovePlayer(1, 0);
+		gm->MovePlayer(-1, 1); //(-1, 0) (-1, 1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		gm->MovePlayer(-1, 0);
+		gm->MovePlayer(1, -1); //(1, 0) (1, -1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		gm->MovePlayer(0, 1);
+		gm->MovePlayer(-1, -1); //(0, -1) (-1, -1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		gm->MovePlayer(0, -1);
+		gm->MovePlayer(1, 1); //(0, 1) (1, 1)
 #pragma endregion
 
 #pragma region Other Actions
@@ -107,7 +108,12 @@ void AppClass::ProcessMouse(void)
 		m_bFPC = true;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		vector3 tempPosition = gm->player->position;
 		gm->bulletList[0].SetRenderVisibility(true);
-		gm->RenderBullet(0);
+		gm->bulletList[0].position = tempPosition;
+		
+		//std::cout << tempPosition.x << ", " << tempPosition.y << ", " << tempPosition.z << std::endl;
+		gm->bulletList[0].SetStart(tempPosition);
+		gm->bulletList[0].SetEnd(vector3(tempPosition.x, 0.0f, tempPosition.z));
 	}
 }

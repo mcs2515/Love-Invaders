@@ -13,12 +13,14 @@ class GameManager
 {
 	static GameManager* instance;
 
+	
+
+public:
 	//instance of other singleton classes
 	Player* player;
 	SystemSingleton* m_pSystem;
 	MeshManagerSingleton* meshManager;
 
-public:
 	// Returns the instance of GameManager singleton and 
 	static GameManager* GetInstance(MeshManagerSingleton* meshManager);
 
