@@ -23,10 +23,11 @@ void Enemy::Move(float percentage)
 
 	if (percentage >= 1.0f) //reached destination
 	{
+		std::swap(v3Start, v3End);
 		//swap start and end
-		vector3 temp = v3_Start;
+		/*vector3 temp = v3_Start;
 		v3_Start = v3_End;
-		v3_End = temp;
+		v3_End = temp;*/
 	}
 	modelMatrix = IDENTITY_M4;
 	modelMatrix *= glm::translate(position);
