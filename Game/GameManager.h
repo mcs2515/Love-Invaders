@@ -116,31 +116,35 @@ private:
 		bulletList = std::vector<Bullet>();
 		enemyList = std::vector<Enemy>();
 		meshManager = mesh;
+
 		//meshManager = MeshManagerSingleton::GetInstance();
 		m_pSystem = SystemSingleton::GetInstance();
 		player = Player::GetInstance(meshManager);
-	};
+	}
 
-	//// Copy constructor
-	//GameManager(GameManager const& other) {
-	//	instance = other.GetInstance();
-	//};
+	// Copy constructor
+	GameManager(GameManager const& other) {
+		instance = other.GetInstance(meshManager);
+	}
 
-	//// Copy assignment
-	//GameManager& operator=(GameManager const& other) {
-	//	instance = other.GetInstance();
-	//};
+	// Copy assignment
+	GameManager& operator=(GameManager const& other) {
+		instance = other.GetInstance(meshManager);
+	}
 
 	// Basic destructor
 	~GameManager() {
 		SafeDelete(ui);
 		player->ReleaseInstance();
 		ReleaseInstance();
-	};
+	}
 
 #pragma region variables
 	//goal
 	int goal;
+
+	vector3 bulletSize;
+	int enemeyLSize = 6;
 
 	//timer
 	float roundTimer;

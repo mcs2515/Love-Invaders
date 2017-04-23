@@ -105,4 +105,9 @@ void AppClass::ProcessMouse(void)
 	
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
 		m_bFPC = true;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		gm->bulletList[0].SetRenderVisibility(true);
+		gm->RenderBullet(0);
+	}
 }

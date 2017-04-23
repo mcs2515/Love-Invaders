@@ -12,7 +12,11 @@ public:
 	Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager);
 	~Bullet();
 
+	bool GetRenderVisibily(void);
+	void SetRenderVisibility(bool value);
+
 private:
 	std::vector<vector3> MakeBulletCollisionBox(vector3 size);
+	bool visible;
 };
 #endif

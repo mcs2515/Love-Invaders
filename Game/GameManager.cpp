@@ -64,6 +64,8 @@ void GameManager::NewGame(void) {
 
 	fRunTime = 0.0f; //reset run time
 	roundTimer = 60; //seconds
+	bulletSize = vector3(0.2f, 0.2f, 0.2f);
+	//bulletInitialPos = vector3();
 
 	SetLives(3); //reset lives
 
@@ -73,9 +75,14 @@ void GameManager::NewGame(void) {
 
 	SetCurrentTimer(roundTimer); //reset current timer-seconds
 
-								 //reset ammo count
+	//reset ammo count
 	SetAmmo(20);
 	roundAmmo = 20;
+
+	//create bullet objects
+	for (int i = 0; i < player->GetBullets(); i++) {
+		bulletList.push_back(Bullet(vector3(0, 0, 0), false, bulletSize, vector3(0, 0, 0), vector3(0, 0, 0), meshManager));
+	}
 
 	SetGoal(5); //reset goal
 }
@@ -190,8 +197,7 @@ void GameManager::DisplayData() {
 
 	meshManager->PrintLine(ui->DisplayCurrentTime(fRunTime));	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
 
-																//display player lives
-	meshManager->PrintLine(ui->DisplayLives(GetLives()));
+	meshManager->PrintLine(ui->DisplayLives(GetLives()));	//display player lives
 }
 
 float GameManager::Percentage(float scaleOriginalMin, float scaleOriginalMax, float mappedMin, float mappedMax) {
@@ -217,8 +223,13 @@ void GameManager::RenderEnemy(int enemy) {
 }
 
 void GameManager::RenderBullet(int bullet) {
-	// render the bullet that we want
+
+	if (bulletList[bullet].GetRenderVisibily()) {
+		// render the bullet that we want
+		bulletList[bullet].Draw();
+	}
 }
+
 #pragma endregion
 
 #pragma region Properties
@@ -245,27 +256,3 @@ void GameManager::SetAmmo(int value) {player->SetBullets(value);}
 // CURRENT TIMER properties
 void GameManager::SetCurrentTimer(float value) {currentTimer = value;}
 #pragma endregion
-/*
-GameManager::GameManager(void) {
-	bulletList = std::vector<Bullet>();
-	enemyList = std::vector<Enemy>();
-
-	//meshManager = MeshManagerSingleton::GetInstance();
-	m_pSystem = SystemSingleton::GetInstance();
-	player = Player::GetInstance(meshManager);
-	//player = new Player(vector3(0.0f), false, vector3(1.0f), meshManager);//Player::GetInstance(meshManager);
-}
-
-GameManager::GameManager(GameManager const& other) {
-	instance = other.GetInstance();
-}
-
-GameManager & GameManager::operator=(GameManager const & other) {
-	instance = other.GetInstance();
-}
-
-GameManager::~GameManager() {
-	SafeDelete(ui);
-	player->ReleaseInstance();
-	ReleaseInstance();
-}*/
