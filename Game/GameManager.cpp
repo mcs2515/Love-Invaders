@@ -91,13 +91,8 @@ void GameManager::NewGame(void) {
 	SetCurrentTimer(roundTimer); //reset current timer-seconds
 
 	//reset ammo count
-	SetAmmo(20);
-	roundAmmo = 20;
-
-	//create bullet objects
-	/*for (int i = 0; i < player->GetBullets(); i++) {
-		bulletList.push_back(Bullet(vector3(0, 0, 0), false, bulletSize, vector3(0, 0, 0), vector3(0, 0, 0), meshManager));
-	}*/
+	roundAmmo = 15;
+	SetAmmo(roundAmmo);
 
 	//create enemy objects
 	for (int i = 0; i < enemyLSize; i++) {
@@ -192,8 +187,10 @@ void GameManager::DetectCollision()
 
 void GameManager::FireBullet()
 {
-	if(bulletList.size() < player->GetBullets())
+	if(bulletList.size() < GetAmmo()) {
 		bulletList.push_back(player->FireBullet());
+		SetAmmo(GetAmmo() - 1);
+	}
 }
 
 
@@ -227,11 +224,11 @@ void GameManager::DisplayData() {
 	meshManager->PrintLine(ui->DisplayLives(GetLives()));	//display player lives
 }
 
-float GameManager::Percentage(float scaleOriginalMin, float scaleOriginalMax, float mappedMin, float mappedMax) {
-	float percentage = MapValue(static_cast<float>(fRunTime), scaleOriginalMin, scaleOriginalMax, mappedMin, mappedMax);
-
-	return percentage;
-}
+//float GameManager::Percentage(float scaleOriginalMin, float scaleOriginalMax, float mappedMin, float mappedMax) {
+//	float percentage = MapValue(static_cast<float>(fRunTime), scaleOriginalMin, scaleOriginalMax, mappedMin, mappedMax);
+//
+//	return percentage;
+//}
 #pragma endregion
 
 #pragma region Destroying_Objects

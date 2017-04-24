@@ -114,6 +114,8 @@ void AppClass::ProcessMouse(void)
 		gm->bulletList[0].SetStart(tempPosition);
 		gm->bulletList[0].SetEnd(vector3(tempPosition.x, 0.0f, tempPosition.z));
 		gm->bulletList[0].Reset();*/
+
+		//detect that the spacebar has been released first before firing
 		gm->FireBullet();
 	}
 }
