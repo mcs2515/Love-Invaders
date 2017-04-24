@@ -59,6 +59,8 @@ public:
 	// Used to detect a collision between enemies & bullets
 	void DetectCollision();
 
+	void FireBullet();
+
 #pragma region Other_Helper_Functions
 	void UpdateTimer(void);
 

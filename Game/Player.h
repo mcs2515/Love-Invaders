@@ -2,6 +2,8 @@
 #define __PLAYER_H_
 
 #include "MovableObjects.h"
+#include "Bullet.h"
+#pragma once
 
 class Player : public MovableObjects
 {
@@ -45,6 +47,8 @@ public:
 	// Moves the player based on m_fMove
 	  void Move();
 
+	  // Returns a bullet for creation within GameManager and sets all properties upon creation
+	  Bullet FireBullet();
 
 	  // Getter / Setter for m_bGoLeft
 	  bool GetLeft() { return m_bGoLeft; };

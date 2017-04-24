@@ -17,7 +17,7 @@ public:
 	void Reset();
 private:
 	std::vector<vector3> MakeBulletCollisionBox(vector3 size);
-	bool visible = false;
+	bool visible = true;
 
 	bool returning; //used to check if it has bounced off the ground
 };

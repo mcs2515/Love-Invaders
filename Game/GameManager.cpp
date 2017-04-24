@@ -95,9 +95,9 @@ void GameManager::NewGame(void) {
 	roundAmmo = 20;
 
 	//create bullet objects
-	for (int i = 0; i < player->GetBullets(); i++) {
+	/*for (int i = 0; i < player->GetBullets(); i++) {
 		bulletList.push_back(Bullet(vector3(0, 0, 0), false, bulletSize, vector3(0, 0, 0), vector3(0, 0, 0), meshManager));
-	}
+	}*/
 
 	//create enemy objects
 	for (int i = 0; i < enemyLSize; i++) {
@@ -185,6 +185,12 @@ void GameManager::DetectCollision()
 			}
 		}
 	}
+}
+
+void GameManager::FireBullet()
+{
+	if(bulletList.size() < player->GetBullets())
+		bulletList.push_back(player->FireBullet());
 }
 
 

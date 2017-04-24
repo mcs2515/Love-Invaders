@@ -108,11 +108,12 @@ void AppClass::ProcessMouse(void)
 		m_bFPC = true;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-		vector3 tempPosition = gm->player->position;
+		/*vector3 tempPosition = gm->player->position;
 		gm->bulletList[0].SetRenderVisibility(true);
 		gm->bulletList[0].position = tempPosition;
 		gm->bulletList[0].SetStart(tempPosition);
 		gm->bulletList[0].SetEnd(vector3(tempPosition.x, 0.0f, tempPosition.z));
-		gm->bulletList[0].Reset();
+		gm->bulletList[0].Reset();*/
+		gm->FireBullet();
 	}
 }
