@@ -7,7 +7,7 @@ void AppClass::ProcessKeyboard(void)
 #pragma region ON_KEY_PRESS_RELEASE
 	static bool	bLastF1 = false, bLastF2 = false, bLastF3 = false, bLastF4 = false, bLastF5 = false,
 				bLastF6 = false, bLastF7 = false, bLastF8 = false, bLastF9 = false, bLastF10 = false,
-				bLastEscape = false, bLastF = false;
+		bLastEscape = false, bLastF = false, bLastSpace = false;
 #define ON_KEY_PRESS_RELEASE(key, pressed_action, released_action){  \
 			bool pressed = sf::Keyboard::isKeyPressed(sf::Keyboard::key);			\
 			if(pressed){											\
@@ -63,6 +63,16 @@ void AppClass::ProcessKeyboard(void)
 	ON_KEY_PRESS_RELEASE(F4, NULL, m_pCameraMngr->SetCameraMode(CAMROTHOX));
 	static bool bFPSControll = false;
 	ON_KEY_PRESS_RELEASE(F, bFPSControll = !bFPSControll, m_pCameraMngr->SetFPS(bFPSControll));
+	//detect that the spacebar has been released first before firing
+	static bool willShoot = false;
+	ON_KEY_PRESS_RELEASE(Space, NULL, willShoot = true);
+
+
+	if (willShoot) {
+		gm->FireBullet();
+		willShoot = false;
+	}
+
 #pragma endregion
 }
 void AppClass::ProcessMouse(void)
@@ -106,16 +116,4 @@ void AppClass::ProcessMouse(void)
 	
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
 		m_bFPC = true;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-		/*vector3 tempPosition = gm->player->position;
-		gm->bulletList[0].SetRenderVisibility(true);
-		gm->bulletList[0].position = tempPosition;
-		gm->bulletList[0].SetStart(tempPosition);
-		gm->bulletList[0].SetEnd(vector3(tempPosition.x, 0.0f, tempPosition.z));
-		gm->bulletList[0].Reset();*/
-
-		//detect that the spacebar has been released first before firing
-		gm->FireBullet();
-	}
 }

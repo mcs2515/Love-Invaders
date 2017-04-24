@@ -178,7 +178,7 @@ void GameManager::DetectCollision()
 			if (bulletList[i].IsColliding(player) && bulletList[i].GetGeneralVisibility())
 			{
 				bulletList.erase(bulletList.begin() + i);
-				player->SetBullets(player->GetBullets() + 1);
+				player->SetBullets(GetAmmo() + 1);
 				i--;
 			}
 		}
@@ -187,7 +187,7 @@ void GameManager::DetectCollision()
 
 void GameManager::FireBullet()
 {
-	if(bulletList.size() < GetAmmo()) {
+	if(GetAmmo() !=0) {
 		bulletList.push_back(player->FireBullet());
 		SetAmmo(GetAmmo() - 1);
 	}
