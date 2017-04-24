@@ -230,8 +230,8 @@ void MovableObjects::SetColor(vector3 color) { objColor = color; }
 vector3 MovableObjects::GetColor(void) { return objColor; }
 void MovableObjects::SetGeneralVisibility(bool value) { m_bVisible = value; }
 bool MovableObjects::GetGeneralVisibility(void) { return m_bVisible; }
-void MovableObjects::SetAABBVisibility(bool value) { m_bVisible = value; }
-bool MovableObjects::GetAABBVisibility(void) { return m_bVisible; }
+void MovableObjects::SetAABBVisibility(bool value) { m_bAVisible = value; }
+bool MovableObjects::GetAABBVisibility(void) { return m_bAVisible; }
 void MovableObjects::SetColliding(bool input) { m_bColliding = input; }
 bool MovableObjects::GetColliding(void) { return m_bColliding; }
 void MovableObjects::SetCenterLocal(vector3 input) { m_v3CenterLocal = input; }

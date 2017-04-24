@@ -27,14 +27,14 @@ void GameManager::Update() {
 		//draw E,P,B and background
 		//move E,B
 		//detect collision
-		//DetectCollision();
+		DetectCollision();
 
 		DisplayData(); //display UI
 
 		//for loop for bullet rendering
 		for (int i = 0; i < bulletList.size(); i++)
 		{
-			if (bulletList[i].GetRenderVisibily())
+			if (bulletList[i].GetGeneralVisibility())
 			{
 				bulletList[i].TimeTick(fTimeSpan);
 				float bulletLerp = MapValue(bulletList[i].GetTime(), 0.0f, 2.0f, 0.0f, 1.0f);
@@ -174,14 +174,17 @@ void GameManager::DetectCollision()
 	{
 		for (int j = 0; j < enemyList.size(); j++)
 		{
-			if (bulletList[i].IsColliding(&enemyList[i]))
+			if (bulletList[i].IsColliding(&enemyList[j]) && bulletList[i].GetGeneralVisibility())
 			{
-				enemyList.erase(enemyList.begin()+i);
+				enemyList.erase(enemyList.begin()+j);
+				j--;
 			}
 
-			if (bulletList[i].IsColliding(player))
+			if (bulletList[i].IsColliding(player) && bulletList[i].GetGeneralVisibility())
 			{
 				bulletList.erase(bulletList.begin() + i);
+				player->SetBullets(player->GetBullets() + 1);
+				i--;
 			}
 		}
 	}
@@ -249,7 +252,7 @@ void GameManager::RenderEnemy() {
 void GameManager::RenderBullet(int bullet) {
 
 	if (player->GetBullets() > 0) {
-		if (bulletList[bullet].GetRenderVisibily()) {
+		if (bulletList[bullet].GetGeneralVisibility()) {
 			// render the bullet that we want
 			bulletList[bullet].Draw();
 		}

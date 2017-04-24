@@ -56,10 +56,6 @@ Bullet::~Bullet()
 {
 }
 
-bool Bullet::GetRenderVisibily(void){ return visible; }
-
-void Bullet::SetRenderVisibility(bool value) { visible = value; }
-
 void Bullet::Reset()
 {
 	timer = 0;

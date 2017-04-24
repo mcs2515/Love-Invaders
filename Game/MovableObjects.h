@@ -51,6 +51,7 @@ public:
 
 private:
 	bool m_bVisible = true; //turn off/on bounding obj 
+	bool m_bAVisible = true; //turn off/on bounding obj 
 	bool m_bColliding = false;
 	vector3 m_v3CenterLocal = vector3(0.0f); //center  in local space
 	vector3 m_v3CenterGlobal = vector3(0.0f); //center  in global space
