@@ -48,7 +48,11 @@ void Player::Move() {
 	modelMatrix *= glm::scale(size);
 }
 
-
+Bullet Player::FireBullet() {
+	Bullet b = Bullet(position, false, vector3(0.1f), position, vector3(position.x, 0, position.z), meshManager);
+	b.SetRenderVisibility(true);
+	return b;
+}
 
 std::vector<vector3> Player::MakePlayerCollisionBox(vector3 size)
 {

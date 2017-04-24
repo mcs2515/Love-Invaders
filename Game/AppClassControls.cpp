@@ -110,9 +110,14 @@ void AppClass::ProcessMouse(void)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 		vector3 tempPosition = gm->player->position;
 		gm->bulletList[0].SetGeneralVisibility(true);
+=======
+		/*vector3 tempPosition = gm->player->position;
+		gm->bulletList[0].SetRenderVisibility(true);
+>>>>>>> f5967d345c29ebe251c0669f52f20725fc811b2c
 		gm->bulletList[0].position = tempPosition;
 		gm->bulletList[0].SetStart(tempPosition);
 		gm->bulletList[0].SetEnd(vector3(tempPosition.x, 0.0f, tempPosition.z));
-		gm->bulletList[0].Reset();
+		gm->bulletList[0].Reset();*/
+		gm->FireBullet();
 	}
 }
