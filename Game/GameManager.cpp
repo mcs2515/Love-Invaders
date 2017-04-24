@@ -247,7 +247,7 @@ void GameManager::DestroyBullet(int bullet) {
 #pragma region Rendering_Objects
 void GameManager::RenderEnemy() {
 	// render the enemy
-	for (int i = 0; i < enemyLSize; i++) {
+	for (int i = 0; i < enemyList.size(); i++) {
 		enemyList[i].TimeTick(fTimeSpan);
 		float enemyLerp = MapValue(enemyList[i].GetTime(), 0.0f, 5.0f, 0.0f, 1.0f);
 		enemyList[i].Move(enemyLerp);

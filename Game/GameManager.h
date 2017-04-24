@@ -149,7 +149,7 @@ private:
 
 	vector3 humanSize;
 	vector3 bulletSize;
-	int enemyLSize = 6;
+	int enemyLSize = 1;
 
 	//timer
 	float roundTimer;
