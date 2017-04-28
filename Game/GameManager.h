@@ -64,6 +64,8 @@ public:
 #pragma region Other_Helper_Functions
 	void UpdateTimer(void);
 
+	void DrawPlanes(void);
+
 	// at the end of the timer, checks to see if player reached their goal
 	void CheckGoal(void);
 
@@ -164,6 +166,11 @@ private:
 
 	float fTimeSpan;
 	float fRunTime;
+
+	matrix4 floorPlane;
+	matrix4 floorBox; //optional
+	matrix4 wall1Plane;
+	matrix4 wall2Plane;
 #pragma endregion
 
 };
