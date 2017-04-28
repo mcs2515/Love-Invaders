@@ -205,24 +205,24 @@ void GameManager::DrawPlanes(void) {
 	//floor
 	floorPlane = glm::rotate(IDENTITY_M4, 90.0f, vector3(1.0f, 0.0f, 0.0f));
 	floorPlane = glm::translate(floorPlane, vector3(0.0f, 0.0f, 0.5f));
-	floorPlane = glm::scale(floorPlane, vector3(40.0f, 20.0f, 20.0f));
+	floorPlane = glm::scale(floorPlane, vector3(40.0f, 25.0f, 1.0f));
 	meshManager->AddPlaneToRenderList(floorPlane, REPURPLE);
 
 	//floor box (OPTIONAL)
 	floorBox = glm::rotate(IDENTITY_M4, 90.0f, vector3(1.0f, 0.0f, 0.0f));
-	floorBox = glm::translate(floorBox, vector3(0.0f, 0.0f, 1.6f));
-	floorBox = glm::scale(floorBox, vector3(40.0f, 20.0f, 2.0f));
+	floorBox = glm::translate(floorBox, vector3(0.0f, 0.0f, 1.7f));
+	floorBox = glm::scale(floorBox, vector3(40.0f, 25.0f, 2.0f));
 	meshManager->AddCubeToRenderList(floorBox, REGREEN);
 
 	//wall1Plane
-	wall1Plane = glm::translate(IDENTITY_M4, vector3(0.0f, 4.5f, -10.0f));
-	wall1Plane = glm::scale(wall1Plane, vector3(40.0f, 10.0f, 20.0f));
+	wall1Plane = glm::translate(IDENTITY_M4, vector3(0.0f, 4.5f, -12.5f));
+	wall1Plane = glm::scale(wall1Plane, vector3(40.0f, 10.0f, 1.0f));
 	meshManager->AddPlaneToRenderList(wall1Plane, REMAGENTA);
 
 	//wall2Plane
 	wall2Plane = glm::rotate(IDENTITY_M4, 90.0f, vector3(0.0f, 1.0f, 0.0f));
 	wall2Plane = glm::translate(wall2Plane, vector3(0.0f, 4.5f, 20.0f));
-	wall2Plane = glm::scale(wall2Plane, vector3(20.0f, 10.0f, 20.0f));
+	wall2Plane = glm::scale(wall2Plane, vector3(25.0f, 10.0f, 0.0f));
 	meshManager->AddPlaneToRenderList(wall2Plane, REBLUE);
 }
 

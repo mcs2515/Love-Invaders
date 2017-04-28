@@ -20,13 +20,19 @@ void AppClass::InitVariables(void)
 	//Reset the selection to -1, -1
 	m_selection = std::pair<int, int>(-1, -1);
 	//Set the camera position
-	m_pCameraMngr->SetPositionTargetAndView(
-		vector3(0.0f, 2.5f, 15.0f),//Camera position
-		vector3(0.0f, 2.5f, 0.0f),//What Im looking at
-		REAXISY);//What is up
-	//Load a model onto the Mesh manager
-	//m_pMeshMngr->LoadModel("Lego\\Unikitty.bto", "Unikitty");
+	//m_pCameraMngr->SetPositionTargetAndView(
+	//	vector3(0.0f, 2.5f, 15.0f),//Camera position
+	//	vector3(0.0f, 2.5f, 0.0f),//What Im looking at
+	//	REAXISY);//What is up
 
+
+	m_m4Projection = glm::perspective(45.0f, 1080.0f / 768.0f, 0.01f, 1000.0f);
+	//camera position, looking at, camera orientation
+	m_m4View = glm::lookAt(glm::vec3(10.0f, 10.0f, 15.0f), glm::vec3(0.0f, 0.0f, 14.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	//camera position, looking at, camera orientation
+	m_pCameraMngr->SetPositionTargetAndView(glm::vec3(-25.0f, 25.0f, 32.0f), glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	//Load a model onto the Mesh manager
 	gm = GameManager::GetInstance(m_pMeshMngr);
 	gm->NewGame();
 }
@@ -40,11 +46,11 @@ void AppClass::Update(void)
 	m_pMeshMngr->Update();
 
 	//First person camera movement
-	if (m_bFPC == true)
-		CameraRotation();
+	/*if (m_bFPC == true)
+		CameraRotation();*/
 
 	//Call the arcball method
-	ArcBall();
+	//ArcBall();
 	
 	//Set the model matrix for the first model to be the arcball
 	//m_pMeshMngr->SetModelMatrix(ToMatrix4(m_qArcBall), 0);
@@ -52,6 +58,8 @@ void AppClass::Update(void)
 	//Adds all loaded instance to the render list
 	m_pMeshMngr->AddSkyboxToRenderList();
 	m_pMeshMngr->AddInstanceToRenderList("ALL");
+
+	
 
 	//Indicate the FPS
 	int nFPS = m_pSystem->GetFPS();

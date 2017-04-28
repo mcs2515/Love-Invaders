@@ -18,7 +18,8 @@ public:
 	typedef ReEngAppClass super;
 
 	GameManager* gm;
-
+	matrix4 m_m4Projection;
+	matrix4 m_m4View;
 	/*
 	USAGE: Constructor
 	ARGUMENTS: 
