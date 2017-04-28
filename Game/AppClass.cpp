@@ -25,11 +25,6 @@ void AppClass::InitVariables(void)
 	//	vector3(0.0f, 2.5f, 0.0f),//What Im looking at
 	//	REAXISY);//What is up
 
-
-	m_m4Projection = glm::perspective(45.0f, 1080.0f / 768.0f, 0.01f, 1000.0f);
-	//camera position, looking at, camera orientation
-	m_m4View = glm::lookAt(glm::vec3(10.0f, 10.0f, 15.0f), glm::vec3(0.0f, 0.0f, 14.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
 	//camera position, looking at, camera orientation
 	m_pCameraMngr->SetPositionTargetAndView(glm::vec3(-25.0f, 25.0f, 32.0f), glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	//Load a model onto the Mesh manager

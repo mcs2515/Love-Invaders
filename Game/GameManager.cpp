@@ -45,6 +45,7 @@ void GameManager::Update() {
 		}
 
 		DrawPlanes();
+		DrawBunkers();
 		player->Draw();	// display Player; temporary
 		RenderEnemy();
 
@@ -224,6 +225,25 @@ void GameManager::DrawPlanes(void) {
 	wall2Plane = glm::translate(wall2Plane, vector3(0.0f, 4.5f, 20.0f));
 	wall2Plane = glm::scale(wall2Plane, vector3(25.0f, 10.0f, 0.0f));
 	meshManager->AddPlaneToRenderList(wall2Plane, REBLUE);
+}
+
+void GameManager::DrawBunkers(void) {
+	
+	bunker = glm::translate(IDENTITY_M4, vector3(-15.0f, 0.2f, -9.0f));
+	bunker = glm::scale(bunker, vector3(1.5f, 1.5f, 1.5f));
+	meshManager->AddCubeToRenderList(bunker, REYELLOW);
+
+	bunker2 = glm::translate(IDENTITY_M4, vector3(-15.0f, 0.2f, 9.0f));
+	bunker2 = glm::scale(bunker2, vector3(1.5f, 1.5f, 1.5f));
+	meshManager->AddCubeToRenderList(bunker2, REYELLOW);
+
+	bunker3 = glm::translate(IDENTITY_M4, vector3(15.0f, 0.2f, 9.0f));
+	bunker3 = glm::scale(bunker3, vector3(1.5f, 1.5f, 1.5f));
+	meshManager->AddCubeToRenderList(bunker3, REYELLOW);
+
+	bunker4 = glm::translate(IDENTITY_M4, vector3(15.0f, 0.2f, -9.0f));
+	bunker4 = glm::scale(bunker4, vector3(1.5f, 1.5f, 1.5f));
+	meshManager->AddCubeToRenderList(bunker4, REYELLOW);
 }
 
 

@@ -66,6 +66,8 @@ public:
 
 	void DrawPlanes(void);
 
+	void DrawBunkers(void);
+
 	// at the end of the timer, checks to see if player reached their goal
 	void CheckGoal(void);
 
@@ -171,6 +173,11 @@ private:
 	matrix4 floorBox; //optional
 	matrix4 wall1Plane;
 	matrix4 wall2Plane;
+
+	matrix4 bunker;
+	matrix4 bunker2;
+	matrix4 bunker3;
+	matrix4 bunker4;
 #pragma endregion
 
 };
