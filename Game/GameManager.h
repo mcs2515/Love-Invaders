@@ -33,6 +33,7 @@ public:
 	UILabels* ui;
 	std::vector<Bullet> bulletList; // List of bullet objects the singleton creates and has control over
 	std::vector<Enemy> enemyList; // List of enemy objects the singleton creates and has control over
+	std::vector<vector3> bunkerVecs;
 
 #pragma region Game_Loop_Functions
 	// called when player fails to reach round goal
@@ -71,6 +72,8 @@ public:
 
 	void DrawBunkers(void);
 
+	void SpawnEnemies(int numEnemies);
+
 	// at the end of the timer, checks to see if player reached their goal
 	void CheckGoal(void);
 
@@ -83,13 +86,13 @@ public:
 #pragma region Destroying_Objects
 	void DestroyEnemy(int enemy);
 
-	void DestroyBullet(int bullet);
+	void DestroyBullet(Bullet bullet);
 #pragma endregion
 
 #pragma region Rendering_Objects
 	void RenderEnemy();
 
-	void RenderBullet(int bullet);
+	void RenderBullets();
 #pragma endregion
 
 
@@ -113,8 +116,8 @@ public:
 
 
 	// AMMO COUNT properties
-	int GetAmmo(void);
-	void SetAmmo(int value);
+	int GetPlayerAmmo(void);
+	void SetPlayerAmmo(int value);
 
 	// CURRENT TIMER properties
 	void GameManager::SetCurrentTimer(float value);
@@ -131,6 +134,11 @@ private:
 		//meshManager = MeshManagerSingleton::GetInstance();
 		m_pSystem = SystemSingleton::GetInstance();
 		player = Player::GetInstance(meshManager);
+		bunkerVecs = std::vector<vector3>();
+		bunkerVecs.push_back(vector3(-15.0f, 0.2f, -9.0f));
+		bunkerVecs.push_back(vector3(-15.0f, 0.2f, 9.0f));
+		bunkerVecs.push_back(vector3(15.0f, 0.2f, 9.0f));
+		bunkerVecs.push_back(vector3(15.0f, 0.2f, -9.0f));
 	}
 
 	// Copy constructor
@@ -156,7 +164,7 @@ private:
 
 	vector3 humanSize;
 	vector3 bulletSize;
-	int enemyLSize = 1;
+	int enemyLSize = 6;
 
 	//timer
 	float roundTimer;

@@ -12,11 +12,15 @@ public:
 	Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager);
 	~Bullet();
 
+	bool GetReturn(void);
+
+	void SetIsActive(bool value); //Sets Visibilty
+	bool GetIsActive(void);
+
 	void Reset();
 private:
 	std::vector<vector3> MakeBulletCollisionBox(vector3 size);
-	bool visible = true;
-
+	bool active = false;
 	bool returning; //used to check if it has bounced off the ground
 };
 #endif

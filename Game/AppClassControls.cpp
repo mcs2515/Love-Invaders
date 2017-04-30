@@ -63,7 +63,17 @@ void AppClass::ProcessKeyboard(void)
 
 #pragma region Player Movement
 	//Use first set of params for standard movement, second set for psuedo-iso movement
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	//	gm->MovePlayer(-1, 1); //(-1, 0) (-1, 1)
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	//	gm->MovePlayer(1, -1); //(1, 0) (1, -1)
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	//	gm->MovePlayer(-1, -1); //(0, -1) (-1, -1)
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	//	gm->MovePlayer(1, 1); //(0, 1) (1, 1)
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+<<<<<<< HEAD
 		gm->MovePlayer(-1, -1); //(-1, 0) (-1, 1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		gm->MovePlayer(1, 1); //(1, 0) (1, -1)
@@ -71,6 +81,15 @@ void AppClass::ProcessKeyboard(void)
 		gm->MovePlayer(1, -1); //(0, -1) (-1, -1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		gm->MovePlayer(-1, 1); //(0, 1) (1, 1)
+=======
+		gm->MovePlayer(-1, 0); //(-1, 0) (-1, 1)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		gm->MovePlayer(1, 0); //(1, 0) (1, -1)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		gm->MovePlayer(0, -1); //(0, -1) (-1, -1)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		gm->MovePlayer(0, 1); //(0, 1) (1, 1)
+>>>>>>> 982ef6ad3d2f7524346df30042d4940c5f9bd686
 #pragma endregion
 
 #pragma region Other Actions

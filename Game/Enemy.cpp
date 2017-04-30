@@ -2,10 +2,10 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
-	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize))
+Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> bunkersList, float startPercent)
+	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize), startPercent)
 {
-	
+	bunkerLocs = bunkersList;
 }
 
 void Enemy::Draw()
@@ -13,6 +13,9 @@ void Enemy::Draw()
 	//only need draw for now
 	meshManager->SetModelMatrix(modelMatrix);
 	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
+	SetModelMatrix(modelMatrix);
+	RenderBox();
+	RenderSphere();
 }
 
 void Enemy::Move(float percentage)
@@ -22,7 +25,13 @@ void Enemy::Move(float percentage)
 
 	if (percentage >= 1.0f) //reached destination
 	{
-		std::swap(v3_Start, v3_End);
+		v3_Start = v3_End;
+
+		while (v3_Start == v3_End)
+		{
+			v3_End = bunkerLocs[rand() % 4];
+		}
+
 		timer = 0;
 	}
 
