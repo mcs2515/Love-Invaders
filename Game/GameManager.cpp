@@ -97,9 +97,10 @@ void GameManager::NewGame(void) {
 	SetAmmo(roundAmmo);
 
 	//create enemy objects
-	for (int i = 0; i < enemyLSize; i++) {
+	/*for (int i = 0; i < enemyLSize; i++) {
 		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, vector3(-5.0f, 0.0f, 5.0f), vector3(5.0f, 0.0f, -5.0f), meshManager));
-	}
+	}*/
+	SpawnEnemies(enemyLSize);
 
 	SetGoal(5); //reset goal
 }
@@ -244,6 +245,26 @@ void GameManager::DrawBunkers(void) {
 	bunker4 = glm::translate(IDENTITY_M4, vector3(15.0f, 0.2f, -9.0f));
 	bunker4 = glm::scale(bunker4, vector3(1.5f, 1.5f, 1.5f));
 	meshManager->AddCubeToRenderList(bunker4, REYELLOW);
+}
+
+void GameManager::SpawnEnemies(int numEnemies)
+{
+	//create numEnemies number of enemies
+	for (int i = 0; i < numEnemies; i++) {
+		//get random values for Start, End and Percent
+		vector3 newStart = bunkerVecs[rand() % 4];
+
+		vector3 newEnd = newStart;
+		while (newEnd == newStart)
+		{
+			newEnd = bunkerVecs[rand() % 4];
+		}
+
+		float newPercent = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+		//pushback the new enemy
+		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, newPercent));
+	}
 }
 
 
