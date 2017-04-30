@@ -41,6 +41,8 @@ void AppClass::ProcessKeyboard(void)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		m_pCameraMngr->MoveVertical(fSpeed);*/
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		gm->ResetPlayer();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
 	{
@@ -62,13 +64,13 @@ void AppClass::ProcessKeyboard(void)
 #pragma region Player Movement
 	//Use first set of params for standard movement, second set for psuedo-iso movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		gm->MovePlayer(-1, 1); //(-1, 0) (-1, 1)
+		gm->MovePlayer(-1, -1); //(-1, 0) (-1, 1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		gm->MovePlayer(1, -1); //(1, 0) (1, -1)
+		gm->MovePlayer(1, 1); //(1, 0) (1, -1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		gm->MovePlayer(-1, -1); //(0, -1) (-1, -1)
+		gm->MovePlayer(1, -1); //(0, -1) (-1, -1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		gm->MovePlayer(1, 1); //(0, 1) (1, 1)
+		gm->MovePlayer(-1, 1); //(0, 1) (1, 1)
 #pragma endregion
 
 #pragma region Other Actions

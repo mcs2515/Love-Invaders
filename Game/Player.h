@@ -36,36 +36,37 @@ public:
 		m_bGoUp = other.GetUp();
 		instance = other.GetInstance(meshManager);
 	};*/
-
-	// Since there will only ever be one player, make it a singleton / instance
-	  static Player* GetInstance(MeshManagerSingleton* IMeshManager);
-	  void ReleaseInstance();
 	
+	// Since there will only ever be one player, make it a singleton / instance
+	static Player* GetInstance(MeshManagerSingleton* IMeshManager);
+	void ReleaseInstance();
+
 	// Draws the Object based on m_pBody and inherited class's variables
-	  void Draw();
+	void Draw();
 
 	// Moves the player based on m_fMove
-	  void Move();
+	void Move();
 
-	  // Returns a bullet for creation within GameManager and sets all properties upon creation
-	  Bullet FireBullet();
+	// Returns a bullet for creation within GameManager and sets all properties upon creation
+	Bullet FireBullet();
 
-	  // Getter / Setter for m_bGoLeft
-	  bool GetLeft() { return m_bGoLeft; };
-	  void SetLeft(bool l) { m_bGoLeft = l; };
-	  // Getter / Setter for m_bGoUp
-	  bool GetUp() { return m_bGoUp; };
-	  void SetUp(bool u) { m_bGoUp = u; };
-	  // Getter / Setter for m_iLives
-	  int GetLives() { return m_iLives; };
-	  void SetLives(int l) { m_iLives = l; };
-	  // Getter / Setter for m_iBullets
-	  int GetBullets() { return m_iBullets; };
-	  void SetBullets(int b) { m_iBullets = b; };
-	  int GetMoveSpeed() { return m_iMove; };
+	// Getter / Setter for m_bGoLeft
+	bool GetLeft() { return m_bGoLeft; };
+	void SetLeft(bool l) { m_bGoLeft = l; };
+	// Getter / Setter for m_bGoUp
+	bool GetUp() { return m_bGoUp; };
+	void SetUp(bool u) { m_bGoUp = u; };
+	// Getter / Setter for m_iLives
+	int GetLives() { return m_iLives; };
+	void SetLives(int l) { m_iLives = l; };
+	// Getter / Setter for m_iBullets
+	int GetBullets() { return m_iBullets; };
+	void SetBullets(int b) { m_iBullets = b; };
+	int GetMoveSpeed() { return m_iMove; };
 
-	  vector3 SetPosition(vector3 p) { position = p; }
-	  vector3 GetPosition() { return position; }
+	void SetPosition(vector3 p) { position = p; };
+	vector3 GetPosition() { return position; };
+	String GetStringPosition() { return std::to_string(position.x) + ", " + std::to_string(position.y) + ", " + std::to_string(position.z); };
 };
 
 #endif // __PLAYER_H_

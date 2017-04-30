@@ -147,6 +147,10 @@ void GameManager::IncreaseChallenge() {
 void GameManager::IncrementCurrentScore(int value) {
 	currentScore += value;
 }
+void GameManager::ResetPlayer()
+{
+	player->SetPosition(vector3(0.0f, 0.0f, 0.0f));
+}
 #pragma endregion
 
 void GameManager::MovePlayer(int left, int up) {
@@ -270,6 +274,8 @@ void GameManager::DisplayData() {
 	meshManager->PrintLine(ui->DisplayCurrentTime(fRunTime));	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
 
 	meshManager->PrintLine(ui->DisplayLives(GetLives()));	//display player lives
+
+	meshManager->PrintLine(player->GetStringPosition(), RERED);
 }
 
 //float GameManager::Percentage(float scaleOriginalMin, float scaleOriginalMax, float mappedMin, float mappedMax) {

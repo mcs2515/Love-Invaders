@@ -52,6 +52,9 @@ public:
 
 	// increments the current score when player hits something
 	void IncrementCurrentScore(int value);
+
+	// Resets the position of the player - also called in AppClassControls by key 'R'
+	void ResetPlayer();
 #pragma endregion
 
 	void MovePlayer(int left, int up);
@@ -77,7 +80,7 @@ public:
 	float Percentage(float scaleOriginalMin, float scaleOriginalMax, float mappedMin, float mappedMax);
 #pragma endregion
 
-#pragma region Destorying_Objects
+#pragma region Destroying_Objects
 	void DestroyEnemy(int enemy);
 
 	void DestroyBullet(int bullet);

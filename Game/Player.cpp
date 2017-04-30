@@ -39,6 +39,30 @@ void Player::Draw()
 }
 
 void Player::Move() {
+	// Checks to see if the player is beyond certain margins
+	/*bool passedPos = false;
+	if (position.x > 10)
+	{
+		position.x = 10;
+		passedPos = true;
+	}
+	else if (position.x < -10)
+	{
+		position.x = -10;
+		passedPos = true;
+	}
+	if (position.z > 10)
+	{
+		position.z = 10;
+		passedPos = true;
+	}
+	else if (position.z < -10)
+	{
+		position.z = -10;
+		passedPos = true;
+	}
+	if (passedPos)
+		return;*/
 	// Updates the model matrix after moving
 	modelMatrix = glm::translate(position);
 	/*if (!rotation)
