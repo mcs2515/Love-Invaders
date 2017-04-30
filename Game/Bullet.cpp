@@ -64,4 +64,9 @@ void Bullet::Reset()
 {
 	timer = 0;
 	returning = false;
+	active = false;
 }
+
+bool Bullet::GetReturn(void) { return returning; }
+void Bullet::SetIsActive(bool value) { active = value; }
+bool Bullet::GetIsActive(void) { return active; }

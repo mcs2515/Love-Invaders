@@ -83,13 +83,13 @@ public:
 #pragma region Destorying_Objects
 	void DestroyEnemy(int enemy);
 
-	void DestroyBullet(int bullet);
+	void DestroyBullet(Bullet bullet);
 #pragma endregion
 
 #pragma region Rendering_Objects
 	void RenderEnemy();
 
-	void RenderBullet(int bullet);
+	void RenderBullets();
 #pragma endregion
 
 
@@ -113,8 +113,8 @@ public:
 
 
 	// AMMO COUNT properties
-	int GetAmmo(void);
-	void SetAmmo(int value);
+	int GetPlayerAmmo(void);
+	void SetPlayerAmmo(int value);
 
 	// CURRENT TIMER properties
 	void GameManager::SetCurrentTimer(float value);

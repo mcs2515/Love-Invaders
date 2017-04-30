@@ -293,3 +293,4 @@ vector3 MovableObjects::GetCenterGlobal(void) { return m_v3CenterGlobal; }
 void MovableObjects::SetRadius(float input) { m_fRadius = input; }
 float MovableObjects::GetRadius(void) { return m_fRadius; }
 matrix4 MovableObjects::GetModelMatrix(void) { return m_m4ToWorld; }
+

@@ -29,24 +29,14 @@ void GameManager::Update() {
 		//detect collision
 		DetectCollision();
 
-		DisplayData(); //display UI
+		DisplayData(); //display UI	
+		RenderBullets(); //render bullets if active
 
-		//for loop for bullet rendering
-		for (int i = 0; i < bulletList.size(); i++)
-		{
-			if (bulletList[i].GetGeneralVisibility())
-			{
-				bulletList[i].TimeTick(fTimeSpan);
-				float bulletLerp = MapValue(bulletList[i].GetTime(), 0.0f, 2.0f, 0.0f, 1.0f);
-				bulletList[i].Move(bulletLerp);
-				//std::cout << bulletLerp << std::endl;
-				bulletList[i].Draw();
-			}
-		}
-
+		//drawing background
 		DrawPlanes();
 		DrawBunkers();
-		player->Draw();	// display Player; temporary
+
+		player->Draw();	// display Player;
 		RenderEnemy();
 
 		UpdateTimer(); //update timer
@@ -94,7 +84,7 @@ void GameManager::NewGame(void) {
 
 	//reset ammo count
 	roundAmmo = 15;
-	SetAmmo(roundAmmo);
+	SetPlayerAmmo(roundAmmo);
 
 	//create enemy objects
 	/*for (int i = 0; i < enemyLSize; i++) {
@@ -123,7 +113,7 @@ void GameManager::GameOver(){
 
 	//destroy bullets
 	for (int i = 0; i < bulletList.size(); i++) {
-		DestroyBullet(i);
+		DestroyBullet(bulletList[i]);
 	}
 
 	//call new game if player wishes to continue
@@ -136,8 +126,8 @@ void GameManager::IncreaseChallenge() {
 
 		int ranNum = rand() % 3; //get a new rando value
 
-		roundAmmo = GetAmmo() + ranNum; //used for reseting round. 
-		SetAmmo(GetAmmo() - ranNum); //decrement ammo
+		roundAmmo = GetPlayerAmmo() + ranNum; //used for reseting round. 
+		SetPlayerAmmo(GetPlayerAmmo() - ranNum); //decrement ammo
 
 		ranNum = rand() % 3; //get a new rando value
 
@@ -172,17 +162,16 @@ void GameManager::DetectCollision()
 	{
 		for (int j = 0; j < enemyList.size(); j++)
 		{
-			if (bulletList[i].IsColliding(&enemyList[j]) && bulletList[i].GetGeneralVisibility())
+			if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
 			{
 				enemyList.erase(enemyList.begin()+j);
 				j--;
 			}
 
-			if (bulletList[i].IsColliding(player) && bulletList[i].GetGeneralVisibility())
+			if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
 			{
-				bulletList.erase(bulletList.begin() + i);
-				player->SetBullets(GetAmmo() + 1);
-				i--;
+				bulletList[i].Reset(); //reset timer, isactive bool , returning bool
+				SetPlayerAmmo(GetPlayerAmmo()+1); //increment player bullet
 			}
 		}
 	}
@@ -190,9 +179,9 @@ void GameManager::DetectCollision()
 
 void GameManager::FireBullet()
 {
-	if(GetAmmo() !=0) {
+	if(GetPlayerAmmo() !=0) {
 		bulletList.push_back(player->FireBullet());
-		SetAmmo(GetAmmo() - 1);
+		SetPlayerAmmo(GetPlayerAmmo() - 1);
 	}
 }
 
@@ -263,6 +252,7 @@ void GameManager::SpawnEnemies(int numEnemies)
 		float newPercent = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
 		//pushback the new enemy
+
 		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, newPercent));
 	}
 }
@@ -286,7 +276,7 @@ void GameManager::DisplayData() {
 
 	meshManager->PrintLine(ui->DisplayCurrentScore(GetCurrentScore())); //display current score
 
-	meshManager->PrintLine(ui->DisplayAmmoCount(GetAmmo())); //display current bullet count
+	meshManager->PrintLine(ui->DisplayAmmoCount(GetPlayerAmmo())); //display current bullet count
 
 	meshManager->PrintLine(ui->DisplayCurrentTime(fRunTime));	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
 
@@ -305,8 +295,9 @@ void GameManager::DestroyEnemy(int enemy) {
 	// destroy the enemy that we want
 }
 
-void GameManager::DestroyBullet(int bullet) {
+void GameManager::DestroyBullet(Bullet bullet) {
 	// destroy the bullet that we want
+
 }
 #pragma endregion
 
@@ -321,12 +312,18 @@ void GameManager::RenderEnemy() {
 	}
 }
 
-void GameManager::RenderBullet(int bullet) {
-
-	if (player->GetBullets() > 0) {
-		if (bulletList[bullet].GetGeneralVisibility()) {
-			// render the bullet that we want
-			bulletList[bullet].Draw();
+void GameManager::RenderBullets()
+{
+	//for loop for bullet rendering
+	for (int i = 0; i < bulletList.size(); i++)
+	{
+		if (bulletList[i].GetIsActive())
+		{
+			bulletList[i].TimeTick(fTimeSpan);
+			float bulletLerp = MapValue(bulletList[i].GetTime(), 0.0f, 2.0f, 0.0f, 1.0f);
+			bulletList[i].Move(bulletLerp);
+			//std::cout << bulletLerp << std::endl;
+			bulletList[i].Draw();
 		}
 	}
 }
@@ -351,8 +348,8 @@ int GameManager::GetLives() {return player->GetLives();}
 void GameManager::SetLives(int value) {player->SetLives(value);}
 
 // AMMO COUNT properties
-int GameManager::GetAmmo(void) {return player->GetBullets();}
-void GameManager::SetAmmo(int value) {player->SetBullets(value);}
+int GameManager::GetPlayerAmmo(void) {return player->GetBullets();}
+void GameManager::SetPlayerAmmo(int value) {player->SetBullets(value);}
 
 // CURRENT TIMER properties
 void GameManager::SetCurrentTimer(float value) {currentTimer = value;}
