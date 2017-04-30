@@ -44,7 +44,11 @@ void Bullet::Draw()
 	//only need draw for now
 	meshManager->SetModelMatrix(modelMatrix);
 	meshManager->AddSphereToRenderList(modelMatrix, REBLACK, SOLID);
+	SetModelMatrix(modelMatrix);
+	RenderBox();
+	RenderSphere();
 }
+
 Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeBulletCollisionBox(initialSize))
 {

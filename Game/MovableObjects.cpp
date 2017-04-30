@@ -177,6 +177,56 @@ void MovableObjects::SetModelMatrix(matrix4 a_m4ToWorld)
 	}
 }
 
+void MovableObjects::RenderSphere()
+{
+	vector3 v3Color = GetSphereColor();
+	int value = 0; //NONE
+
+	if (GetGeneralVisibility()) {
+		value = 2; //WIRE
+	}
+
+	if (true == m_bColliding)
+		v3Color = RERED;
+
+	m_pMeshMngr->AddSphereToRenderList(
+		glm::translate(m_v3CenterGlobal) *
+		glm::scale(vector3(m_fRadius / 2) * 2.0f), v3Color, value);
+}
+
+void MovableObjects::RenderBox()
+{
+	vector3 v3Color = GetColor();
+	int value = 0; //NONE
+
+	if (GetGeneralVisibility()) {
+		value = 2; //WIRE
+	}
+
+	if (true == m_bColliding)
+		v3Color = RERED;
+
+	if (value == 2) {
+		if (!GetAABBVisibility())
+		{
+			value = 0;
+		}
+
+		// Personal cube
+		//m_pMeshMngr->AddCubeToRenderList(
+		//	m_m4ToWorld *
+		//	glm::translate(m_v3CenterGlobal) *
+		//	glm::scale(m_v3Size),
+		//	v3Color, value);
+
+		// All-encompassing cube
+		m_pMeshMngr->AddCubeToRenderList(
+			glm::translate(m_v3CenterGlobal) *
+			glm::scale(m_v3SurroundingSize),
+			REGREEN, value);
+	}
+}
+
 bool MovableObjects::IsColliding(MovableObjects * a_other)
 {
 	//check for sphere collision first
@@ -228,6 +278,8 @@ bool MovableObjects::CheckSphereCollision(MovableObjects* a_other)
 //properties
 void MovableObjects::SetColor(vector3 color) { objColor = color; }
 vector3 MovableObjects::GetColor(void) { return objColor; }
+void MovableObjects::SetSphereColor(vector3 color) { ObjSphereColor = color; }
+vector3 MovableObjects::GetSphereColor(void) { return ObjSphereColor; }
 void MovableObjects::SetGeneralVisibility(bool value) { m_bVisible = value; }
 bool MovableObjects::GetGeneralVisibility(void) { return m_bVisible; }
 void MovableObjects::SetAABBVisibility(bool value) { m_bAVisible = value; }

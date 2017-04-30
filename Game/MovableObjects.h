@@ -35,6 +35,9 @@ public:
 	float GetRadius(void); //Sets the radius of the sphere
 	void SetRadius(float input); //Gets radius of the sphere
 
+	void RenderSphere();
+	void RenderBox(); //Renders the box based on the center in global space
+
 	bool IsColliding(MovableObjects* a_other); //Will check the collision with another object
 	bool CheckBoxCollision(MovableObjects* a_other);
 	bool CheckSphereCollision(MovableObjects* a_other);
@@ -48,6 +51,8 @@ public:
 	void SetColor(vector3 color);
 	vector3 GetColor(void);
 
+	void SetSphereColor(vector3 color);
+	vector3 GetSphereColor(void);
 
 private:
 	bool m_bVisible = true; //turn off/on bounding obj 
@@ -60,6 +65,7 @@ private:
 	float m_fRadius = 0.0f; //radius of the sphere
 
 	vector3 objColor;
+	vector3 ObjSphereColor;
 
 	vector3 m_v3Max;
 	vector3 m_v3Min;

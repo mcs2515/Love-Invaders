@@ -36,6 +36,9 @@ void Player::ReleaseInstance() {
 void Player::Draw()
 {
 	meshManager->AddSphereToRenderList(modelMatrix, RERED, SOLID);
+	SetModelMatrix(modelMatrix);
+	RenderBox();
+	RenderSphere();
 }
 
 void Player::Move() {
