@@ -36,9 +36,10 @@ void Player::ReleaseInstance() {
 void Player::Draw()
 {
 	meshManager->AddSphereToRenderList(modelMatrix, RERED, SOLID);
+	//meshManager->LoadModel("Love-Invaders\\ufo.obj", "UFO");
 	SetModelMatrix(modelMatrix);
-	RenderBox();
-	RenderSphere();
+	//RenderBox();
+	//RenderSphere();
 }
 
 void Player::Move() {

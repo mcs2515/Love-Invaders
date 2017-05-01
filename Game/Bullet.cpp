@@ -42,11 +42,12 @@ std::vector<vector3> Bullet::MakeBulletCollisionBox(vector3 size)
 void Bullet::Draw()
 {
 	//only need draw for now
-	meshManager->SetModelMatrix(modelMatrix);
+	//meshManager->LoadModel("Love\\Heart.obj", "HEART");
+	//meshManager->SetModelMatrix(modelMatrix);
 	meshManager->AddSphereToRenderList(modelMatrix, REBLACK, SOLID);
 	SetModelMatrix(modelMatrix);
-	RenderBox();
-	RenderSphere();
+	//RenderBox();
+	//RenderSphere();
 }
 
 Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
