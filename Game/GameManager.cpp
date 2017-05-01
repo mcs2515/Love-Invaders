@@ -53,13 +53,15 @@ void GameManager::ResetRound() {
 
 		player->SetLives(GetLives() - 1); //player lose 1 health
 
-		SetTotalScore(GetTotalScore() - GetCurrentScore()); //return to original score
+		//SetTotalScore(GetTotalScore() - GetCurrentScore()); //return to original score
 
 		SetCurrentScore(0); //reset current score
 
 		SetCurrentTimer(roundTimer); //seconds //reset current timer
 
 		player->SetBullets(roundAmmo); //Ammo and Goal are the same for the current round
+		
+		ResetObjects(roundAmmo, enemyLSize, true);
 	}
 	else {
 		GameOver(); //if player health = 0, call GameOver
@@ -69,7 +71,7 @@ void GameManager::ResetRound() {
 void GameManager::NewGame(void) {
 
 	fRunTime = 0.0f; //reset run time
-	roundTimer = 60; //seconds
+	roundTimer = 20; //seconds
 	bulletSize = vector3(0.2f, 0.2f, 0.2f);
 	humanSize = vector3(1.0f,1.0f,1.0f);
 	//bulletInitialPos = vector3();
@@ -84,13 +86,11 @@ void GameManager::NewGame(void) {
 
 	//reset ammo count
 	roundAmmo = 15;
-	SetPlayerAmmo(roundAmmo);
-
-	//create enemy objects
-	/*for (int i = 0; i < enemyLSize; i++) {
-		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, vector3(-5.0f, 0.0f, 5.0f), vector3(5.0f, 0.0f, -5.0f), meshManager));
-	}*/
-	SpawnEnemies(enemyLSize);
+	
+	/*SetPlayerAmmo(roundAmmo);
+	SpawnEnemies(enemyLSize);*/
+	// Previously-commented code replaced with this:
+	ResetObjects(roundAmmo, enemyLSize, true);
 
 	SetGoal(5); //reset goal
 }
@@ -106,17 +106,24 @@ void GameManager::NextRound(void) {
 }
 
 void GameManager::GameOver(){
-	//destroy enemies
+	ResetObjects(0, 0, false);
+	//call new game if player wishes to continue
+}
+
+void GameManager::ResetObjects(int playerBullets, int numEnemies, bool addObjs)
+{
 	for (int i = 0; i < enemyList.size(); i++) {
 		DestroyEnemy(i);
 	}
-
-	//destroy bullets
 	for (int i = 0; i < bulletList.size(); i++) {
 		DestroyBullet(bulletList[i]);
 	}
+	if (!addObjs)
+		return;
 
-	//call new game if player wishes to continue
+	SetPlayerAmmo(playerBullets);
+	SpawnEnemies(numEnemies);
+	ResetPlayer();
 }
 #pragma endregion
 
@@ -127,35 +134,39 @@ void GameManager::IncreaseChallenge() {
 		int ranNum = rand() % 3; //get a new rando value
 
 		roundAmmo = GetPlayerAmmo() + ranNum; //used for reseting round. 
-		SetPlayerAmmo(GetPlayerAmmo() - ranNum); //decrement ammo
+		//SetPlayerAmmo(GetPlayerAmmo() - ranNum); //decrement ammo
 
 		ranNum = rand() % 3; //get a new rando value
 
 		SetGoal(GetGoal() + ranNum); //increment goal
+
+		enemyLSize = GetGoal() + ranNum;
 	}
+	ResetObjects(roundAmmo, enemyLSize, true);
 }
 
 void GameManager::IncrementCurrentScore(int value) {
 	currentScore += value;
 }
+
 void GameManager::ResetPlayer()
 {
-	player->SetPosition(vector3(0.0f, 0.0f, 0.0f));
+	player->SetPosition(vector3(0.0f, 3.0f, 0.0f));
 }
 #pragma endregion
 
 void GameManager::MovePlayer(int left, int up) {
 	// X AXIS movement
 	if (left == -1)
-		player->position.x -= static_cast<float>(player->GetMoveSpeed());
+		player->position.x -= player->GetMoveSpeed();
 	else if (left == 1)
-		player->position.x += static_cast<float>(player->GetMoveSpeed());
+		player->position.x += player->GetMoveSpeed();
 
 	// Z AXIS movement
 	if (up == -1)
-		player->position.z -= static_cast<float>(player->GetMoveSpeed());
+		player->position.z -= player->GetMoveSpeed();
 	else if (up == 1)
-		player->position.z += static_cast<float>(player->GetMoveSpeed());
+		player->position.z += player->GetMoveSpeed();
 
 	player->Move();
 }
@@ -170,6 +181,7 @@ void GameManager::DetectCollision()
 			{
 				enemyList.erase(enemyList.begin()+j);
 				j--;
+				IncrementCurrentScore(1);
 			}
 
 			if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
@@ -261,7 +273,6 @@ void GameManager::SpawnEnemies(int numEnemies)
 	}
 }
 
-
 void GameManager::CheckGoal(void) {
 	if (currentScore >= goal) {
 
@@ -282,7 +293,7 @@ void GameManager::DisplayData() {
 
 	meshManager->PrintLine(ui->DisplayAmmoCount(GetPlayerAmmo())); //display current bullet count
 
-	meshManager->PrintLine(ui->DisplayCurrentTime(fRunTime));	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
+	meshManager->PrintLine(ui->DisplayCurrentTime(currentTimer));	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
 
 	meshManager->PrintLine(ui->DisplayLives(GetLives()));	//display player lives
 

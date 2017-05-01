@@ -3,9 +3,9 @@
 void Bullet::Move(float fPercent)
 {
 	//lerp from start to end
-	position = glm::lerp(v3_Start, v3_End, fPercent);
+	position = glm::lerp(v3_Start, v3_End, (fPercent * 3));
 
-	if (fPercent >= 1.0f && !returning) //reached destination
+	if (fPercent >= 0.33f && !returning) //reached destination
 	{
 		//swap start and end
 		vector3 temp = v3_Start;

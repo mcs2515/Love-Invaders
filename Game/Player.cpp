@@ -4,6 +4,7 @@
 Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager, MakePlayerCollisionBox(is))
 {
 	m_iBullets = 5;
+	m_iMove = 0.5f;
 
 	// Creates the body for drawing - Not used yet
 	m_pBody = new PrimitiveClass();
@@ -19,7 +20,7 @@ Player::~Player()
 
 Player* Player::GetInstance(MeshManagerSingleton* IMeshManager) {
 	if (instance == nullptr) {
-		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(1.0f, 1.0f, 1.0f), IMeshManager);
+		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(1.0f), IMeshManager);
 	}
 	return instance;
 }
@@ -42,30 +43,30 @@ void Player::Draw()
 }
 
 void Player::Move() {
-	// Checks to see if the player is beyond certain margins
-	/*bool passedPos = false;
-	if (position.x > 10)
+	// Checks to see if the player is beyond certain margins - make sure they stay within certain areas
+	bool passedPos = false;
+	if (position.x > 15)
 	{
-		position.x = 10;
+		position.x = 15;
 		passedPos = true;
 	}
-	else if (position.x < -10)
+	else if (position.x < -15)
 	{
-		position.x = -10;
+		position.x = -15;
 		passedPos = true;
 	}
-	if (position.z > 10)
+	if (position.z > 9)
 	{
-		position.z = 10;
+		position.z = 9;
 		passedPos = true;
 	}
-	else if (position.z < -10)
+	else if (position.z < -9)
 	{
-		position.z = -10;
+		position.z = -9;
 		passedPos = true;
 	}
 	if (passedPos)
-		return;*/
+		return;
 	// Updates the model matrix after moving
 	modelMatrix = glm::translate(position);
 	/*if (!rotation)

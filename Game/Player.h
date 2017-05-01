@@ -19,7 +19,7 @@ protected:
 	bool m_bGoUp;						// Getter / Setter -> Set in AppClassControls, used to determine which direction across the X AXIS the player travels
 	int m_iLives;						// Getter / Setter -> Used by UILayer / GameManager to get and change how many lives the player has left
 	int m_iBullets;						// Getter / Setter -> Used by UILayer / GameManager to get and change number of bullets player starts with
-	const static int m_iMove = 1;		// Used to determine how much the player moves
+	float m_iMove;						// Used to determine how much the player moves
 
 	PrimitiveClass* m_pBody;
 
@@ -62,7 +62,7 @@ public:
 	// Getter / Setter for m_iBullets
 	int GetBullets() { return m_iBullets; };
 	void SetBullets(int b) { m_iBullets = b; };
-	int GetMoveSpeed() { return m_iMove; };
+	float GetMoveSpeed() { return m_iMove; };
 
 	void SetPosition(vector3 p) { position = p; };
 	vector3 GetPosition() { return position; };

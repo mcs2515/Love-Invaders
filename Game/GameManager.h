@@ -44,6 +44,9 @@ public:
 	void NextRound(void);
 
 	void GameOver();
+	// Method used to reset all objects
+		// PARAMS: number of player bullets, number of enemies, whether objects should be added or everything is just deleted
+	void ResetObjects(int playerBullets, int numEnemies, bool addObjs);
 #pragma endregion
 
 #pragma region Functions Called_By_NextRound()
