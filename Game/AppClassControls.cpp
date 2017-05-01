@@ -73,6 +73,7 @@ void AppClass::ProcessKeyboard(void)
 	//	gm->MovePlayer(1, 1); //(0, 1) (1, 1)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+<<<<<<< HEAD
 		gm->MovePlayer(-1, 0); //(-1, 0) (-1, 1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		gm->MovePlayer(1, 0); //(1, 0) (1, -1)
@@ -80,6 +81,16 @@ void AppClass::ProcessKeyboard(void)
 		gm->MovePlayer(0, -1); //(0, -1) (-1, -1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		gm->MovePlayer(0, 1); //(0, 1) (1, 1)
+=======
+		gm->MovePlayer(-1, -1); //(-1, 0) (-1, 1)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		gm->MovePlayer(1, 1); //(1, 0) (1, -1)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		gm->MovePlayer(1, -1); //(0, -1) (-1, -1)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		gm->MovePlayer(-1, 1); //(0, 1) (1, 1)
+
+>>>>>>> 1a2fe38d2dd8815682b712f90c7b565b002be980
 #pragma endregion
 
 #pragma region Other Actions

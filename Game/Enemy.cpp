@@ -14,8 +14,8 @@ void Enemy::Draw()
 	meshManager->SetModelMatrix(modelMatrix);
 	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
 	SetModelMatrix(modelMatrix);
-	RenderBox();
-	RenderSphere();
+	//RenderBox();
+	//RenderSphere();
 }
 
 void Enemy::Move(float percentage)
