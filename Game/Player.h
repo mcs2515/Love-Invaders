@@ -24,7 +24,7 @@ protected:
 	PrimitiveClass* m_pBody;
 
 	static Player* instance;
-
+	matrix4 shadowMatrix;
 
 	std::vector<vector3> MakePlayerCollisionBox(vector3 size);
 

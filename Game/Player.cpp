@@ -39,26 +39,29 @@ void Player::Draw()
 	meshManager->AddSphereToRenderList(modelMatrix, RERED, SOLID);
 	//meshManager->LoadModel("Love-Invaders\\ufo.obj", "UFO");
 	SetModelMatrix(modelMatrix);
-	//RenderBox();
-	//RenderSphere();
+
+	//shadow
+	meshManager->AddCylinderToRenderList(shadowMatrix, REBLACK, SOLID);
+	shadowMatrix = glm::translate(position.x, 0.5f, position.z);
+	shadowMatrix *= glm::scale(1.0f, 0.1f, 1.0f);
 }
 
 void Player::Move() {
 	// Checks to see if the player is beyond certain margins - make sure they stay within certain areas
 	bool passedPos = false;
-	if (position.x > 15)
+	if (position.x > 16)
 	{
-		position.x = 15;
+		position.x = 16;
 		passedPos = true;
 	}
-	else if (position.x < -15)
+	else if (position.x < -17)
 	{
-		position.x = -15;
+		position.x = -17;
 		passedPos = true;
 	}
-	if (position.z > 9)
+	if (position.z > 11)
 	{
-		position.z = 9;
+		position.z = 11;
 		passedPos = true;
 	}
 	else if (position.z < -9)
