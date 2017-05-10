@@ -11,7 +11,6 @@ Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSi
 void Enemy::Draw()
 {
 	//only need draw for now
-	meshManager->SetModelMatrix(modelMatrix);
 	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
 	SetModelMatrix(modelMatrix);
 	//RenderBox();

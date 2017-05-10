@@ -41,9 +41,10 @@ void Player::Draw()
 	SetModelMatrix(modelMatrix);
 
 	//shadow
-	meshManager->AddCylinderToRenderList(shadowMatrix, REBLACK, SOLID);
 	shadowMatrix = glm::translate(position.x, 0.5f, position.z);
 	shadowMatrix *= glm::scale(1.0f, 0.1f, 1.0f);
+	meshManager->AddCylinderToRenderList(shadowMatrix, REBLACK, SOLID);
+
 }
 
 void Player::Move() {
@@ -81,7 +82,7 @@ void Player::Move() {
 }
 
 Bullet Player::FireBullet() {
-	Bullet b = Bullet(position, false, vector3(0.3f), position, vector3(position.x, 0, position.z), meshManager);
+	Bullet b = Bullet(position, false, vector3(0.1f), position, vector3(position.x, 0, position.z), meshManager);
 	b.SetIsActive(true);
 	return b;
 }

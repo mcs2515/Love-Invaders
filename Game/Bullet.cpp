@@ -31,7 +31,7 @@ std::vector<vector3> Bullet::MakeBulletCollisionBox(vector3 size)
 	data.push_back(vector3(-size.x, size.y, size.z));
 	data.push_back(vector3(size.x, -size.y, size.z));
 	data.push_back(vector3(size.x, size.y, -size.z));
-	data.push_back(vector3(-size.x, -size.y, size.z));
+	data.push_back(vector3(-size.x, -size.y, size.z)); 
 	data.push_back(vector3(size.x, -size.y, -size.z));
 	data.push_back(vector3(-size.x, size.y, -size.z));
 	data.push_back(vector3(-size.x, -size.y, -size.z));
@@ -42,10 +42,10 @@ std::vector<vector3> Bullet::MakeBulletCollisionBox(vector3 size)
 void Bullet::Draw()
 {
 	//only need draw for now
-	//meshManager->LoadModel("Love\\Heart.obj", "HEART");
-	//meshManager->SetModelMatrix(modelMatrix);
-	meshManager->AddSphereToRenderList(modelMatrix, REBLACK, SOLID);
-	SetModelMatrix(modelMatrix);
+	meshManager->LoadModel("Love\\Heart.obj", "BULLET");
+	meshManager->SetModelMatrix(modelMatrix, "BULLET");
+	//meshManager->AddSphereToRenderList(modelMatrix, REBLACK, SOLID);
+	//SetModelMatrix(modelMatrix);
 	//RenderBox();
 	//RenderSphere();
 }
