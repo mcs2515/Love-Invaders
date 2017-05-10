@@ -17,6 +17,44 @@ void GameManager::ReleaseInstance(void) {
 }
 
 void GameManager::Update() {
+
+
+	switch (gameState)
+	{
+	case TITLE: 
+		break;
+
+	case CREDITS:
+		break;
+
+	case PAUSE:
+		ui->DisplayPauseScreen();
+		break;
+
+	case GAME_PLAY:
+		Update();
+
+		break;
+
+	case NEXT_ROUND:
+		NextRound(); //player goes to a next round
+		break;
+
+	case RESTART_ROUND:
+		
+		ResetRound(); //player has to replay round
+		break;
+
+	case GAME_OVER:
+		GameOver();
+		break;
+
+	default:
+		break;
+	}
+}
+
+void GameManager::Update() {
 	//Lets us know how much time has passed since the last call
 	fTimeSpan = m_pSystem->LapClock(); //Delta time (between frame calls)
 
@@ -32,7 +70,7 @@ void GameManager::Update() {
 		DisplayData(); //display UI	
 		RenderBullets(); //render bullets if active
 
-		//drawing background
+						 //drawing background
 		DrawPlanes();
 		DrawBunkers();
 
@@ -64,7 +102,7 @@ void GameManager::ResetRound() {
 		ResetObjects(roundAmmo, enemyLSize, true);
 	}
 	else {
-		GameOver(); //if player health = 0, call GameOver
+		gameState = GAME_OVER; //if player health = 0, call GameOver
 	}
 }
 
@@ -276,28 +314,24 @@ void GameManager::SpawnEnemies(int numEnemies)
 void GameManager::CheckGoal(void) {
 	if (currentScore >= goal) {
 
-		NextRound(); //player goes to a next round
+		gameState = NEXT_ROUND;
+		
 	}
 	else {
 
-		ResetRound(); //player has to replay round
+		gameState = RESTART_ROUND;
 	}
 }
 
 void GameManager::DisplayData() {
-	meshManager->PrintLine(ui->DisplayTotalScore(GetTotalScore())); //display total score
+	ui->DisplayTotalScore(GetTotalScore()); //display total score
+	ui->DisplayGoal(GetGoal()); //display current round goal
+	ui->DisplayCurrentScore(GetCurrentScore()); //display current score
+	ui->DisplayAmmoCount(GetPlayerAmmo()); //display current bullet count
+	ui->DisplayCurrentTime(currentTimer);	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
+	ui->DisplayLives(GetLives());	//display player lives
 
-	meshManager->PrintLine(ui->DisplayGoal(GetGoal())); //display current round goal
-
-	meshManager->PrintLine(ui->DisplayCurrentScore(GetCurrentScore())); //display current score
-
-	meshManager->PrintLine(ui->DisplayAmmoCount(GetPlayerAmmo())); //display current bullet count
-
-	meshManager->PrintLine(ui->DisplayCurrentTime(currentTimer));	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
-
-	meshManager->PrintLine(ui->DisplayLives(GetLives()));	//display player lives
-
-	meshManager->PrintLine(player->GetStringPosition(), RERED);
+	//meshManager->PrintLine(player->GetStringPosition(), RERED);
 }
 
 //float GameManager::Percentage(float scaleOriginalMin, float scaleOriginalMax, float mappedMin, float mappedMax) {
@@ -367,6 +401,13 @@ void GameManager::SetLives(int value) {player->SetLives(value);}
 // AMMO COUNT properties
 int GameManager::GetPlayerAmmo(void) {return player->GetBullets();}
 void GameManager::SetPlayerAmmo(int value) {player->SetBullets(value);}
+
+int GameManager::GetGameState(void){return gameState;}
+
+void GameManager::SetGameState(GameState value)
+{
+	gameState = value;
+}
 
 // CURRENT TIMER properties
 void GameManager::SetCurrentTimer(float value) {currentTimer = value;}

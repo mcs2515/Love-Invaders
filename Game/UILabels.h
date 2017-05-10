@@ -9,20 +9,23 @@ public:
 	UILabels();
 	~UILabels();
 
+	MeshManagerSingleton* m_pMeshMngr = nullptr;
+
+	void DisplayTotalScore(int ts); //method to display total score
 	
-	String DisplayTotalScore(int ts); //method to display total score
+	void DisplayCurrentScore(int cs); //method to display current score
 	
-	String DisplayCurrentScore(int cs); //method to display current score
-	
-	String DisplayAmmoCount(int a); //method to display current bullet count
+	void DisplayAmmoCount(int a); //method to display current bullet count
 
-	String DisplayGoal(int g); //method to display current goal
+	void DisplayGoal(int g); //method to display current goal
 
-	String DisplayLives(int l); //method to display current lives
+	void DisplayLives(int l); //method to display current lives
 
-	String DisplayCurrentTime(int t); //method siplays current time
+	void DisplayCurrentTime(int t); //method diplays current time
 
-
+	void DisplayMainMenu();
+	void DisplayCredits();
+	void GenericSingleLine(String string);
 private:
 
 
