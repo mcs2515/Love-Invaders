@@ -13,8 +13,6 @@ class GameManager
 {
 	static GameManager* instance;
 
-	
-
 public:
 	//instance of other singleton classes
 	Player* player;
@@ -34,6 +32,7 @@ public:
 	std::vector<Bullet> bulletList; // List of bullet objects the singleton creates and has control over
 	std::vector<Enemy> enemyList; // List of enemy objects the singleton creates and has control over
 	std::vector<vector3> bunkerVecs;
+	enum GameState { TITLE, CREDITS, PAUSE, GAME_PLAY, NEXT_ROUND, RESTART_ROUND, GAME_OVER };
 
 #pragma region Game_Loop_Functions
 	// called when player fails to reach round goal
@@ -45,7 +44,7 @@ public:
 
 	void GameOver();
 	// Method used to reset all objects
-		// PARAMS: number of player bullets, number of enemies, whether objects should be added or everything is just deleted
+	// PARAMS: number of player bullets, number of enemies, whether objects should be added or everything is just deleted
 	void ResetObjects(int playerBullets, int numEnemies, bool addObjs);
 #pragma endregion
 
@@ -122,6 +121,9 @@ public:
 	int GetPlayerAmmo(void);
 	void SetPlayerAmmo(int value);
 
+	int GetGameState(void);
+	void SetGameState(GameState value);
+
 	// CURRENT TIMER properties
 	void GameManager::SetCurrentTimer(float value);
 #pragma endregion
@@ -130,6 +132,7 @@ private:
 
 	// Basic constructor
 	GameManager(MeshManagerSingleton* mesh) {
+		gameState = TITLE;
 		bulletList = std::vector<Bullet>();
 		enemyList = std::vector<Enemy>();
 		meshManager = mesh;
@@ -182,6 +185,8 @@ private:
 
 	float fTimeSpan;
 	float fRunTime;
+
+	static GameState gameState;
 
 	matrix4 floorPlane;
 	matrix4 floorBox; //optional
