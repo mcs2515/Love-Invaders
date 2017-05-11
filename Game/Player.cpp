@@ -6,9 +6,8 @@ Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManag
 	m_iBullets = 5;
 	m_iMove = 0.5f;
 
-	// Creates the body for drawing - Not used yet
-	m_pBody = new PrimitiveClass();
-	m_pBody->GenerateSphere(1.0f, 5, RERED);
+	meshManager->LoadModel("Love\\ufo.fbx", "UFO");
+	meshManager->SetModelMatrix(modelMatrix * glm::translate(vector3(-100, -100, -100)), "UFO");
 }
 // PRIVATE - DESTRUCTOR
 
@@ -20,7 +19,7 @@ Player::~Player()
 
 Player* Player::GetInstance(MeshManagerSingleton* IMeshManager) {
 	if (instance == nullptr) {
-		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(1.0f), IMeshManager);
+		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(.2f), IMeshManager);
 	}
 	return instance;
 }
@@ -36,9 +35,10 @@ void Player::ReleaseInstance() {
 // Draws the body - Not used yet, just adds a sphere to the render list
 void Player::Draw()
 {
-	meshManager->AddSphereToRenderList(modelMatrix, RERED, SOLID);
-	//meshManager->LoadModel("Love-Invaders\\ufo.obj", "UFO");
+	//meshManager->AddSphereToRenderList(modelMatrix, RERED, SOLID);
+	meshManager->SetModelMatrix(modelMatrix, "UFO");
 	SetModelMatrix(modelMatrix);
+
 
 	//shadow
 	shadowMatrix = glm::translate(position.x, 0.5f, position.z);
@@ -90,6 +90,8 @@ Bullet Player::FireBullet(int num) {
 std::vector<vector3> Player::MakePlayerCollisionBox(vector3 size)
 {
 	std::vector<vector3> data;
+
+	size = vector3(1,.2,1);
 
 	data.push_back(vector3(size.x, size.y, size.z));
 	data.push_back(vector3(-size.x, size.y, size.z));

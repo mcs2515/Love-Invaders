@@ -2,10 +2,13 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> bunkersList, float startPercent)
+Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> bunkersList, float startPercent, int inum)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize), startPercent)
 {
+	num = inum * 100;
 	bunkerLocs = bunkersList;
+	//meshManager->LoadModel("Minecraft\\Steve.obj", std::to_string(num));
+	//meshManager->SetModelMatrix(modelMatrix * glm::translate( vector3(-100, -100, -100)), std::to_string(num));
 }
 
 void Enemy::Draw()
@@ -13,8 +16,12 @@ void Enemy::Draw()
 	//only need draw for now
 	meshManager->AddCubeToRenderList(modelMatrix, REGREEN, SOLID);
 	SetModelMatrix(modelMatrix);
+
+	//meshManager->SetModelMatrix(modelMatrix, std::to_string(num));
+	//SetModelMatrix(modelMatrix);
 	//RenderBox();
 	//RenderSphere();
+
 }
 
 void Enemy::Move(float percentage)
@@ -63,4 +70,11 @@ std::vector<vector3> Enemy::MakeEnemyCollisionBox(vector3 size)
 
 Enemy::~Enemy()
 {
+
+}
+
+void Enemy::Kill()
+{
+	//modelMatrix *= glm::translate(vector3(-100, -100, -100));
+	//meshManager->SetModelMatrix(modelMatrix, std::to_string(num));
 }

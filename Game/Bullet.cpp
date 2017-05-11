@@ -62,7 +62,7 @@ Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initial
 	num = inum;
 	returning = false;
 	meshManager->LoadModel("Love\\Heart.obj", std::to_string(num));
-	meshManager->SetModelMatrix(modelMatrix, std::to_string(num));
+	meshManager->SetModelMatrix(modelMatrix * glm::translate(vector3(-100, -100, -100)), std::to_string(num));
 }
 
 
