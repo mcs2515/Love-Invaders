@@ -9,7 +9,7 @@ class NPC :
 public:
 	virtual void Draw();
 	virtual void Move(float fTimer);
-	NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> vertexList, float startPercent);
+	NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> vertexList, ObjectType it, float startPercent);
 	~NPC();
 
 	vector3 GetStart();

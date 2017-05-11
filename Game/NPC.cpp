@@ -9,8 +9,8 @@ void NPC::Move(float fTimer)
 {
 }
 
-NPC::NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> vertexList, float startPercent)
-	: MovableObjects(initialPosition, initialRotation, initialSize, IMeshManager, vertexList)
+NPC::NPC(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> vertexList, ObjectType it, float startPercent)
+	: MovableObjects(initialPosition, initialRotation, initialSize, IMeshManager, vertexList, it)
 {
 	v3_Start = initialStart;
 	v3_End = initialEnd;

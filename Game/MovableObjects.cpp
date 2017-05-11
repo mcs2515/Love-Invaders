@@ -9,7 +9,7 @@ void MovableObjects::Draw()
 }
 
 
-MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager, std::vector<vector3> vertexList)
+MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager, std::vector<vector3> vertexList, ObjectType it)
 {
 	meshManager = iMeshManager;
 	position = ip;
@@ -25,6 +25,8 @@ MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSi
 
 	m_bColliding = false;
 	m_v3CenterGlobal = vector3(0.0f);
+
+	type = it;
 
 	if (vertexList.size() < 1)
 		return;
@@ -411,3 +413,4 @@ float MovableObjects::GetRadius(void) { return m_fRadius; }
 matrix4 MovableObjects::GetModelMatrix(void) { return m_m4ToWorld; }
 vector3 MovableObjects::GetMin() { return m_v3Min; }
 vector3 MovableObjects::GetMax() { return m_v3Max; }
+ObjectType MovableObjects::GetType() { return type; }

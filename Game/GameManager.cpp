@@ -227,23 +227,21 @@ void GameManager::DetectCollision()
 	if (octree.GetSOCheck()) {
 		octree.CheckCollisions();
 	}
-	else {
-		for (int i = 0; i < bulletList.size(); i++)
+	for (int i = 0; i < bulletList.size(); i++)
+	{
+		for (int j = 0; j < enemyList.size(); j++)
 		{
-			for (int j = 0; j < enemyList.size(); j++)
+			if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
 			{
-				if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
-				{
-					enemyList.erase(enemyList.begin() + j);
-					j--;
-					IncrementCurrentScore(1);
-				}
+				enemyList.erase(enemyList.begin() + j);
+				j--;
+				IncrementCurrentScore(1);
+			}
 
-				if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
-				{
-					bulletList[i].Reset(); //reset timer, isactive bool , returning bool
-					SetPlayerAmmo(GetPlayerAmmo() + 1); //increment player bullet
-				}
+			if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
+			{
+				bulletList[i].Reset(); //reset timer, isactive bool , returning bool
+				SetPlayerAmmo(GetPlayerAmmo() + 1); //increment player bullet
 			}
 		}
 	}
@@ -339,7 +337,7 @@ void GameManager::SpawnEnemies(int numEnemies)
 
 		//pushback the new enemy
 
-		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, newPercent));
+		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, ENEMY, newPercent));
 	}
 }
 

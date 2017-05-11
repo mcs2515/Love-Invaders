@@ -56,8 +56,8 @@ void Bullet::Draw()
 	}
 }
 
-Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, int inum)
-	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeBulletCollisionBox(initialSize), 0.0f)
+Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, ObjectType it, int inum)
+	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeBulletCollisionBox(initialSize), it, 0.0f)
 {
 	num = inum;
 	returning = false;

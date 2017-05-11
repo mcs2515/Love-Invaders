@@ -10,7 +10,7 @@ class Player : public MovableObjects
 protected:
 
 	// Constructor
-	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager);
+	Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager, ObjectType it);
 
 	// Destructor
 	~Player();

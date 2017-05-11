@@ -7,11 +7,7 @@ void AppClass::ProcessKeyboard(void)
 #pragma region ON_KEY_PRESS_RELEASE
 	static bool	bLastF1 = false, bLastF2 = false, bLastF3 = false, bLastF4 = false, bLastF5 = false,
 		bLastF6 = false, bLastF7 = false, bLastF8 = false, bLastF9 = false, bLastF10 = false,
-<<<<<<< HEAD
-		bLastEscape = false, bLastF = false, bLastSpace = false, bLastO = false, bLastP = false;
-=======
-		bLastEscape = false, bLastF = false, bLastSpace = false, bLastP = false, bLastEsc = false, bLastC = false;
->>>>>>> a078ed771cdc517b29503bc3303f1d0c14ac4f10
+		bLastEscape = false, bLastF = false, bLastSpace = false, bLastO = false, bLastI = false, bLastP = false, bLastReturn = false, bLastC = false;
 #define ON_KEY_PRESS_RELEASE(key, pressed_action, released_action){  \
 			bool pressed = sf::Keyboard::isKeyPressed(sf::Keyboard::key);			\
 			if(pressed){											\
@@ -89,7 +85,7 @@ void AppClass::ProcessKeyboard(void)
 #pragma endregion
 
 #pragma region Other Actions
-	//ON_KEY_PRESS_RELEASE(Escape, NULL, PostMessage(m_pWindow->GetHandler(), WM_QUIT, NULL, NULL));
+	ON_KEY_PRESS_RELEASE(Escape, NULL, PostMessage(m_pWindow->GetHandler(), WM_QUIT, NULL, NULL));
 	//ON_KEY_PRESS_RELEASE(F1, NULL, m_pCameraMngr->SetCameraMode(CAMPERSP));
 	//ON_KEY_PRESS_RELEASE(F2, NULL, m_pCameraMngr->SetCameraMode(CAMROTHOZ));
 	//ON_KEY_PRESS_RELEASE(F3, NULL, m_pCameraMngr->SetCameraMode(CAMROTHOY));
@@ -107,7 +103,6 @@ void AppClass::ProcessKeyboard(void)
 		willShoot = false;
 	}
 
-<<<<<<< HEAD
 	// Detect whether Octree has been enabled or not
 	static bool makeOctree = false;
 	ON_KEY_PRESS_RELEASE(O, NULL, makeOctree = true);
@@ -119,20 +114,19 @@ void AppClass::ProcessKeyboard(void)
 
 	// Reset the Octree if it has been enabled
 	static bool resetOctree = false;
-	ON_KEY_PRESS_RELEASE(P, NULL, resetOctree = true);
+	ON_KEY_PRESS_RELEASE(I, NULL, resetOctree = true);
 	if (resetOctree) {
 		if (gm->octree.GetSOCheck()) {
 			gm->ResetOctree();
 		}
 		resetOctree = false;
 	}
-=======
 	static bool pPressed = false;
-	static bool escPressed = false;
+	static bool returnPressed = false;
 	static bool cPressed = false;
 	ON_KEY_PRESS_RELEASE(P, NULL, pPressed = true);
 	ON_KEY_PRESS_RELEASE(C, NULL, cPressed = true);
-	ON_KEY_PRESS_RELEASE(Escape, NULL, escPressed = true);
+	ON_KEY_PRESS_RELEASE(Return, NULL, returnPressed = true);
 
 
 	if (cPressed) {
@@ -145,24 +139,24 @@ void AppClass::ProcessKeyboard(void)
 		}
 	}
 
-	if (escPressed) {
+	if (returnPressed) {
 		switch (gm->GetGameState()) {
 		case CREDITS:
 			//if 'esc' return to Title
 			gm->SetGameState(TITLE);
-			escPressed = false;
+			returnPressed = false;
 			break;
 
 		case PAUSE:
 			//if 'esc' return to Title
 			gm->SetGameState(TITLE);
-			escPressed = false;
+			returnPressed = false;
 			break;
 
 		case GAME_OVER:
 			//if 'esc' return to Title
 			gm->SetGameState(TITLE);
-			escPressed = false;
+			returnPressed = false;
 			break;
 		}
 	}
@@ -208,7 +202,6 @@ void AppClass::ProcessKeyboard(void)
 	//if (gm->GetGameState() == PAUSE) {
 	//	pPressed = false;
 	//}
->>>>>>> a078ed771cdc517b29503bc3303f1d0c14ac4f10
 
 #pragma endregion
 }

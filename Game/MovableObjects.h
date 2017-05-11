@@ -4,6 +4,12 @@
 #include "RE\ReEngAppClass.h"
 #include "BoundingObject.h"
 
+enum ObjectType {
+	PLAYER,
+	BULLET,
+	ENEMY,
+};
+
 class MovableObjects
 {
 public:
@@ -17,7 +23,7 @@ public:
 	virtual void Move();
 	virtual void Draw();
 
-	MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager, std::vector<vector3> vertexList);
+	MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager, std::vector<vector3> vertexList, ObjectType it);
 	~MovableObjects();
 
 	//start bounding box stuff
@@ -61,6 +67,8 @@ public:
 	vector3 GetMin();
 	vector3 GetMax();
 
+	ObjectType GetType();
+
 private:
 	bool m_bVisible = true; //turn off/on bounding obj 
 	bool m_bAVisible = true; //turn off/on bounding obj 
@@ -87,5 +95,6 @@ private:
 	vector3 m_v3SurroundingSize;
 	//end bounding box stuff
 
+	ObjectType type;
 };
 #endif

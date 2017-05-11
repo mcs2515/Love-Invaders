@@ -1,7 +1,7 @@
 #include "Player.h"
 //Player* Player::instance = nullptr;
 // PRIVATE - CONSTRUCTOR
-Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager) : MovableObjects(ip, ir, is, IMeshManager, MakePlayerCollisionBox(is))
+Player::Player(vector3 ip, bool ir, vector3 is, MeshManagerSingleton* IMeshManager, ObjectType it) : MovableObjects(ip, ir, is, IMeshManager, MakePlayerCollisionBox(is), it)
 {
 	m_iBullets = 5;
 	m_iMove = 0.5f;
@@ -20,7 +20,7 @@ Player::~Player()
 
 Player* Player::GetInstance(MeshManagerSingleton* IMeshManager) {
 	if (instance == nullptr) {
-		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(1.0f), IMeshManager);
+		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(1.0f), IMeshManager, PLAYER);
 	}
 	return instance;
 }
@@ -82,7 +82,7 @@ void Player::Move() {
 }
 
 Bullet Player::FireBullet(int num) {
-	Bullet b = Bullet(position, false, vector3(0.1f), position, vector3(position.x, 0, position.z), meshManager, num);
+	Bullet b = Bullet(position, false, vector3(0.1f), position, vector3(position.x, 0, position.z), meshManager, BULLET, num);
 	b.SetIsActive(true);
 	return b;
 }
