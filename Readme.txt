@@ -1,5 +1,11 @@
+Made by:
+
+Samantha Level,
+Jordan Mato,
+Megan Smith,
+James Spinelli
 
 
-
-Model Sources:
-https://3dexport.com/free-3dmodel-ufo-85527.htm
+TODO:
+Polish game with models and textures
+Insert nice looking images to serve as different game menus/screens
