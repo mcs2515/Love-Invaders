@@ -48,7 +48,7 @@ public:
 	void Move();
 
 	// Returns a bullet for creation within GameManager and sets all properties upon creation
-	Bullet FireBullet();
+	Bullet FireBullet(int inum);
 
 	// Getter / Setter for m_bGoLeft
 	bool GetLeft() { return m_bGoLeft; };

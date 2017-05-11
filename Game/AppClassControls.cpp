@@ -7,7 +7,11 @@ void AppClass::ProcessKeyboard(void)
 #pragma region ON_KEY_PRESS_RELEASE
 	static bool	bLastF1 = false, bLastF2 = false, bLastF3 = false, bLastF4 = false, bLastF5 = false,
 		bLastF6 = false, bLastF7 = false, bLastF8 = false, bLastF9 = false, bLastF10 = false,
+<<<<<<< HEAD
 		bLastEscape = false, bLastF = false, bLastSpace = false, bLastO = false, bLastP = false;
+=======
+		bLastEscape = false, bLastF = false, bLastSpace = false, bLastP = false, bLastEsc = false, bLastC = false;
+>>>>>>> a078ed771cdc517b29503bc3303f1d0c14ac4f10
 #define ON_KEY_PRESS_RELEASE(key, pressed_action, released_action){  \
 			bool pressed = sf::Keyboard::isKeyPressed(sf::Keyboard::key);			\
 			if(pressed){											\
@@ -17,7 +21,7 @@ void AppClass::ProcessKeyboard(void)
 #pragma endregion
 
 #pragma region Modifiers
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
 		bModifier = true;
 #pragma endregion
 
@@ -29,7 +33,7 @@ void AppClass::ProcessKeyboard(void)
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		m_pCameraMngr->MoveForward(-fSpeed);
-	
+
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		m_pCameraMngr->MoveSideways(-fSpeed);
 
@@ -73,7 +77,7 @@ void AppClass::ProcessKeyboard(void)
 	//	gm->MovePlayer(1, 1); //(0, 1) (1, 1)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		
+
 		gm->MovePlayer(-1, 0); //(-1, 0) (-1, 1)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		gm->MovePlayer(1, 0); //(1, 0) (1, -1)
@@ -85,23 +89,25 @@ void AppClass::ProcessKeyboard(void)
 #pragma endregion
 
 #pragma region Other Actions
-	ON_KEY_PRESS_RELEASE(Escape, NULL, PostMessage(m_pWindow->GetHandler(), WM_QUIT, NULL, NULL));
+	//ON_KEY_PRESS_RELEASE(Escape, NULL, PostMessage(m_pWindow->GetHandler(), WM_QUIT, NULL, NULL));
 	//ON_KEY_PRESS_RELEASE(F1, NULL, m_pCameraMngr->SetCameraMode(CAMPERSP));
 	//ON_KEY_PRESS_RELEASE(F2, NULL, m_pCameraMngr->SetCameraMode(CAMROTHOZ));
 	//ON_KEY_PRESS_RELEASE(F3, NULL, m_pCameraMngr->SetCameraMode(CAMROTHOY));
 	//ON_KEY_PRESS_RELEASE(F4, NULL, m_pCameraMngr->SetCameraMode(CAMROTHOX));
 	static bool bFPSControll = false;
 	ON_KEY_PRESS_RELEASE(F, bFPSControll = !bFPSControll, m_pCameraMngr->SetFPS(bFPSControll));
+
+
 	//detect that the spacebar has been released first before firing
 	static bool willShoot = false;
 	ON_KEY_PRESS_RELEASE(Space, NULL, willShoot = true);
-
 
 	if (willShoot) {
 		gm->FireBullet();
 		willShoot = false;
 	}
 
+<<<<<<< HEAD
 	// Detect whether Octree has been enabled or not
 	static bool makeOctree = false;
 	ON_KEY_PRESS_RELEASE(O, NULL, makeOctree = true);
@@ -120,6 +126,89 @@ void AppClass::ProcessKeyboard(void)
 		}
 		resetOctree = false;
 	}
+=======
+	static bool pPressed = false;
+	static bool escPressed = false;
+	static bool cPressed = false;
+	ON_KEY_PRESS_RELEASE(P, NULL, pPressed = true);
+	ON_KEY_PRESS_RELEASE(C, NULL, cPressed = true);
+	ON_KEY_PRESS_RELEASE(Escape, NULL, escPressed = true);
+
+
+	if (cPressed) {
+		switch (gm->GetGameState()) {
+		case TITLE:
+			//if 'P' go to Game_Play
+			gm->SetGameState(CREDITS);
+			cPressed = false;
+			break;
+		}
+	}
+
+	if (escPressed) {
+		switch (gm->GetGameState()) {
+		case CREDITS:
+			//if 'esc' return to Title
+			gm->SetGameState(TITLE);
+			escPressed = false;
+			break;
+
+		case PAUSE:
+			//if 'esc' return to Title
+			gm->SetGameState(TITLE);
+			escPressed = false;
+			break;
+
+		case GAME_OVER:
+			//if 'esc' return to Title
+			gm->SetGameState(TITLE);
+			escPressed = false;
+			break;
+		}
+	}
+
+	if (pPressed) {
+		switch (gm->GetGameState()) {
+			case TITLE:
+				//if 'P' go to Game_Play
+				gm->SetGameState(GAME_PLAY);
+				gm-> NewGame();
+				pPressed = false;
+				break;
+
+			case PAUSE:
+				//if 'p' return to Game_Play
+				gm->SetGameState(GAME_PLAY);
+				pPressed = false;
+				break;
+
+			case GAME_PLAY:
+				//if 'p' pause game
+				gm->SetGameState(PAUSE);
+				pPressed = false;
+				break;
+
+			case NEXT_ROUND:
+				//if 'p' return to Game_Play
+				gm->SetGameState(GAME_PLAY);
+				pPressed = false;
+				break;
+
+			case RESTART_ROUND:
+				//if 'p' return to Game_Play
+				gm->SetGameState(GAME_PLAY);
+				pPressed = false;
+				break;
+
+			default:
+				break;
+		}
+	}
+	
+	//if (gm->GetGameState() == PAUSE) {
+	//	pPressed = false;
+	//}
+>>>>>>> a078ed771cdc517b29503bc3303f1d0c14ac4f10
 
 #pragma endregion
 }

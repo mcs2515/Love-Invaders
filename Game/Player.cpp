@@ -81,8 +81,8 @@ void Player::Move() {
 	modelMatrix *= glm::scale(size);
 }
 
-Bullet Player::FireBullet() {
-	Bullet b = Bullet(position, false, vector3(0.1f), position, vector3(position.x, 0, position.z), meshManager);
+Bullet Player::FireBullet(int num) {
+	Bullet b = Bullet(position, false, vector3(0.1f), position, vector3(position.x, 0, position.z), meshManager, num);
 	b.SetIsActive(true);
 	return b;
 }

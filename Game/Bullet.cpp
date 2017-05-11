@@ -42,18 +42,27 @@ std::vector<vector3> Bullet::MakeBulletCollisionBox(vector3 size)
 void Bullet::Draw()
 {
 	//only need draw for now
-	meshManager->LoadModel("Love\\Heart.obj", "BULLET");
-	meshManager->SetModelMatrix(modelMatrix, "BULLET");
+	
+	meshManager->SetModelMatrix(modelMatrix, std::to_string(num));
 	//meshManager->AddSphereToRenderList(modelMatrix, REBLACK, SOLID);
-	//SetModelMatrix(modelMatrix);
+	SetModelMatrix(modelMatrix);
 	//RenderBox();
 	//RenderSphere();
+	if (!active)
+	{
+
+		modelMatrix *= glm::translate(vector3(-100, -100, -100));
+		meshManager->SetModelMatrix(modelMatrix, std::to_string(num));
+	}
 }
 
-Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager)
+Bullet::Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, int inum)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeBulletCollisionBox(initialSize), 0.0f)
 {
+	num = inum;
 	returning = false;
+	meshManager->LoadModel("Love\\Heart.obj", std::to_string(num));
+	meshManager->SetModelMatrix(modelMatrix, std::to_string(num));
 }
 
 

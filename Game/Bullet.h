@@ -9,8 +9,10 @@ class Bullet : public NPC
 public:
 	void Draw();
 	void Move(float fTImer);
-	Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager);
+	Bullet(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, int inum);
 	~Bullet();
+
+	int num;
 
 	bool GetReturn(void);
 
