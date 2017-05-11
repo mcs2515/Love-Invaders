@@ -1,14 +1,9 @@
 //Jordan Mato 4/15/17
 #include "Enemy.h"
 
-
-<<<<<<< HEAD
-Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> bunkersList, ObjectType it, float startPercent)
+Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> bunkersList, ObjectType it, float startPercent, int inum)
 	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize), it, startPercent)
-=======
-Enemy::Enemy(vector3 initialPosition, boolean initialRotation, vector3 initialSize, vector3 initialStart, vector3 initialEnd, MeshManagerSingleton* IMeshManager, std::vector<vector3> bunkersList, float startPercent, int inum)
-	: NPC(initialPosition, initialRotation, initialSize, initialStart, initialEnd, IMeshManager, MakeEnemyCollisionBox(initialSize), startPercent)
->>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
+
 {
 	num = inum * 100;
 	bunkerLocs = bunkersList;

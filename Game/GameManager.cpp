@@ -93,23 +93,15 @@ void GameManager::Update() {
 
 			player->Draw();	// display Player;
 			RenderEnemy();
-
-<<<<<<< HEAD
 			UpdateTimer(); //update timer
+
+			if (octree.GetSOCheck()) {
+				octree.Render();
+			}
 		}
 		else {
 			CheckGoal();
 		}
-=======
-		UpdateTimer(); //update timer
-
-		if (octree.GetSOCheck()) {
-			octree.Render();
-		}
-	}
-	else {
-		CheckGoal();
->>>>>>> a1ceecd7909f0f996e9f46d174ccb6b3793493cb
 	}
 }
 
@@ -245,28 +237,17 @@ void GameManager::DetectCollision()
 	{
 		for (int j = 0; j < enemyList.size(); j++)
 		{
-<<<<<<< HEAD
-			if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
-			{
-				enemyList.erase(enemyList.begin() + j);
-=======
-<<<<<<< HEAD
 			if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
 			{
 				enemyList[j].Kill();
 				enemyList.erase(enemyList.begin()+j);
->>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
 				j--;
 				IncrementCurrentScore(1);
 			}
 
 			if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
-<<<<<<< HEAD
-=======
-=======
+
 			for (int j = 0; j < enemyList.size(); j++)
->>>>>>> a1ceecd7909f0f996e9f46d174ccb6b3793493cb
->>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
 			{
 				bulletList[i].Reset(); //reset timer, isactive bool , returning bool
 				SetPlayerAmmo(GetPlayerAmmo() + 1); //increment player bullet
@@ -364,12 +345,7 @@ void GameManager::SpawnEnemies(int numEnemies)
 		float newPercent = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 
 		//pushback the new enemy
-
-<<<<<<< HEAD
-		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, ENEMY, newPercent));
-=======
-		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, newPercent, i));
->>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
+		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, ENEMY, newPercent, i));
 	}
 }
 

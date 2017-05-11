@@ -19,11 +19,7 @@ Player::~Player()
 
 Player* Player::GetInstance(MeshManagerSingleton* IMeshManager) {
 	if (instance == nullptr) {
-<<<<<<< HEAD
-		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(1.0f), IMeshManager, PLAYER);
-=======
-		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(.2f), IMeshManager);
->>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
+		instance = new Player(vector3(0.0f, 3.0f, 0.0f), true, vector3(0.2f), IMeshManager, PLAYER);
 	}
 	return instance;
 }
