@@ -23,54 +23,41 @@ void GameManager::DisplayGameStates() {
 	{
 	case TITLE: 
 		ui.DisplayMainMenu();
-		//if 'P' call new game()
+		ui.DisplayCurrentTime(currentTimer);	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
+		ui.GenericSingleLine("Press 'p' to play.");
+		ui.GenericSingleLine("Press 'c' for credits.");
 		break;
 
 	case CREDITS:
 		ui.DisplayCredits();
-
-		//if 'esc' return to Title
+		ui.GenericSingleLine("Press 'esc' to return to Title.");
 		break;
 
 	case PAUSE:
 		ui.GenericSingleLine("Paused");
-
-		//if 'p' return to Game_Play
-		//if 'esc' return to Title
-
+		ui.GenericSingleLine("Press 'p' to continue.");
+		ui.DisplayCurrentTime(currentTimer);	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
 		break;
 
 	case GAME_PLAY:
 		Update(); //continue to update the game
-
-		//if 'p' pause game
-
 		break;
 
 	case NEXT_ROUND:
 		ui.GenericSingleLine("Next Round!");
-		NextRound(); //increase challenge
-		ui.GenericSingleLine("Enchant" + std::to_string(GetGoal()) + "humans.");
-		//wait a few secs
-		//return to Game_Play
-
+		ui.GenericSingleLine("Enchant " + std::to_string(GetGoal()) + " humans.");
+		ui.GenericSingleLine("Press 'p' to continue.");
 		break;
 
 	case RESTART_ROUND:
-		ui.GenericSingleLine("Failed to enchant" + std::to_string(GetGoal()) + "humans.");
-
-		ResetRound(); //player has to replay round
-
-		//wait a few secs
-		//return to Game_Play
+		ui.GenericSingleLine("You lost a chance to enchant " + std::to_string(GetGoal()) + " humans.");
+		ui.GenericSingleLine("Press 'p' to continue.");
 		break;
 
 	case GAME_OVER:
+		ui.GenericSingleLine("You ran out of chances to enchant the humans. Your superiors are dissapointed. Game Over.");
+		ui.GenericSingleLine("Press 'esc' to return to Title");
 		GameOver();
-
-		//wait a few secs
-		//return to Title
-
 		break;
 
 	default:
@@ -110,24 +97,17 @@ void GameManager::Update() {
 
 #pragma region Game_Loop_Functions
 void GameManager::ResetRound() {
-	//as long as player's hp is >0
-	if (player->GetLives() > 0) {
+	player->SetLives(GetLives() - 1); //player lose 1 health
 
-		player->SetLives(GetLives() - 1); //player lose 1 health
+	//SetTotalScore(GetTotalScore() - GetCurrentScore()); //return to original score
 
-		//SetTotalScore(GetTotalScore() - GetCurrentScore()); //return to original score
+	SetCurrentScore(0); //reset current score
 
-		SetCurrentScore(0); //reset current score
+	SetCurrentTimer(roundTimer); //seconds //reset current timer
 
-		SetCurrentTimer(roundTimer); //seconds //reset current timer
-
-		player->SetBullets(roundAmmo); //Ammo and Goal are the same for the current round
+	player->SetBullets(roundAmmo); //Ammo and Goal are the same for the current round
 		
-		ResetObjects(roundAmmo, enemyLSize, true);
-	}
-	else {
-		gameState = GAME_OVER; //if player health = 0, call GameOver
-	}
+	ResetObjects(roundAmmo, enemyLSize, true);
 }
 
 void GameManager::NewGame(void) {
@@ -337,13 +317,19 @@ void GameManager::SpawnEnemies(int numEnemies)
 
 void GameManager::CheckGoal(void) {
 	if (currentScore >= goal) {
-
+		NextRound();
 		gameState = NEXT_ROUND;
 		
 	}
 	else {
+		if (player->GetLives() > 0) {
 
-		gameState = RESTART_ROUND;
+			ResetRound();
+			gameState = RESTART_ROUND;
+		}
+		else {
+			gameState = GAME_OVER; //if player health = 0, call GameOver
+		}
 	}
 }
 

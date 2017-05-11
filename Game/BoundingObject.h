@@ -1,26 +1,16 @@
-#ifndef MOVABLEOBJECTS_H
-#define MOVABLEOBJECTS_H
+#pragma once
+#include "RE\ReEng.h"
 
-#include "RE\ReEngAppClass.h"
-#include "BoundingObject.h"
-
-class MovableObjects
+class BoundingObject
 {
 public:
-	matrix4 modelMatrix;
-	vector3 position;
-	//true = left/false = right
-	boolean rotation;
-	vector3 size;
-	MeshManagerSingleton* meshManager;
+	//has functions and varibles to create sphere and or box collision
+	~BoundingObject();
 
-	virtual void Move();
-	virtual void Draw();
+	BoundingObject();
 
-	MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager, std::vector<vector3> vertexList);
-	~MovableObjects();
+	BoundingObject(std::vector<vector3> vertexList); //Constructor, needs a vertex list
 
-	//start bounding box stuff
 	void SetCenterLocal(vector3 input); //Sets Center of the sphere in local space
 	vector3 GetCenterLocal(void); //Gets center of the sphere in local space
 
@@ -39,12 +29,11 @@ public:
 	void RenderSphere();
 	void RenderBox(); //Renders the box based on the center in global space
 
-	bool IsColliding(MovableObjects* a_other); //Will check the collision with another object
-	bool CheckBoxCollision(MovableObjects* a_other); // Checks the box collision with another MovableObject (for normal collisions)
-	bool CheckBoxCollision(BoundingObject* a_other); // Checks the box collision witih a BoundingObject (for Octree)
-	bool CheckSphereCollision(MovableObjects* a_other); // Checks the sphere collision with another MovableObject (for collisions / SAT pretest)
+	bool IsColliding(BoundingObject* a_other); //Will check the collision with another object
+	bool CheckBoxCollision(BoundingObject* a_other);
+	bool CheckSphereCollision(BoundingObject* a_other);
 
-	bool MovableObjects::SeparatingAxisTest(MovableObjects * a_other);
+	bool SeparatingAxisTest(BoundingObject* a_other);
 
 	void SetGeneralVisibility(bool value); //Sets Visibilty
 	bool GetGeneralVisibility(void);
@@ -63,7 +52,7 @@ public:
 
 private:
 	bool m_bVisible = true; //turn off/on bounding obj 
-	bool m_bAVisible = true; //turn off/on bounding obj 
+	bool m_AABBVisible = true; //turn off/on bounding obj 
 	bool m_bColliding = false;
 	vector3 m_v3CenterLocal = vector3(0.0f); //center  in local space
 	vector3 m_v3CenterGlobal = vector3(0.0f); //center  in global space
@@ -85,7 +74,5 @@ private:
 	vector3 m_v3MaxSurrounding;
 	vector3 m_v3MinSurrounding;
 	vector3 m_v3SurroundingSize;
-	//end bounding box stuff
-
 };
-#endif
+

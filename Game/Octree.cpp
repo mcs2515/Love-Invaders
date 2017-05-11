@@ -29,7 +29,7 @@ Octree::Octree(float iminx, float imaxx, float iminy, float imaxy, float iminz, 
 	float yPos = (imaxy - iminy) / 2;
 	float zPos = (imaxz - iminz) / 2;
 
-	boundingBox = MovableObjects(vector3(xPos, yPos, zPos), false, vector3(1.0f), MeshManagerSingleton::GetInstance(), vecList);
+	boundingBox = BoundingObject(vecList);
 }
 
 void Octree::Divide()

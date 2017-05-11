@@ -7,6 +7,15 @@
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
 
+enum GameState {
+	TITLE,
+	CREDITS,
+	PAUSE,
+	GAME_PLAY,
+	NEXT_ROUND,
+	RESTART_ROUND,
+	GAME_OVER
+};
 
 //Singleton class
 class GameManager
@@ -34,7 +43,6 @@ public:
 	std::vector<Bullet> bulletList; // List of bullet objects the singleton creates and has control over
 	std::vector<Enemy> enemyList; // List of enemy objects the singleton creates and has control over
 	std::vector<vector3> bunkerVecs;
-	enum GameState { TITLE, CREDITS, PAUSE, GAME_PLAY, NEXT_ROUND, RESTART_ROUND, GAME_OVER };
 
 #pragma region Game_Loop_Functions
 	// called when player fails to reach round goal
@@ -134,8 +142,8 @@ private:
 
 	// Basic constructor
 	GameManager(MeshManagerSingleton* mesh) {
-		//gameState = TITLE;
-		gameState = GAME_PLAY;
+		gameState = TITLE;
+		//gameState = GAME_PLAY;
 		bulletList = std::vector<Bullet>();
 		enemyList = std::vector<Enemy>();
 		ui =  UILabels();

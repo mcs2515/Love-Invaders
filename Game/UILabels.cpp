@@ -48,7 +48,7 @@ void UILabels::DisplayCredits()
 {
 	m_pMeshMngr->PrintLine("Developers:");
 	m_pMeshMngr->PrintLine("Samantha Levey, Jordan Mato");
-	m_pMeshMngr->PrintLine("James Spinelli, Megan Smith");
+	m_pMeshMngr->PrintLine("Megan Smith, James Spinelli");
 }
 
 void UILabels::GenericSingleLine(String string)
