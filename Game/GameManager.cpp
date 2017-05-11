@@ -22,6 +22,7 @@ void GameManager::DisplayGameStates() {
 	switch (gameState)
 	{
 	case TITLE: 
+		meshManager->ClearRenderList();
 		ui.DisplayMainMenu();
 		ui.DisplayCurrentTime(currentTimer);	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
 		ui.GenericSingleLine("Press 'p' to play.");
@@ -34,6 +35,7 @@ void GameManager::DisplayGameStates() {
 		break;
 
 	case PAUSE:
+		meshManager->ClearRenderList();
 		ui.GenericSingleLine("Paused");
 		ui.GenericSingleLine("Press 'p' to continue.");
 		ui.DisplayCurrentTime(currentTimer);	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
@@ -44,17 +46,20 @@ void GameManager::DisplayGameStates() {
 		break;
 
 	case NEXT_ROUND:
+		meshManager->ClearRenderList();
 		ui.GenericSingleLine("Next Round!");
 		ui.GenericSingleLine("Enchant " + std::to_string(GetGoal()) + " humans.");
 		ui.GenericSingleLine("Press 'p' to continue.");
 		break;
 
 	case RESTART_ROUND:
+		meshManager->ClearRenderList();
 		ui.GenericSingleLine("You lost a chance to enchant " + std::to_string(GetGoal()) + " humans.");
 		ui.GenericSingleLine("Press 'p' to continue.");
 		break;
 
 	case GAME_OVER:
+		meshManager->ClearRenderList();
 		ui.GenericSingleLine("You ran out of chances to enchant the humans. Your superiors are dissapointed. Game Over.");
 		ui.GenericSingleLine("Press 'esc' to return to Title");
 		GameOver();
@@ -71,23 +76,31 @@ void GameManager::Update() {
 
 	//cumulative time
 	fRunTime += fTimeSpan; //How much time has passed since the program started
+	if (!(gameState == PAUSE || gameState == NEXT_ROUND || gameState == RESTART_ROUND || gameState == TITLE))
+	{
+		if (currentTimer > 0) {
+			//draw E,P,B and background
+			//move E,B
+			//detect collision
+			DetectCollision();
 
-	if (currentTimer > 0) {
-		//draw E,P,B and background
-		//move E,B
-		//detect collision
-		DetectCollision();
+			DisplayData(); //display UI	
+			RenderBullets(); //render bullets if active
 
-		DisplayData(); //display UI	
-		RenderBullets(); //render bullets if active
+							 //drawing background
+			DrawPlanes();
+			DrawBunkers();
 
-						 //drawing background
-		DrawPlanes();
-		DrawBunkers();
+			player->Draw();	// display Player;
+			RenderEnemy();
 
-		player->Draw();	// display Player;
-		RenderEnemy();
-
+<<<<<<< HEAD
+			UpdateTimer(); //update timer
+		}
+		else {
+			CheckGoal();
+		}
+=======
 		UpdateTimer(); //update timer
 
 		if (octree.GetSOCheck()) {
@@ -96,6 +109,7 @@ void GameManager::Update() {
 	}
 	else {
 		CheckGoal();
+>>>>>>> a1ceecd7909f0f996e9f46d174ccb6b3793493cb
 	}
 }
 
@@ -231,14 +245,28 @@ void GameManager::DetectCollision()
 	{
 		for (int j = 0; j < enemyList.size(); j++)
 		{
+<<<<<<< HEAD
 			if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
 			{
 				enemyList.erase(enemyList.begin() + j);
+=======
+<<<<<<< HEAD
+			if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
+			{
+				enemyList[j].Kill();
+				enemyList.erase(enemyList.begin()+j);
+>>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
 				j--;
 				IncrementCurrentScore(1);
 			}
 
 			if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
+<<<<<<< HEAD
+=======
+=======
+			for (int j = 0; j < enemyList.size(); j++)
+>>>>>>> a1ceecd7909f0f996e9f46d174ccb6b3793493cb
+>>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
 			{
 				bulletList[i].Reset(); //reset timer, isactive bool , returning bool
 				SetPlayerAmmo(GetPlayerAmmo() + 1); //increment player bullet
@@ -337,7 +365,11 @@ void GameManager::SpawnEnemies(int numEnemies)
 
 		//pushback the new enemy
 
+<<<<<<< HEAD
 		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, ENEMY, newPercent));
+=======
+		enemyList.push_back(Enemy(vector3(0, 0, 0), false, humanSize, newStart, newEnd, meshManager, bunkerVecs, newPercent, i));
+>>>>>>> d9fa5c7f9c00c524d2916469fad88fa10d677615
 	}
 }
 

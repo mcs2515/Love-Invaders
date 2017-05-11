@@ -72,15 +72,17 @@ void AppClass::ProcessKeyboard(void)
 	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	//	gm->MovePlayer(1, 1); //(0, 1) (1, 1)
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-
-		gm->MovePlayer(-1, 0); //(-1, 0) (-1, 1)
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		gm->MovePlayer(1, 0); //(1, 0) (1, -1)
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		gm->MovePlayer(0, -1); //(0, -1) (-1, -1)
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		gm->MovePlayer(0, 1); //(0, 1) (1, 1)
+	if (!(gm->GetGameState() == PAUSE || gm->GetGameState() == NEXT_ROUND || gm->GetGameState() == RESTART_ROUND || gm->GetGameState() == TITLE))
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			gm->MovePlayer(-1, 0); //(-1, 0) (-1, 1)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			gm->MovePlayer(1, 0); //(1, 0) (1, -1)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			gm->MovePlayer(0, -1); //(0, -1) (-1, -1)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			gm->MovePlayer(0, 1); //(0, 1) (1, 1)
+	}
 
 #pragma endregion
 
@@ -93,14 +95,16 @@ void AppClass::ProcessKeyboard(void)
 	static bool bFPSControll = false;
 	ON_KEY_PRESS_RELEASE(F, bFPSControll = !bFPSControll, m_pCameraMngr->SetFPS(bFPSControll));
 
+	if (!(gm->GetGameState() == PAUSE || gm->GetGameState() == NEXT_ROUND || gm->GetGameState() == RESTART_ROUND || gm->GetGameState() == TITLE))
+	{
+		//detect that the spacebar has been released first before firing
+		static bool willShoot = false;
+		ON_KEY_PRESS_RELEASE(Space, NULL, willShoot = true);
 
-	//detect that the spacebar has been released first before firing
-	static bool willShoot = false;
-	ON_KEY_PRESS_RELEASE(Space, NULL, willShoot = true);
-
-	if (willShoot) {
-		gm->FireBullet();
-		willShoot = false;
+		if (willShoot) {
+			gm->FireBullet();
+			willShoot = false;
+		}
 	}
 
 	// Detect whether Octree has been enabled or not
