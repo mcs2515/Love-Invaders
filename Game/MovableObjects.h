@@ -2,6 +2,7 @@
 #define MOVABLEOBJECTS_H
 
 #include "RE\ReEngAppClass.h"
+#include "BoundingObject.h"
 
 class MovableObjects
 {
@@ -17,7 +18,6 @@ public:
 	virtual void Draw();
 
 	MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager, std::vector<vector3> vertexList);
-	MovableObjects();
 	~MovableObjects();
 
 	//start bounding box stuff
@@ -40,8 +40,9 @@ public:
 	void RenderBox(); //Renders the box based on the center in global space
 
 	bool IsColliding(MovableObjects* a_other); //Will check the collision with another object
-	bool CheckBoxCollision(MovableObjects* a_other);
-	bool CheckSphereCollision(MovableObjects* a_other);
+	bool CheckBoxCollision(MovableObjects* a_other); // Checks the box collision with another MovableObject (for normal collisions)
+	bool CheckBoxCollision(BoundingObject* a_other); // Checks the box collision witih a BoundingObject (for Octree)
+	bool CheckSphereCollision(MovableObjects* a_other); // Checks the sphere collision with another MovableObject (for collisions / SAT pretest)
 
 	bool MovableObjects::SeparatingAxisTest(MovableObjects * a_other);
 

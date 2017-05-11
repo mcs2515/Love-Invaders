@@ -1,6 +1,8 @@
 #pragma once
+
 #include "RE\ReEng.h"
 #include "MovableObjects.h"
+
 class Octree
 {
 public:
@@ -45,7 +47,7 @@ private:
 	int depth;
 	MeshManagerSingleton* m_pMeshMngr = nullptr;
 
-	MovableObjects boundingBox;
+	BoundingObject boundingBox;
 
 	const static int m_iMAX_OBJECTS = 5;
 

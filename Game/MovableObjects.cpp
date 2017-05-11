@@ -89,10 +89,6 @@ MovableObjects::MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSi
 	}
 }
 
-MovableObjects::MovableObjects() {
-	MovableObjects(vector3(0.0f), false, vector3(1.0f), MeshManagerSingleton::GetInstance(), std::vector<vector3>());
-}
-
 MovableObjects::~MovableObjects()
 {
 }
@@ -258,6 +254,27 @@ bool MovableObjects::CheckBoxCollision(MovableObjects* a_other)
 	if (this->m_v3MaxG.z < a_other->m_v3MinG.z)
 		return false;
 	if (this->m_v3MinG.z > a_other->m_v3MaxG.z)
+		return false;
+
+	//else return true
+	return true;
+}
+
+bool MovableObjects::CheckBoxCollision(BoundingObject * a_other)
+{
+	if (this->m_v3MaxG.x < a_other->GetMin().x)
+		return false;
+	if (this->m_v3MinG.x > a_other->GetMax().x)
+		return false;
+
+	if (this->m_v3MaxG.y < a_other->GetMin().y)
+		return false;
+	if (this->m_v3MinG.y > a_other->GetMax().y)
+		return false;
+
+	if (this->m_v3MaxG.z < a_other->GetMin().z)
+		return false;
+	if (this->m_v3MinG.z > a_other->GetMax().z)
 		return false;
 
 	//else return true
