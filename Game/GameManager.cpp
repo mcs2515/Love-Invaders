@@ -258,7 +258,7 @@ void GameManager::DetectCollision()
 void GameManager::FireBullet()
 {
 	if(GetPlayerAmmo() !=0) {
-		bulletList.push_back(player->FireBullet());
+		bulletList.push_back(player->FireBullet(bulletList.size()));
 		SetPlayerAmmo(GetPlayerAmmo() - 1);
 	}
 }
@@ -398,6 +398,10 @@ void GameManager::RenderBullets()
 			float bulletLerp = MapValue(bulletList[i].GetTime(), 0.0f, 2.0f, 0.0f, 1.0f);
 			bulletList[i].Move(bulletLerp);
 			//std::cout << bulletLerp << std::endl;
+			bulletList[i].Draw();
+		}
+		else
+		{
 			bulletList[i].Draw();
 		}
 	}
