@@ -29,6 +29,8 @@ public:
 
 	void Render();
 
+	void Reset();
+
 	~Octree();
 
 private:
@@ -43,12 +45,12 @@ private:
 	float cz;
 	bool hasChildren;
 	bool octreeVis = false;
-	bool SOCheck = true;
+	bool SOCheck = false;
 	int depth;
 	MeshManagerSingleton* m_pMeshMngr = nullptr;
 
 	BoundingObject boundingBox;
 
-	const static int m_iMAX_OBJECTS = 5;
+	const static int m_iMAX_OBJECTS = 2;
 
 };

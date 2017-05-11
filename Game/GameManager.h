@@ -3,6 +3,7 @@
 #include "UILabels.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "Octree.h"
 
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
@@ -36,6 +37,8 @@ public:
 	std::vector<vector3> bunkerVecs;
 	enum GameState { TITLE, CREDITS, PAUSE, GAME_PLAY, NEXT_ROUND, RESTART_ROUND, GAME_OVER };
 
+	Octree octree = Octree(-20.0f, 20.0f, -20.0f, 20.0f, -20.0f, 20.0f, 5); // The octree
+
 #pragma region Game_Loop_Functions
 	// called when player fails to reach round goal
 	void ResetRound();
@@ -68,6 +71,8 @@ public:
 	void DetectCollision();
 
 	void FireBullet();
+
+	void ResetOctree();
 
 #pragma region Other_Helper_Functions
 	void UpdateTimer(void);

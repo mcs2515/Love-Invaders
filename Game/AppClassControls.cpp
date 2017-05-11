@@ -6,8 +6,8 @@ void AppClass::ProcessKeyboard(void)
 
 #pragma region ON_KEY_PRESS_RELEASE
 	static bool	bLastF1 = false, bLastF2 = false, bLastF3 = false, bLastF4 = false, bLastF5 = false,
-				bLastF6 = false, bLastF7 = false, bLastF8 = false, bLastF9 = false, bLastF10 = false,
-		bLastEscape = false, bLastF = false, bLastSpace = false;
+		bLastF6 = false, bLastF7 = false, bLastF8 = false, bLastF9 = false, bLastF10 = false,
+		bLastEscape = false, bLastF = false, bLastSpace = false, bLastO = false, bLastP = false;
 #define ON_KEY_PRESS_RELEASE(key, pressed_action, released_action){  \
 			bool pressed = sf::Keyboard::isKeyPressed(sf::Keyboard::key);			\
 			if(pressed){											\
@@ -100,6 +100,25 @@ void AppClass::ProcessKeyboard(void)
 	if (willShoot) {
 		gm->FireBullet();
 		willShoot = false;
+	}
+
+	// Detect whether Octree has been enabled or not
+	static bool makeOctree = false;
+	ON_KEY_PRESS_RELEASE(O, NULL, makeOctree = true);
+	if (makeOctree) {
+		gm->octree.SetSOCheck(!gm->octree.GetSOCheck());	// Set the octree's check to the opposite of what it was
+		gm->octree.SetOctreeVis(gm->octree.GetSOCheck());	// Set the octree's visibility to whether it's checking
+		makeOctree = false;
+	}
+
+	// Reset the Octree if it has been enabled
+	static bool resetOctree = false;
+	ON_KEY_PRESS_RELEASE(P, NULL, resetOctree = true);
+	if (resetOctree) {
+		if (gm->octree.GetSOCheck()) {
+			gm->ResetOctree();
+		}
+		resetOctree = false;
 	}
 
 #pragma endregion
