@@ -14,22 +14,9 @@ Octree::Octree(float iminx, float imaxx, float iminy, float imaxy, float iminz, 
 	maxZ = imaxz;
 	cz = (minZ + maxZ) / 2;
 
-	hasChildren = false;
-
 	depth = idepth;
 
-	object = {};
-
-	std::vector<vector3> vecList;
-
-	vecList.push_back(vector3(minX, minY, minZ));
-	vecList.push_back(vector3(maxX, maxY, maxZ));
-
-	float xPos = (imaxx - iminx) / 2;
-	float yPos = (imaxy - iminy) / 2;
-	float zPos = (imaxz - iminz) / 2;
-
-	boundingBox = BoundingObject(vecList);
+	Reset();
 }
 
 void Octree::Divide()
@@ -148,7 +135,7 @@ void Octree::Render()
 	m_pMeshMngr->AddCubeToRenderList(
 		glm::translate(vector3(cx, cy, cz)) *
 		glm::scale(vector3(maxX - minX, maxY - minY, maxZ - minZ)),
-		REPURPLE, WIRE);
+		REBLACK, WIRE);
 
 	if (hasChildren)
 	{
@@ -157,6 +144,26 @@ void Octree::Render()
 			child.Render();
 		}
 	}
+}
+
+void Octree::Reset()
+{
+	hasChildren = false;
+
+	children = std::vector<Octree>();
+
+	object = {};
+
+	std::vector<vector3> vecList;
+
+	vecList.push_back(vector3(minX, minY, minZ));
+	vecList.push_back(vector3(maxX, maxY, maxZ));
+
+	float xPos = (maxX - minX) / 2;
+	float yPos = (maxY - minY) / 2;
+	float zPos = (maxZ - minZ) / 2;
+
+	boundingBox = BoundingObject(vecList);
 }
 
 Octree::~Octree()

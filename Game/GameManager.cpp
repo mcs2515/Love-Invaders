@@ -94,11 +94,22 @@ void GameManager::Update() {
 			player->Draw();	// display Player;
 			RenderEnemy();
 
+<<<<<<< HEAD
 			UpdateTimer(); //update timer
 		}
 		else {
 			CheckGoal();
 		}
+=======
+		UpdateTimer(); //update timer
+
+		if (octree.GetSOCheck()) {
+			octree.Render();
+		}
+	}
+	else {
+		CheckGoal();
+>>>>>>> a1ceecd7909f0f996e9f46d174ccb6b3793493cb
 	}
 }
 
@@ -173,6 +184,11 @@ void GameManager::ResetObjects(int playerBullets, int numEnemies, bool addObjs)
 	SetPlayerAmmo(playerBullets);
 	SpawnEnemies(numEnemies);
 	ResetPlayer();
+
+	if (octree.GetSOCheck())
+	{
+		ResetOctree();
+	}
 }
 #pragma endregion
 
@@ -222,10 +238,13 @@ void GameManager::MovePlayer(int left, int up) {
 
 void GameManager::DetectCollision()
 {
-	for (int i = 0; i < bulletList.size(); i++)
-	{
-		for (int j = 0; j < enemyList.size(); j++)
+	if (octree.GetSOCheck()) {
+		octree.CheckCollisions();
+	}
+	else {
+		for (int i = 0; i < bulletList.size(); i++)
 		{
+<<<<<<< HEAD
 			if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
 			{
 				enemyList[j].Kill();
@@ -235,9 +254,22 @@ void GameManager::DetectCollision()
 			}
 
 			if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
+=======
+			for (int j = 0; j < enemyList.size(); j++)
+>>>>>>> a1ceecd7909f0f996e9f46d174ccb6b3793493cb
 			{
-				bulletList[i].Reset(); //reset timer, isactive bool , returning bool
-				SetPlayerAmmo(GetPlayerAmmo()+1); //increment player bullet
+				if (bulletList[i].IsColliding(&enemyList[j]) && !bulletList[i].GetReturn() /*&& bulletList[i].GetIsActive()*/) //dont get for collision if bullet is bouncing back
+				{
+					enemyList.erase(enemyList.begin() + j);
+					j--;
+					IncrementCurrentScore(1);
+				}
+
+				if (bulletList[i].IsColliding(player) && bulletList[i].GetReturn()) //is returning/bouncing back
+				{
+					bulletList[i].Reset(); //reset timer, isactive bool , returning bool
+					SetPlayerAmmo(GetPlayerAmmo() + 1); //increment player bullet
+				}
 			}
 		}
 	}
@@ -248,6 +280,20 @@ void GameManager::FireBullet()
 	if(GetPlayerAmmo() !=0) {
 		bulletList.push_back(player->FireBullet(bulletList.size()));
 		SetPlayerAmmo(GetPlayerAmmo() - 1);
+
+		octree.AddObject(bulletList.back());
+	}
+}
+
+void GameManager::ResetOctree()
+{
+	octree.Reset();
+	octree.AddObject(*player);
+	for (int i = 0; i < enemyList.size(); i++) {
+		octree.AddObject(enemyList[i]);
+	}
+	for (int i = 0; i < bulletList.size(); i++) {
+		octree.AddObject(bulletList[i]);
 	}
 }
 

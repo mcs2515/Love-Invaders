@@ -3,6 +3,7 @@
 #include "UILabels.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "Octree.h"
 
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
@@ -44,6 +45,8 @@ public:
 	std::vector<Enemy> enemyList; // List of enemy objects the singleton creates and has control over
 	std::vector<vector3> bunkerVecs;
 
+	Octree octree = Octree(-20.0f, 20.0f, -20.0f, 20.0f, -20.0f, 20.0f, 5); // The octree
+
 #pragma region Game_Loop_Functions
 	// called when player fails to reach round goal
 	void ResetRound();
@@ -76,6 +79,8 @@ public:
 	void DetectCollision();
 
 	void FireBullet();
+
+	void ResetOctree();
 
 #pragma region Other_Helper_Functions
 	void UpdateTimer(void);
