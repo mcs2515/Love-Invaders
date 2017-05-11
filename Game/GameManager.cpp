@@ -16,37 +16,61 @@ void GameManager::ReleaseInstance(void) {
 	}
 }
 
-void GameManager::Update() {
+void GameManager::DisplayGameStates() {
 
 
 	switch (gameState)
 	{
 	case TITLE: 
+		ui.DisplayMainMenu();
+		//if 'P' call new game()
 		break;
 
 	case CREDITS:
+		ui.DisplayCredits();
+
+		//if 'esc' return to Title
 		break;
 
 	case PAUSE:
-		ui->DisplayPauseScreen();
+		ui.GenericSingleLine("Paused");
+
+		//if 'p' return to Game_Play
+		//if 'esc' return to Title
+
 		break;
 
 	case GAME_PLAY:
-		Update();
+		Update(); //continue to update the game
+
+		//if 'p' pause game
 
 		break;
 
 	case NEXT_ROUND:
-		NextRound(); //player goes to a next round
+		ui.GenericSingleLine("Next Round!");
+		NextRound(); //increase challenge
+		ui.GenericSingleLine("Enchant" + std::to_string(GetGoal()) + "humans.");
+		//wait a few secs
+		//return to Game_Play
+
 		break;
 
 	case RESTART_ROUND:
-		
+		ui.GenericSingleLine("Failed to enchant" + std::to_string(GetGoal()) + "humans.");
+
 		ResetRound(); //player has to replay round
+
+		//wait a few secs
+		//return to Game_Play
 		break;
 
 	case GAME_OVER:
 		GameOver();
+
+		//wait a few secs
+		//return to Title
+
 		break;
 
 	default:
@@ -324,12 +348,12 @@ void GameManager::CheckGoal(void) {
 }
 
 void GameManager::DisplayData() {
-	ui->DisplayTotalScore(GetTotalScore()); //display total score
-	ui->DisplayGoal(GetGoal()); //display current round goal
-	ui->DisplayCurrentScore(GetCurrentScore()); //display current score
-	ui->DisplayAmmoCount(GetPlayerAmmo()); //display current bullet count
-	ui->DisplayCurrentTime(currentTimer);	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
-	ui->DisplayLives(GetLives());	//display player lives
+	ui.DisplayTotalScore(GetTotalScore()); //display total score
+	ui.DisplayGoal(GetGoal()); //display current round goal
+	ui.DisplayCurrentScore(GetCurrentScore()); //display current score
+	ui.DisplayAmmoCount(GetPlayerAmmo()); //display current bullet count
+	ui.DisplayCurrentTime(currentTimer);	// CHANGE FROM SYSTEM TIME TO CURRENT TIME LATER
+	ui.DisplayLives(GetLives());	//display player lives
 
 	//meshManager->PrintLine(player->GetStringPosition(), RERED);
 }

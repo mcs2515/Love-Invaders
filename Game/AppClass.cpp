@@ -55,7 +55,7 @@ void AppClass::Update(void)
 	//Indicate the FPS
 	int nFPS = m_pSystem->GetFPS();
 	m_pMeshMngr->PrintLine("");
-	gm->Update();
+	gm->DisplayGameStates();
 
 	/* OLD:
 	m_pMeshMngr->Print("Selection: ");

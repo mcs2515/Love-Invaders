@@ -9,7 +9,7 @@ public:
 	UILabels();
 	~UILabels();
 
-	MeshManagerSingleton* m_pMeshMngr = nullptr;
+	
 
 	void DisplayTotalScore(int ts); //method to display total score
 	
@@ -28,7 +28,7 @@ public:
 	void GenericSingleLine(String string);
 private:
 
-
+	MeshManagerSingleton* m_pMeshMngr = nullptr;
 
 };
 #endif

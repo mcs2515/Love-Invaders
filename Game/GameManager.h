@@ -25,10 +25,12 @@ public:
 	// Deletes the instance of GameManager singleton if not already destroyed
 	static void ReleaseInstance(void);
 
+	void DisplayGameStates();
+
 	void Update();
 
 	//objects
-	UILabels* ui;
+	UILabels ui;
 	std::vector<Bullet> bulletList; // List of bullet objects the singleton creates and has control over
 	std::vector<Enemy> enemyList; // List of enemy objects the singleton creates and has control over
 	std::vector<vector3> bunkerVecs;
@@ -132,9 +134,11 @@ private:
 
 	// Basic constructor
 	GameManager(MeshManagerSingleton* mesh) {
-		gameState = TITLE;
+		//gameState = TITLE;
+		gameState = GAME_PLAY;
 		bulletList = std::vector<Bullet>();
 		enemyList = std::vector<Enemy>();
+		ui =  UILabels();
 		meshManager = mesh;
 
 		//meshManager = MeshManagerSingleton::GetInstance();
@@ -159,7 +163,7 @@ private:
 
 	// Basic destructor
 	~GameManager() {
-		SafeDelete(ui);
+		//SafeDelete(ui);
 		player->ReleaseInstance();
 		ReleaseInstance();
 	}
@@ -186,7 +190,7 @@ private:
 	float fTimeSpan;
 	float fRunTime;
 
-	static GameState gameState;
+    GameState gameState;
 
 	matrix4 floorPlane;
 	matrix4 floorBox; //optional
