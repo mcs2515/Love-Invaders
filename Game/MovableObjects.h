@@ -17,6 +17,7 @@ public:
 	virtual void Draw();
 
 	MovableObjects(vector3 ip, boolean ir, vector3 is, MeshManagerSingleton* iMeshManager, std::vector<vector3> vertexList);
+	MovableObjects();
 	~MovableObjects();
 
 	//start bounding box stuff
@@ -42,6 +43,8 @@ public:
 	bool CheckBoxCollision(MovableObjects* a_other);
 	bool CheckSphereCollision(MovableObjects* a_other);
 
+	bool MovableObjects::SeparatingAxisTest(MovableObjects * a_other);
+
 	void SetGeneralVisibility(bool value); //Sets Visibilty
 	bool GetGeneralVisibility(void);
 
@@ -53,6 +56,9 @@ public:
 
 	void SetSphereColor(vector3 color);
 	vector3 GetSphereColor(void);
+
+	vector3 GetMin();
+	vector3 GetMax();
 
 private:
 	bool m_bVisible = true; //turn off/on bounding obj 
